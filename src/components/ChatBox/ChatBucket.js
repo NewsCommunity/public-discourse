@@ -1,14 +1,25 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {ChatBox,ChatInput} from './index'
 
-function ChatBucket(props){
-console.log("CHATBUCKET dumb component props are: ", props)
+class ChatBucket extends Component {
+  constructor(props){
+    super(props);
+    this.state = {};
+  }
+
+componentDidMount(){
+ this.props.subscribe('messages', 100)
+}
+
+render() {
+  console.log("CHATBUCKET dumb component props are: ", this.props)
 return (
   <div className="Chatbucket-container">
-  <ChatBox   msgArray={props.msgArray}/>
-  <ChatInput postMsg={props.postMsg}/>
+  <ChatBox   msgArray={this.props.msgArray}/>
+  <ChatInput postMsg={this.props.postMsg}/>
   </div>
 )
+}
 }
 
 export default ChatBucket;

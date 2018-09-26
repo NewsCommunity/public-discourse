@@ -6,7 +6,9 @@ import SingleMsg from './SingleMsg'
   let msgArray = props.msgArray;
 return (
       <div className="chat-box">
-      {msgArray.map(msg => {<SingleMsg userName={msg.userName} msg={msg.textBody} feedback={msg.feedback}/>})}
+      {msgArray.map((msg) => { return (
+      <SingleMsg text={msg.text} id={msg.id}/>)
+      })}
         </div>
 )
 
@@ -23,3 +25,5 @@ export default ChatBox;
 //    feedback: [1, 2, 3]
 //    }
 // ]
+
+//{type: "SET_CHAT_MESSAGES", messages: {…}}

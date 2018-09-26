@@ -11,7 +11,7 @@ export function ChatReducer(state = initialState, action) {
     case types.SET_CHAT_MESSAGES:
     return {
       ...state,
-      messages: action.messages
+      messages: [...state.messages, action.messages]
     }
     default:
       return state;

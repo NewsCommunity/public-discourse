@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import {subscribeToDatabase_THUNK, postToDatabase} from '../state/chatRoom/actions'
 
 import { getChatMessages_THUNK, setChatMessages } from '../state/chatRoom';
 
@@ -13,7 +14,8 @@ function mapState(state) {
 
 function mapDispatch(dispatch) {
 	return {
-		postMsg: () => dispatch(getChatMessages_THUNK())
+		postMsg: (msg) => dispatch(postToDatabase(msg)),
+		subscribe: (chatRoomId, limit) => dispatch(subscribeToDatabase_THUNK(chatRoomId, limit)),
 	};
 }
 
