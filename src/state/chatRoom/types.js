@@ -1,0 +1,5 @@
+const SET_CHAT_MESSAGES = 'SET_CHAT_MESSAGES';
+
+export default {
+	SET_CHAT_MESSAGES
+};
