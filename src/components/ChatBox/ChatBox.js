@@ -7,7 +7,7 @@ import SingleMsg from './SingleMsg'
 return (
       <div className="chat-box">
       {msgArray.map((msg) => { return (
-      <SingleMsg text={msg.text} id={msg.id}/>)
+      <SingleMsg text={msg.body} user={msg.userName}/>)
       })}
         </div>
 )
