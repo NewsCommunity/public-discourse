@@ -1,0 +1,32 @@
+[debug] [2018-09-27T20:11:04.676Z] ----------------------------------------------------------------------
+[debug] [2018-09-27T20:11:04.679Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\MBP\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-09-27T20:11:04.679Z] CLI Version:   4.2.1
+[debug] [2018-09-27T20:11:04.679Z] Platform:      win32
+[debug] [2018-09-27T20:11:04.679Z] Node Version:  v8.11.2
+[debug] [2018-09-27T20:11:04.680Z] Time:          Thu Sep 27 2018 16:11:04 GMT-0400 (Eastern Daylight Time)
+[debug] [2018-09-27T20:11:04.680Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-27T20:11:04.696Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-27T20:11:04.697Z] > authorizing via signed-in user
+[debug] [2018-09-27T20:11:04.701Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/collaboration-2c632  
+ 
+[debug] [2018-09-27T20:11:05.051Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-27T20:11:05.052Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/collaboration-2c632  
+ 
+[debug] [2018-09-27T20:11:05.292Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\MBP\collaboration'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-09-27T20:11:06.587Z] Fetching environment
+[debug] [2018-09-27T20:11:06.591Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/521492989557:getServerAppConfig  
+ 
+[debug] [2018-09-27T20:11:06.591Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/521492989557/clients/_:getWebAppConfig  
+ 
+[debug] [2018-09-27T20:11:06.769Z] <<< HTTP RESPONSE 200
+[info] i  hosting[collaboration-2c632]: Serving hosting files from: build
+[info] +  hosting[collaboration-2c632]: Local server: http://localhost:5000
+[debug] [2018-09-27T20:11:06.852Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-27T20:11:06.853Z] Starting @google-cloud/functions-emulator
+[debug] [2018-09-27T20:11:10.423Z] Parsing function triggers
+[info] i  functions: No HTTPS functions found. Use firebase functions:shell if you would like to emulate other types of functions.

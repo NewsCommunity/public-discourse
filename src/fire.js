@@ -1,4 +1,6 @@
 import firebase from 'firebase'
 import { config }  from './secrets.js'
-var fire = firebase.initializeApp(config);
-export default fire;
+export var fire = firebase.initializeApp(config);
+
+export var firestore = fire.firestore();
+
