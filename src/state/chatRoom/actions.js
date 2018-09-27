@@ -26,7 +26,7 @@ let messagesRef;
 export function subscribeToDatabase_THUNK(databaseId = 'messages', limit=100){
   return async (dispatch) => {
 
-    messagesRef = fire.database().ref(databaseId).orderByKey().limitToLast(limit);
+    messagesRef = fire.database().ref(databaseId).orderByKey().limitToLast(2);
     console.log("Inside the subscribe to database action. Messages is: ", messagesRef)
 
     //now we subscribe to messages
