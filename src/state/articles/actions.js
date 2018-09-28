@@ -20,7 +20,7 @@ export function setArticleList(articleList){
 //I assume later users will be able to query by articles. Here I am
 //just leaving query as a possible value to pass for a query. We will
 //need to define how we query later. For now it's unused.
-export function getArticles_THUNK(query = 'default'){
+export function getArticleList_THUNK(query = 'default'){
   return async (dispatch) => {
     const articles //= call to firestore database goes here.
 
