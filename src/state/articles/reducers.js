@@ -2,16 +2,22 @@ import types from './types';
 
 
 const initialState = {
-messages : []
+article : [],
+articles : [],
 };
 
 
-export function ChatReducer(state = initialState, action) {
+export function articleReducer(state = initialState, action) {
   switch (action.type) {
-    case types.SET_CHAT_MESSAGES:
+    case types.SET_SINGLE_ARTICLE:
     return {
       ...state,
-      messages: [...state.messages, action.messages]
+      article: action.article,
+    }
+    case types.SET_MULTIPLE_ARTICLES:
+    return {
+      ...state,
+      articles: action.articles,
     }
     default:
       return state;

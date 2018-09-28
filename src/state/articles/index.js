@@ -1,11 +1,5 @@
-// import { web3Reducer } from './reducers';
 
-// export { default as web3Types } from './types';
-// export { default as web3Actions } from './actions';
-
-// export default web3Reducer;
-
-export {setChatMessages, getChatMessages_THUNK} from './actions'
-export {SET_CHAT_MESSAGES} from './types'
-export {ChatReducer} from './reducers';
+export {setSingleArticle, setMultipleArticles} from './actions'
+export {SET_SINGLE_ARTICLE, SET_MULTIPLE_ARTICLES, GET_ARTICLES, GET_SINGLE_ARTICLE} from './types'
+export {articleReducer} from './reducers';
 
