@@ -5,7 +5,7 @@ const initialState = {
 	discourseList: []
 };
 
-export function articleReducer(state = initialState, action) {
+export function discourseReducer(state = initialState, action) {
 	switch (action.type) {
 		case types.SET_SINGLE_DISCOURSE:
 			return {
