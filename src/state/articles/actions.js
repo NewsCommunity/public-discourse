@@ -8,10 +8,10 @@ export function setSingleArticle(article) {
   }
 }
 
-export function setMultipleArticles(articles){
+export function setArticleList(articleList){
   return {
-    type: types.SET_MULTIPLE_ARTICLES,
-    articles
+    type: types.SET_ARTICLE_LIST,
+    articleList
   }
 }
 
@@ -35,7 +35,7 @@ export function getArticles_THUNK(query = 'default'){
     //   })
     // })
 
-    dispatch(setMultipleArticles(articles))
+    dispatch(setArticleList(articles))
   }
 }
 
