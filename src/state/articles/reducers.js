@@ -2,8 +2,8 @@ import types from './types';
 
 
 const initialState = {
-article : [],
-articles : [],
+article : {},
+articleList : [],
 };
 
 
@@ -17,7 +17,7 @@ export function articleReducer(state = initialState, action) {
     case types.SET_MULTIPLE_ARTICLES:
     return {
       ...state,
-      articles: action.articles,
+      articles: action.articleList,
     }
     default:
       return state;
