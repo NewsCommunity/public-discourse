@@ -27,3 +27,15 @@ body {
   padding-bottom: 50px;
   padding-left: 20px;
 }
+
+.Chatbucket-container {
+  max-height: 100px;
+	position: fixed;
+	bottom: 0px;
+	overflow: scroll;
+}
+
+.chat-box {
+	overflow: scroll;
+}
+
