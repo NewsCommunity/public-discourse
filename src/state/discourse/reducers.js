@@ -1,21 +1,21 @@
 import types from './types';
 
 const initialState = {
-	article: {},
-	articleList: []
+	discourse: {},
+	discourseList: []
 };
 
 export function articleReducer(state = initialState, action) {
 	switch (action.type) {
-		case types.SET_SINGLE_ARTICLE:
+		case types.SET_SINGLE_DISCOURSE:
 			return {
 				...state,
-				article: action.article
+				discourse: action.discourse
 			};
-		case types.SET_ARTICLE_LIST:
+		case types.SET_DISCOURSE_LIST:
 			return {
 				...state,
-				articles: action.articleList
+				discourseList: action.discourseList
 			};
 		default:
 			return state;

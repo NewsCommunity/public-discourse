@@ -1,28 +1,28 @@
 import types from './types';
 import { firestore} from '../../fire';
 
-export function setSingleArticle(article) {
+export function setSingleDiscourse(discourse) {
   return {
-    type: types.SET_SINGLE_ARTICLE,
-    article
+    type: types.SET_SINGLE_DISCOURSE,
+    discourse
   }
 }
 
-export function setArticleList(articleList){
+export function setDiscourseList(discourseList){
   return {
-    type: types.SET_ARTICLE_LIST,
-    articleList
+    type: types.SET_DISCOURSE_LIST,
+    discourseList
   }
 }
 
 
 
-//I assume later users will be able to query by articles. Here I am
+//I assume later users will be able to query by discourseList. Here I am
 //just leaving query as a possible value to pass for a query. We will
 //need to define how we query later. For now it's unused.
 export function getArticleList_THUNK(query = 'default'){
   return async (dispatch) => {
-    const articles //= call to firestore database goes here.
+    const discourseList //= call to firestore database goes here.
 
     //For reference:
 
@@ -35,13 +35,13 @@ export function getArticleList_THUNK(query = 'default'){
     //   })
     // })
 
-    dispatch(setArticleList(articles))
+    dispatch(setDiscourseList(discourseList))
   }
 }
 
 export function getSingleArticle_THUNK(articleID){
   return async (dispatch) => {
-    const article //= call to firestore database goes here.
+    const discourse //= call to firestore database goes here.
 
     //For reference:
 
@@ -54,7 +54,7 @@ export function getSingleArticle_THUNK(articleID){
     //   })
     // })
 
-    dispatch(setSingleArticle);
+    dispatch(setSingleDiscourse);
   }
 }
 

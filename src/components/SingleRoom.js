@@ -4,7 +4,7 @@ import ChatBucket from '../containers/ChatBucket';
 const SingleRoom = (props) => {
 	return (
 		<div>
-			<div className="article-container">
+			<div className="discourse-container">
 				<h1>publicDiscourse</h1>
 				<div className="iframe-container">
 					<iframe
@@ -12,9 +12,9 @@ const SingleRoom = (props) => {
 						frameborder="0"
 					/>
 				</div>
-        <div className="footer">
-				<ChatBucket  />
-        </div>
+				<div className="footer">
+					<ChatBucket />
+				</div>
 			</div>
 		</div>
 	);
