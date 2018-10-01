@@ -9,11 +9,12 @@ class App extends Component {
     return (
         <Switch>
           {/* Routes placed here are available to all visitors */}
+          <Route path="/chat/" component={ChatBucket} />
           <Route path="/discussion/" component={SingleRoom} />
-          <Route path="/" component={ChatBucket} />
+          <Route path="/" component={SingleRoom} />
         </Switch>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
