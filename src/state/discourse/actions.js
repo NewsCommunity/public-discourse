@@ -22,19 +22,25 @@ export function setDiscourseList(discourseList){
 //need to define how we query later. For now it's unused.
 export function getArticleList_THUNK(query = 'default'){
   return async (dispatch) => {
-    const discourseList //= call to firestore database goes here.
-
     //For reference:
+    let discourseList = []
 
+    const articles = await firestore.collection("discourseList")
     // firestore.collection("rooms").doc('nJlBQWLv9YLjHug62z17')
     // .collection("messages")
     // .onSnapshot(function(doc) {
     //   doc.forEach((thing) => {
     //     console.log("THE OBJECT", thing.data());
-    //     dispatch(setChatMessages(thing.data()));
+
     //   })
     // })
 
+    firestore.collection("discourseList").get().then(snapshopt => {
+      snapshot.forEach(doc => {
+        discourseList.push(doc);
+      })
+    })
+    console.log("Discourse LIST is: ", discourseList);
     dispatch(setDiscourseList(discourseList))
   }
 }
