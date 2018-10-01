@@ -16,8 +16,8 @@ class ChatBucket extends Component {
 	}
 
 	async componentDidMount() {
-		await this.getInitialMessages('messages', 50);
-		await this.subscribeToMsgUpdates();
+		//await this.getInitialMessages('messages', 50);
+		this.subscribeToMsgUpdates();
 	}
 
 	async getInitialMessages(databaseId, limit = 50) {
@@ -45,27 +45,39 @@ class ChatBucket extends Component {
 		});
 	}
 
-	subscribeToMsgUpdates() {
-		firestore
+	async subscribeToMsgUpdates() {
+		var messageArray = [];
+
+		await firestore
 			.collection('discourseList')
 			.doc('0VGlOw9pOgeA1j5ZO0tt')
 			.collection('messages')
 			.orderBy('timestamp')
-			.limit(1)
+			.limit(10)
 			.onSnapshot((snapshot) => {
 				snapshot.docChanges().forEach((change) => {
-					if (change.type === 'added') {
-						const newMessage = change.doc.data();
 
-						let newState = this.state.messages;
-						newState.push(newMessage);
+					 messageArray.push(change.doc.data());
+						// const newMessage = change.doc.data();
 
-						this.setState(() => {
-							return { messages: newState };
-						});
-					}
+						// let newState = this.state.messages;
+						// newState.push(newMessage);
+
+						// this.setState(() => {
+						// 	return { messages: newState };
+						// });
+							this.setState(() => {
+							return {messages: messageArray}
+							})
+
+					console.log("The message array:", messageArray)
 				});
 			});
+
+				console.log("Message array outside ", messageArray)
+			// this.setState(() => {
+			// 	return {messages: messageArray}
+			// })
 	}
 
 	//This method for TimeStamp is INSECURE but can't figure it out correctly yet.
