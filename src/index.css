@@ -4,26 +4,42 @@ body {
 	font-family: sans-serif;
 }
 
+.single-room {
+	display: flex;
+	flex-direction: column;
+}
+
+.Chatbucket-container {
+	position: fixed;
+	border-top: solid red;
+	bottom: 0px; 
+	width: 100%;
+}
+
+
+.chat-box {
+	overflow-wrap: normal;
+	max-height: 200px;
+	bottom: 0;
+	overflow: scroll;
+}
+
 .iframe-container {
-	overflow: hidden;
-	padding-top: 56.25%;
+	/* overflow: hidden; */
+	padding-top: 100%;
 	position: relative;
+	padding-bottom: 10%;
+	border-bottom: 1px solid black;
 }
 
 .iframe-container iframe {
 	border: 0;
 	height: 100%;
 	left: 0;
-	position: absolute;
 	top: 0;
+	position: absolute;
 	width: 100%;
 }
 
-.footer {
-	color: red;
-  display: fixed;
-  position: relative;
-  bottom: 0px;
-  padding-bottom: 50px;
-  padding-left: 20px;
-}
+
+
