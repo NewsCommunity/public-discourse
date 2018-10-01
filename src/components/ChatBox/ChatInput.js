@@ -27,7 +27,9 @@ class ChatInput extends Component {
 
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<input type="text" value={this.state.message} name="message" onChange={this.handleChange} />
+			<span className="input">
+				<input className="chat-box-input" type="text" value={this.state.message} name="message" onChange={this.handleChange} placeholder="...add discourse"/>
+				<span></span></span>
 				<input type="submit" />
 			</form>
 		);
