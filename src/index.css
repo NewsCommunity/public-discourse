@@ -12,7 +12,7 @@ body {
 .Chatbucket-container {
 	position: fixed;
 	border-top: solid red;
-	bottom: 0px; 
+	bottom: 0px;
 	width: 100%;
 }
 
@@ -41,5 +41,18 @@ body {
 	width: 100%;
 }
 
+.single-msg {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 4px;
+}
 
+.single-userName {
+	color: rgb(63, 63, 63);
+	margin-right: 9px;
+}
 
+.chat-box{
+	display: flex;
+	flex-direction: column;
+}

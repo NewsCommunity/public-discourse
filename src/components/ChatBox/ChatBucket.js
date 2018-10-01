@@ -16,7 +16,7 @@ class ChatBucket extends Component {
 	}
 
 	async componentDidMount() {
-		//await this.getInitialMessages('messages', 50);
+		//this.getInitialMessages('messages', 50);
 		this.subscribeToMsgUpdates();
 	}
 
@@ -46,38 +46,26 @@ class ChatBucket extends Component {
 	}
 
 	async subscribeToMsgUpdates() {
-		var messageArray = [];
+		//var messageArray = [];
 
 		await firestore
 			.collection('discourseList')
 			.doc('0VGlOw9pOgeA1j5ZO0tt')
 			.collection('messages')
-			.orderBy('timestamp')
-			.limit(10)
+			.orderBy('timestamp', 'asc')
+			.limit(20)
 			.onSnapshot((snapshot) => {
 				snapshot.docChanges().forEach((change) => {
-
-					 messageArray.push(change.doc.data());
-						// const newMessage = change.doc.data();
-
-						// let newState = this.state.messages;
-						// newState.push(newMessage);
-
-						// this.setState(() => {
-						// 	return { messages: newState };
-						// });
-							this.setState(() => {
-							return {messages: messageArray}
-							})
-
-					console.log("The message array:", messageArray)
+					let messageArray = this.state.messages;
+					messageArray.push(change.doc.data());
+					//This is the limit
+					messageArray = messageArray.slice(0, 20);
+					console.log('Message array', messageArray);
+					this.setState(() => {
+						return { messages: messageArray };
+					});
 				});
 			});
-
-				console.log("Message array outside ", messageArray)
-			// this.setState(() => {
-			// 	return {messages: messageArray}
-			// })
 	}
 
 	//This method for TimeStamp is INSECURE but can't figure it out correctly yet.
