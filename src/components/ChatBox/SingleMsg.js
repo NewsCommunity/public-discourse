@@ -1,7 +1,7 @@
 import React from 'react';
 
 function SingleMsg(props) {
-	console.log('The props for SingleMsg are: ', props);
+	//console.log('The props for SingleMsg are: ', props);
 	const { text, user } = props;
 	return (
 		<div className="single-msg">

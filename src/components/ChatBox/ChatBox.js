@@ -2,7 +2,7 @@ import React from 'react'
 import SingleMsg from './SingleMsg'
 
  function ChatBox(props) {
-  console.log("ChatBox props are: ", props);
+  //console.log("ChatBox props are: ", props);
   let msgArray = props.msgArray;
 return (
       <div className="chat-box">

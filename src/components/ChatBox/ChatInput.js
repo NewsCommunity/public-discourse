@@ -23,7 +23,7 @@ class ChatInput extends Component {
 	}
 
 	render() {
-		console.log('The props for the ChatInput are: ', this.props);
+		//console.log('The props for the ChatInput are: ', this.props);
 
 		return (
 			<form onSubmit={this.handleSubmit}>
