@@ -22,6 +22,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "firebase deploy",
-    "serve": "firebase serve"
+    "serve": "firebase serve",
+    "watch": "start react-scripts watch"
   }
 }
