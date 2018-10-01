@@ -1,16 +1,21 @@
-import types from './types';
+import {
+	SET_SINGLE_DISCOURSE,
+	SET_DISCOURSE_LIST,
+	GET_DISCOURSE_LIST,
+	GET_SINGLE_DISCOURSE
+} from './types';
 import { firestore} from '../../fire';
 
 export function setSingleDiscourse(discourse) {
   return {
-    type: types.SET_SINGLE_DISCOURSE,
+    type: SET_SINGLE_DISCOURSE,
     discourse
   }
 }
 
 export function setDiscourseList(discourseList){
   return {
-    type: types.SET_DISCOURSE_LIST,
+    type: SET_DISCOURSE_LIST,
     discourseList
   }
 }
@@ -20,12 +25,12 @@ export function setDiscourseList(discourseList){
 //I assume later users will be able to query by discourseList. Here I am
 //just leaving query as a possible value to pass for a query. We will
 //need to define how we query later. For now it's unused.
-export function getArticleList_THUNK(query = 'default'){
+export function thunkGetDiscourseList(query = 'default'){
   return async (dispatch) => {
     //For reference:
     let discourseList = []
 
-    const articles = await firestore.collection("discourseList")
+    const discourses = await firestore.collection("discourseList")
     // firestore.collection("rooms").doc('nJlBQWLv9YLjHug62z17')
     // .collection("messages")
     // .onSnapshot(function(doc) {
@@ -35,7 +40,7 @@ export function getArticleList_THUNK(query = 'default'){
     //   })
     // })
 
-    firestore.collection("discourseList").get().then(snapshopt => {
+    firestore.collection("discourseList").get().then(snapshot => {
       snapshot.forEach(doc => {
         discourseList.push(doc);
       })
@@ -45,9 +50,8 @@ export function getArticleList_THUNK(query = 'default'){
   }
 }
 
-export function getSingleArticle_THUNK(articleID){
+export function thunkGetSingleDiscourse(discourseID){
   return async (dispatch) => {
-    const discourse //= call to firestore database goes here.
 
     //For reference:
 
@@ -60,7 +64,7 @@ export function getSingleArticle_THUNK(articleID){
     //   })
     // })
 
-    dispatch(setSingleDiscourse);
+    dispatch(setSingleDiscourse());
   }
 }
 

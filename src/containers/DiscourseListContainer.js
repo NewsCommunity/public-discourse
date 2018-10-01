@@ -1,16 +1,24 @@
-import { connect } from 'react-redux';
-import DiscourseList from '../components/DiscourseList';
+import { connect } from "react-redux";
+import DiscourseList from "../components/DiscourseList";
+import { thunkGetDiscourseList } from "../state/discourse/actions";
 
 function mapState(state) {
-	return {
-		discourseList: state.discourseReducer.discourseList
-	};
+  return {
+    discourseList: state.discourseReducer.discourseList
+  };
 }
 
 function mapDispatch(dispatch) {
-	return {
-		getDiscourses: 
-	};
+  return {
+    getDiscourseList: () => {
+      dispatch(thunkGetDiscourseList());
+    }
+  };
 }
 
-export default connect(mapState, mapDispatch)(DiscourseList); 
+const DiscourseListContainer = connect(
+  mapState,
+  mapDispatch
+)(DiscourseList);
+
+export default DiscourseListContainer

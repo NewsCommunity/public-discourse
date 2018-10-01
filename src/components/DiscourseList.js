@@ -4,7 +4,7 @@ import DiscourseCard from './DiscourseCard';
 export default class DiscourseList extends Component {
 
   componentDidMount = () => {
-    this.props.getDiscourses() //UPDATE THIS FUNCTION CALL
+    this.props.getDiscourseList() //UPDATE THIS FUNCTION CALL
   }
   
   render() {
