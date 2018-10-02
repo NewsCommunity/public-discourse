@@ -42,13 +42,22 @@ body {
 
 .single-msg {
 	display: flex;
-	flex-direction: row;
-	margin-bottom: 4px;
+
 }
 
-.single-userName {
-	color: rgb(63, 63, 63);
-	margin-right: 9px;
+.single-msg-box {
+	flex: 1;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: stretch;
+	margin: 5px;
+}
+
+.single-msg-profile{
+	background-color: rgb(255, 255, 255);
+	justify-content: flex-end;
+	align-content: flex-end;
 }
 
 .chat-box{
@@ -90,4 +99,110 @@ body {
 	margin-left: 5px;
 	display: flex;
 	flex-direction: column;
+.single-msg-text-container{
+	background-color: rgba(235, 235, 235, 0.287);
+	flex-grow: 5;
+	border-radius: 15px 50px 30px;
 }
+
+.single-msg-textBody {
+	justify-content: flex-end;
+	font-family: 'Varela Round', sans-serif;
+	margin-left: 10px;
+  margin-top: 5px;
+}
+
+.img-round {
+	border-radius: 50%;
+	width: 60px;
+}
+
+.user-profile-pic {
+	justify-self: flex-end;
+}
+
+.user-profile-name {
+	font-family: 'Muli', sans-serif;
+	color: rgba(19, 54, 75, 0.493);
+}
+
+.chat-box-input {
+	border-radius: 15px 50px 15px;
+}
+
+.input {
+  position: relative;
+  font-size: 1.5em;
+  background: linear-gradient(21deg, #10abff, #1beabd);
+  padding: 3px;
+  display: inline-block;
+  border-radius: 9999em;
+}
+.input *:not(span) {
+  position: relative;
+  display: inherit;
+  border-radius: inherit;
+  margin: 0;
+  border: none;
+  outline: none;
+  padding: 0 .325em;
+  z-index: 1;
+}
+.input *:not(span):focus + span {
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.input span {
+  -webkit-transform: scale(0.993, 0.94);
+          transform: scale(0.993, 0.94);
+  transition: opacity .25s, -webkit-transform .5s;
+  transition: transform .5s, opacity .25s;
+  transition: transform .5s, opacity .25s, -webkit-transform .5s;
+  opacity: 0;
+  position: absolute;
+  z-index: 0;
+  margin: 4px;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 3px #fff, 0 0 0 4px #fff, 3px -3px 30px #1beabd,  -3px 3px 30px #10abff;
+}
+
+input {
+  font-family: inherit;
+  line-height: inherit;
+  color: #2e3750;
+  min-width: 12em;
+}
+
+
+::-webkit-input-placeholder {
+  color: #cbd0d5;
+}
+
+:-ms-input-placeholder {
+  color: #cbd0d5;
+}
+
+::-ms-input-placeholder {
+  color: #cbd0d5;
+}
+
+::placeholder {
+  color: #cbd0d5;
+}
+
+html::after {
+  content: '';
+  background: linear-gradient(21deg, #10abff, #1beabd);
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
