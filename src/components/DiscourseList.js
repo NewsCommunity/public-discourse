@@ -13,7 +13,7 @@ export default class DiscourseList extends Component {
         {discourseList.map(elem => {
           return (
             <DiscourseCard
-              discourseUrl={elem.article.url}
+              discourseId={elem.docId}
               discourseTitle={elem.article.title}
               discourseDescription={elem.article.content}
               discourseImg={elem.article.urlToImage}
