@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { ChatBox, ChatInput } from './index';
 import { firestore } from '../../fire';
+import Login from '../authentication/login';
+var firebase = require('firebase');
+var firebaseui = require('firebaseui');
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 class ChatBucket extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			discourseId: '',
-			messages: []
+			messages: [],
+			displayName: '',
+			email: ''
 		};
 
 		this.getInitialMessages = this.getInitialMessages.bind(this);
@@ -18,6 +24,21 @@ class ChatBucket extends Component {
 	async componentDidMount() {
 		//this.getInitialMessages('messages', 50);
 		this.subscribeToMsgUpdates();
+
+		//Authentication component
+		firebase.auth().onAuthStateChanged((user) => {
+			if (user) {
+				// User is signed in.
+				this.setState(() => {
+					return { displayName: user.displayName, email: user.email };
+				});
+				console.log('The user is: ', user);
+				console.log('the user on state is: ', this.state);
+			} else {
+				// No user is signed in.
+				console.log('No user logged in');
+			}
+		});
 	}
 
 	async getInitialMessages(databaseId, limit = 50) {
@@ -29,7 +50,6 @@ class ChatBucket extends Component {
 			.orderBy('timestamp')
 			.get();
 
-		//console.log('The messages:', messages);
 		messages.forEach((message) => {
 			this.addSingleMessageToState(message.data());
 		});
@@ -37,9 +57,9 @@ class ChatBucket extends Component {
 
 	addSingleMessageToState(message) {
 		let newMessageState = new Set([ ...this.state.messages, message ]);
-		//console.log('This is newmessagestate ', newMessageState);
+
 		let messageState = Array.from(newMessageState);
-		//console.log('This is messageState', messageState);
+
 		this.setState((newMessageState) => {
 			return { messages: messageState };
 		});
@@ -68,8 +88,9 @@ class ChatBucket extends Component {
 			});
 	}
 
-	//This method for TimeStamp is INSECURE but can't figure it out correctly yet.
-	postMsg(message, databaseId = 'messages', user = 'demoUser') {
+	//This method for TimeStamp is INSECURE
+	//This method for userName is INSECURE
+	postMsg(message, databaseId = 'messages', user = this.state.displayName) {
 		const date = new Date();
 		console.log('The Date is: ', date);
 		firestore
@@ -90,9 +111,9 @@ class ChatBucket extends Component {
 	}
 
 	render() {
-		//console.log('CHATBUCKET dumb component props are: ', this.props);
 		return (
 			<div className="Chatbucket-container">
+				<Login />
 				<ChatBox msgArray={this.state.messages} />
 				<ChatInput postMsg={this.postMsg} />
 			</div>

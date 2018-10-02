@@ -6,6 +6,7 @@ import { firestore} from '../fire';
 
 
 
+
 function mapState(state) {
 	console.log('The mapState for ChatBucket is: ', state);
 	return {
