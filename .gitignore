@@ -20,4 +20,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /src/secrets.js
+<<<<<<< HEAD
 /src/secretNewsApiKey.js
+=======
+firebase-debug.log
+>>>>>>> 729b8d1742a375601acf9c83c77d8addff2e0028

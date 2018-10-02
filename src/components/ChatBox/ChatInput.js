@@ -1,26 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class ChatInput extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { message: '' };
+  constructor (props) {
+    super(props)
+    this.state = { message: '' }
 
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-	}
-	handleSubmit(event) {
-		event.preventDefault(); // <- prevent form submit from
-		//Call function that was sent down
-		//alert("We've done it!", this.state.message);
-		this.props.postMsg(this.state.message);
-		this.setState(() => {
-			return { message: '' };
-		});
-	}
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+  handleSubmit (event) {
+    event.preventDefault()
+    this.props.postMsg(this.state.message)
+    this.setState(() => {
+      return { message: '' }
+    })
+  }
 
-	handleChange(event) {
-		this.setState({ [event.target.name]: event.target.value });
-	}
+  handleChange (event) {
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
 	render() {
 		//console.log('The props for the ChatInput are: ', this.props);
@@ -36,6 +34,4 @@ class ChatInput extends Component {
 	}
 }
 
-export default ChatInput;
-
-//PROP TYPES!
+export default ChatInput

@@ -9,14 +9,13 @@ return (
       {msgArray.map((msg) => { return (
       <SingleMsg text={msg.body} user={msg.userName}/>)
       })}
-        </div>
-)
-
+    </div>
+  )
 }
 
-export default ChatBox;
-//Include PropTypes - expect props.msgArray to be an array of objects!
-//Assume object looks like this:
+export default ChatBox
+// Include PropTypes - expect props.msgArray to be an array of objects!
+// Assume object looks like this:
 
 // [
 //    {
@@ -26,4 +25,4 @@ export default ChatBox;
 //    }
 // ]
 
-//{type: "SET_CHAT_MESSAGES", messages: {…}}
+// {type: "SET_CHAT_MESSAGES", messages: {…}}
