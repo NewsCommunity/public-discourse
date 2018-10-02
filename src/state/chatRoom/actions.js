@@ -26,7 +26,7 @@ export function subscribeToDatabase_THUNK (databaseId = 'messages', limit = 100)
   return async dispatch => {
     firestore.collection('rooms').doc('nJlBQWLv9YLjHug62z17').collection('messages').onSnapshot(function (doc) {
       doc.forEach(thing => {
-        console.log('THE OBJECT', thing.data())
+        
         dispatch(setChatMessages(thing.data()))
       })
     })
