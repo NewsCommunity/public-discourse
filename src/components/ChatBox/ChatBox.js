@@ -1,12 +1,13 @@
 import React from 'react'
 import SingleMsg from './SingleMsg'
 
-function ChatBox (props) {
-  let msgArray = props.msgArray
-  return (
-    <div className='chat-box'>
-      {msgArray.map(msg => {
-        return <SingleMsg text={msg.body} user={msg.userName} />
+ function ChatBox(props) {
+  //console.log("ChatBox props are: ", props);
+  let msgArray = props.msgArray;
+return (
+      <div className="chat-box">
+      {msgArray.map((msg) => { return (
+      <SingleMsg text={msg.body} user={msg.userName}/>)
       })}
     </div>
   )

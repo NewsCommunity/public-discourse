@@ -20,14 +20,18 @@ class ChatInput extends Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  render () {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input type='text' value={this.state.message} name='message' onChange={this.handleChange} />
-        <input type='submit' />
-      </form>
-    )
-  }
+	render() {
+		//console.log('The props for the ChatInput are: ', this.props);
+
+		return (
+			<form onSubmit={this.handleSubmit}>
+			<span className="input">
+				<input className="chat-box-input" type="text" value={this.state.message} name="message" onChange={this.handleChange} placeholder="...add discourse"/>
+				<span></span></span>
+				<input type="submit" />
+			</form>
+		);
+	}
 }
 
 export default ChatInput
