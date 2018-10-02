@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 function SingleMsg(props) {
 	//console.log('The props for SingleMsg are: ', props);
@@ -24,7 +24,4 @@ function SingleMsg(props) {
 	);
 }
 
-export default SingleMsg;
-//Include PropTypes!!!!
-
-//{type: "SET_CHAT_MESSAGES", messages: {…}}
+export default SingleMsg

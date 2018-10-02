@@ -1,22 +1,20 @@
 import React from 'react'
 import SingleMsg from './SingleMsg'
 
- function ChatBox(props) {
-  //console.log("ChatBox props are: ", props);
-  let msgArray = props.msgArray;
-return (
-      <div className="chat-box">
-      {msgArray.map((msg) => { return (
-      <SingleMsg text={msg.body} user={msg.userName}/>)
+function ChatBox (props) {
+  let msgArray = props.msgArray
+  return (
+    <div className='chat-box'>
+      {msgArray.map(msg => {
+        return <SingleMsg text={msg.body} user={msg.userName} />
       })}
-        </div>
-)
-
+    </div>
+  )
 }
 
-export default ChatBox;
-//Include PropTypes - expect props.msgArray to be an array of objects!
-//Assume object looks like this:
+export default ChatBox
+// Include PropTypes - expect props.msgArray to be an array of objects!
+// Assume object looks like this:
 
 // [
 //    {
@@ -26,4 +24,4 @@ export default ChatBox;
 //    }
 // ]
 
-//{type: "SET_CHAT_MESSAGES", messages: {…}}
+// {type: "SET_CHAT_MESSAGES", messages: {…}}

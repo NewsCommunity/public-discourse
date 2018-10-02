@@ -20,4 +20,4 @@ function mapDispatch(dispatch) {
 	};
 }
 
-export default connect(mapState, mapDispatch)(ChatBucket);
+export default connect(mapState, mapDispatch)(ChatBucket)
