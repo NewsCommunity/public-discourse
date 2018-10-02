@@ -28,7 +28,6 @@ body {
 	/* overflow: hidden; */
 	padding-top: 100%;
 	position: relative;
-	padding-bottom: 10%;
 	border-bottom: 1px solid black;
 }
 
@@ -53,6 +52,42 @@ body {
 }
 
 .chat-box{
+.discourse-list {
+	display: flex;
+	flex-direction: column;
+}
+.discourse-card {
+	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
+  transition: 0.4s;
+  background: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-family: sans-serif;
+  margin: 10px;
+	padding-bottom: 5%;
+	padding-left: 5%;
+	margin-left: 5%;
+	margin-right: 5%;
+	padding-right: 5%;
+	display:flex;
+	flex-direction: row;
+	border-radius: 16px;
+}
+
+.discourse-card:hover {
+	box-shadow: 0 4px 8px #e0e0eb;
+}
+
+.discourse-card-img {
+	width: 100px;
+	height: 100px;
+	margin-left: 4px;
+	margin: 5% auto;
+	border-radius: 16px;
+}
+.discourse-card-content{
+	margin-top: 5%;
+	margin-left: 5px;
 	display: flex;
 	flex-direction: column;
 }
