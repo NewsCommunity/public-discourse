@@ -1,12 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
-import { Provider } from "react-redux";
-import { store } from "./state/store";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import registerServiceWorker from './registerServiceWorker'
+import { Provider } from 'react-redux'
+import { store } from './state/store'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -14,6 +13,6 @@ ReactDOM.render(
       <App />
     </Router>
   </Provider>,
-  document.getElementById("root")
-);
-registerServiceWorker();
+    document.getElementById('root')
+)
+registerServiceWorker()
