@@ -8,7 +8,6 @@ export default class DiscourseList extends Component {
 
   render () {
     const { discourseList } = this.props
-    console.log('INSIDE THE DISCOURSELIST PROPS =>', discourseList[0])
     return (
       <div className='discourse-list'>
         {discourseList.map(elem => {
