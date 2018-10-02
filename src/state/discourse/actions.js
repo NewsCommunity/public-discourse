@@ -35,6 +35,22 @@ export function thunkGetDiscourseList () {
               console.log('ERROR GETTING DOCUMENTS', err)
             })
 
+    const discourses = await firestore.collection("discourseList")
+    // firestore.collection("rooms").doc('nJlBQWLv9YLjHug62z17')
+    // .collection("messages")
+    // .onSnapshot(function(doc) {
+    //   doc.forEach((thing) => {
+    //     console.log("THE OBJECT", thing.data());
+
+    //   })
+    // })
+
+    firestore.collection("discourseList").get().then(snapshot => {
+      snapshot.forEach(doc => {
+        discourseList.push(doc);
+      })
+    })
+    console.log("Discourse LIST is: ", discourseList);
     dispatch(setDiscourseList(discourseList))
   }
 }
@@ -52,6 +68,6 @@ export function thunkGetSingleDiscourse (discourseID) {
         //   })
         // })
 
-    dispatch(setSingleDiscourse())
+    dispatch(setSingleDiscourse());
   }
 }
