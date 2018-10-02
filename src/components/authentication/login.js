@@ -7,16 +7,14 @@ class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-      displayName: '',
-      email: ''
+			displayName: '',
+			email: ''
 		};
 	}
 
-	componentDidMount() {
+	componentDidMount() {}
 
-	}
-
-	signin = () => {
+	doLogin = () => {
 		firebase.auth().signInWithRedirect(provider);
 
 		firebase
@@ -31,7 +29,6 @@ class Login extends React.Component {
 				}
 				// The signed-in user info.
 				var user = result.user;
-
 			})
 			.catch(function(error) {
 				// Handle Errors here.
@@ -43,11 +40,21 @@ class Login extends React.Component {
 				var credential = error.credential;
 				// ...
 			});
-	};
+  };
+
+  isLoggedIn = () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
 	render() {
 		return (
 			<div className="chat-box">
-				<div onClick={() => this.signin()}>SignIn</div>
+				<div onClick={() => this.doLogin()}>SignIn</div>
 			</div>
 		);
 	}

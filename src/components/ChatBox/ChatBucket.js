@@ -13,7 +13,8 @@ class ChatBucket extends Component {
 			discourseId: '',
 			messages: [],
 			displayName: '',
-			email: ''
+			email: '',
+			loggedIn: false,
 		};
 
 		this.getInitialMessages = this.getInitialMessages.bind(this);
@@ -30,7 +31,7 @@ class ChatBucket extends Component {
 			if (user) {
 				// User is signed in.
 				this.setState(() => {
-					return { displayName: user.displayName, email: user.email };
+					return { displayName: user.displayName, email: user.email, loggedIn: true };
 				});
 
 			} else {
@@ -101,19 +102,37 @@ class ChatBucket extends Component {
 				timestamp: date
 			})
 			.then(function(docRef) {
-
+				console.log('Document written with ID: ', docRef.id);
 			})
 			.catch(function(error) {
 				console.error('Error adding document: ', error);
 			});
 	}
 
+	isLoggedIn = () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+	}
+
+	doLogOut = () => {
+		firebase.auth().signOut().then(() => {
+			console.log("Logout")
+			this.setState(()=> {return {loggedIn: false}})
+		})
+	}
+
 	render() {
 		return (
 			<div className="Chatbucket-container">
-				<Login />
+				{this.state.loggedIn ?  <div onClick={() => this.doLogOut()}>Logout</div> : <Login />}
 				<ChatBox msgArray={this.state.messages} />
-				<ChatInput postMsg={this.postMsg} />
+				{this.state.loggedIn ?  <ChatInput postMsg={this.postMsg} /> : <Login />}
+
 			</div>
 		);
 	}

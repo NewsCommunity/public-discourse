@@ -7,7 +7,7 @@ function ChatBox(props) {
 	return (
 		<div className="chat-box">
 			{msgArray.map((msg) => {
-        console.log("Msg props", msg);
+        
 				return <SingleMsg key={msg.timestamp.nanoseconds} text={msg.body} user={msg.userName} />;
 			})}
 		</div>
