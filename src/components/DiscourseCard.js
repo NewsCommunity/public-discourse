@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-
-const DiscourseCard = (props) => {
-  const { discourseUrl, discourseTitle, discourseDescription } = props;
-  return (
-    <div className="discourse-card">
-      <Link to={discourseUrl}>{discourseTitle}</Link>
-      <p>{discourseDescription}</p>
-    </div>
-  );
-};
-
-export default DiscourseCard;
-=======
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -33,4 +17,3 @@ const DiscourseCard = props => {
 }
 
 export default DiscourseCard
->>>>>>> 729b8d1742a375601acf9c83c77d8addff2e0028

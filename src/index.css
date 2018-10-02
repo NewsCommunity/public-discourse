@@ -169,6 +169,7 @@ html::after {
 	display: flex;
 	flex-direction: column;
 }
+}
 .discourse-card {
 	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
   transition: 0.4s;
