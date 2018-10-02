@@ -32,8 +32,7 @@ class ChatBucket extends Component {
 				this.setState(() => {
 					return { displayName: user.displayName, email: user.email };
 				});
-				console.log('The user is: ', user);
-				console.log('the user on state is: ', this.state);
+
 			} else {
 				// No user is signed in.
 				console.log('No user logged in');
@@ -79,8 +78,7 @@ class ChatBucket extends Component {
 					let messageArray = this.state.messages;
 					messageArray.push(change.doc.data());
 					//This is the limit
-					messageArray = messageArray.slice(0, 20);
-					console.log('Message array', messageArray);
+					messageArray =
 					this.setState(() => {
 						return { messages: messageArray };
 					});
@@ -103,7 +101,7 @@ class ChatBucket extends Component {
 				timestamp: date
 			})
 			.then(function(docRef) {
-				console.log('Document written with ID: ', docRef.id);
+
 			})
 			.catch(function(error) {
 				console.error('Error adding document: ', error);
