@@ -3,7 +3,7 @@ import DiscourseCard from './DiscourseCard'
 
 export default class DiscourseList extends Component {
   componentDidMount = async () => {
-    await this.props.getDiscourseList() // UPDATE THIS FUNCTION CALL
+    await this.props.getDiscourseList()
   }
 
   render () {
@@ -17,6 +17,8 @@ export default class DiscourseList extends Component {
               discourseUrl={elem.article.url}
               discourseTitle={elem.article.title}
               discourseDescription={elem.article.content}
+              discourseImg={elem.article.urlToImage}
+              discoursePublishedAt={elem.article.publishedAt}
                         />
           )
         })}
