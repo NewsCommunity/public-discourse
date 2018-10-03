@@ -12,9 +12,8 @@ class App extends Component {
         <Navbar />
         <Switch>
           {/* Routes placed here are available to all visitors */}
-          <Route path='/discourselist/' component={DiscourseListContainer} />
           <Route path='/discourse/:docId' component={SingleDiscourse} />
-          <Route path='/' component={ChatBucket} />
+          <Route path='/' component={DiscourseListContainer} />
         </Switch>
       </div>
     )
