@@ -8,7 +8,7 @@ class ChatInput extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
   }
-  
+
 	handleSubmit(event) {
     const { message } = this.state
     const { discourseId } = this.props
@@ -36,7 +36,10 @@ class ChatInput extends Component {
 					/>
 					<span />
 				</span>
-				<input type="submit" />
+
+<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored chat-button">
+  <i class="material-icons" type="submit">add</i>
+</button>
 			</form>
 		);
 	}

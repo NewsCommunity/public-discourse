@@ -125,16 +125,12 @@ class ChatBucket extends Component {
       <div className='Chatbucket-container'>
         {loggedIn ? <div onClick={() => this.doLogOut()}>Logout</div> : <Login />}
         <ChatBox msgArray={messages} />
-<<<<<<< HEAD
         {loggedIn ? (
           <ChatInput postMessage={this.postMessage} discourseId={discourseId} />
         ) : (
           <Login />
         )}
         <BottomNav />
-=======
-        {loggedIn ? <ChatInput postMessage={this.postMessage} discourseId={discourseId} /> : <Login />}
->>>>>>> 2f5cad04b54600fdf77c689a8f3a16017ff77eaf
       </div>
     )
   }
