@@ -8,7 +8,7 @@ class Navbar extends Component {
 
   render () {
     return (
-      <nav className='navbar navbar-default navbar-fixed-top'>
+      <nav className='navbar navbar-default fixed-top bg-light'>
         <div className='container-fluid'>
           <div className='navbar-header'>
             <Link className='navbar-brand' to={`/`}>publicDiscourse</Link>

@@ -7,14 +7,14 @@ import Navbar from './components/layouts/NavBar'
 class App extends Component {
   render () {
     return (
-      <Fragment>
+      <div className='whole-app'>
         <Navbar />
         <Switch>
           {/* Routes placed here are available to all visitors */}
           <Route path='/discourse/:docId' component={SingleDiscourse} />
           <Route path='/' component={DiscourseListContainer} />
         </Switch>
-      </Fragment>
+      </div>
     )
   }
 }
