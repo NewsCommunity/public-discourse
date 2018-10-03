@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ChatBox, ChatInput } from "./index";
 import { firestore } from "../../fire";
 import Login from "../authentication/login";
+import BottomNav from "../BottomNavigation/BottomNav";
 var firebase = require("firebase");
 
 class ChatBucket extends Component {
@@ -136,6 +137,7 @@ class ChatBucket extends Component {
         ) : (
           <Login />
         )}
+        <BottomNav />
       </div>
     );
   }
