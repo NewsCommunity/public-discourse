@@ -15,13 +15,13 @@ class Login extends React.Component {
 	componentDidMount() {}
 
 	doLogin = () => {
-		firebase.auth().signInWithRedirect(provider);
-
+		
 		firebase
-			.auth()
-			.getRedirectResult()
-			.then(function(result) {
-				if (result.credential) {
+		.auth()
+		.getRedirectResult()
+		.then(function(result) {
+			console.log('login result', result)
+			if (result.credential) {
 					// This gives you a Google Access Token. You can use it to access the Google API.
 					var token = result.credential.accessToken;
 					console.log('This is the Token: ', token);
@@ -40,6 +40,8 @@ class Login extends React.Component {
 				var credential = error.credential;
 				// ...
 			});
+			
+			firebase.auth().signInWithRedirect(provider);
   };
 
   isLoggedIn = () => {
