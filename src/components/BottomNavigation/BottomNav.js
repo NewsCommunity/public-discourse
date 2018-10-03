@@ -27,16 +27,25 @@ class BottomNav extends React.Component {
     const { value } = this.state;
 
     return (
-      <BottomNavigation
-        value={value}
-        onChange={this.handleChange}
-        showLabels
-        className={classes.root}
-      >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-      </BottomNavigation>
+      // <BottomNavigation
+      //   value={value}
+      //   onChange={this.handleChange}
+      //   showLabels
+      //   className={classes.root}
+      // >
+      //   <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+
+      //   <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} data-badge="4"/>
+      //   <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+      // </BottomNavigation>
+      <div className="bottom-nav">
+      <div>
+      <span class="mdl-badge" data-badge="4">Inbox</span>
+      </div><div>
+      <div class="material-icons mdl-badge mdl-badge--overlap" data-badge="1">account_box</div>
+      </div>
+
+      </div>
     );
   }
 }
