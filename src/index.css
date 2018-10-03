@@ -236,3 +236,9 @@ html::after {
 	border: none;
   margin-top: 8px;
 }
+
+.bottom-nav {
+	justify-content: center;
+	align-items: center;
+	align-self: center;
+}

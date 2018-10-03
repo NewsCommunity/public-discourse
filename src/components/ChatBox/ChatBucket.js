@@ -130,7 +130,9 @@ class ChatBucket extends Component {
         ) : (
           <Login />
         )}
+        <div className="bottom-nav">
         <BottomNav />
+        </div>
       </div>
     )
   }
