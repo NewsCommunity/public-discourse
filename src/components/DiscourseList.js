@@ -18,6 +18,7 @@ export default class DiscourseList extends Component {
               discourseDescription={elem.article.content}
               discourseImg={elem.article.urlToImage}
               discoursePublishedAt={elem.article.publishedAt}
+              key={elem.docId}
                         />
           )
         })}

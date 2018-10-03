@@ -205,3 +205,8 @@ html::after {
 	display: flex;
 	flex-direction: column;
 }
+
+.navbar {
+	display: flex;
+	padding-left: 1vw;
+}

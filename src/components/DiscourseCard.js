@@ -4,13 +4,12 @@ import { Link } from 'react-router-dom'
 const DiscourseCard = props => {
   const { discourseId, discourseTitle, discourseDescription, discourseImg, discoursePublishedAt } = props
   return (
-    <div className='discourse-card'>
-
-      <img className='discourse-card-img' src={`${discourseImg}`} alt='' />
-
-      <div className='discourse-card-content'>
-        <Link to={`/discourse/${discourseId}`}>{discourseTitle}</Link>
-        <p>{discoursePublishedAt}</p>
+    <div className='card'>
+      <img className='card-img-top' src={`${discourseImg}`} alt='Card image cap' />
+      <div className='card-body'>
+        <h5 className='card-title'>{discourseTitle}</h5>
+        <p className='card-text'>{discourseDescription}</p>
+        <a href='#' className='btn btn-primary'>Go somewhere</a>
       </div>
     </div>
   )
