@@ -1,18 +1,20 @@
-import React from 'react'
-import SingleMsg from './SingleMsg'
+import React from 'react';
+import SingleMsg from './SingleMsg';
 
-function ChatBox (props) {
-  let msgArray = props.msgArray
-  return (
-    <div className='chat-box'>
-      {msgArray.map(msg => {
-        return <SingleMsg text={msg.body} user={msg.userName} />
-      })}
-    </div>
-  )
+function ChatBox(props) {
+	let msgArray = props.msgArray;
+	let user = props.user;
+	return (
+		<div className="chat-box">
+			{msgArray.map((msg) => {
+        
+				return <SingleMsg key={msg.timestamp.nanoseconds} text={msg.body} user={msg.userName} />;
+			})}
+		</div>
+	);
 }
 
-export default ChatBox
+export default ChatBox;
 // Include PropTypes - expect props.msgArray to be an array of objects!
 // Assume object looks like this:
 

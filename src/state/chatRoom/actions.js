@@ -26,7 +26,7 @@ export function subscribeToDatabase_THUNK (databaseId = 'messages', limit = 100)
   return async dispatch => {
     firestore.collection('rooms').doc('nJlBQWLv9YLjHug62z17').collection('messages').onSnapshot(function (doc) {
       doc.forEach(thing => {
-        console.log('THE OBJECT', thing.data())
+
         dispatch(setChatMessages(thing.data()))
       })
     })
@@ -44,7 +44,7 @@ export function postToDatabase (message, databaseId = 'messages', user = 'demoUs
               userName: user
             })
             .then(function (docRef) {
-              console.log('Document written with ID: ', docRef.id)
+
             })
             .catch(function (error) {
               console.error('Error adding document: ', error)
