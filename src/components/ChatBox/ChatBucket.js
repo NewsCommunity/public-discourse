@@ -1,20 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { ChatBox, ChatInput } from "./index";
 import { firestore } from "../../fire";
-import Login from "../authentication/login";
-var firebase = require("firebase");
+import { thunkLogInUser, thunkLogOutUser } from "../../state/user/reducer";
 
 class ChatBucket extends Component {
   constructor(props) {
     super(props);
     this.state = {
       discourseId: props.discourseId,
-      messages: [],
-      displayName: "",
-      email: "",
-      loggedIn: false
+      messages: []
     };
-    console.log("props.discourseId", props.discourseId);
+
     this.getInitialMessages = this.getInitialMessages.bind(this);
     this.addSingleMessageToState = this.addSingleMessageToState.bind(this);
     this.postMessage = this.postMessage.bind(this);
@@ -23,21 +20,6 @@ class ChatBucket extends Component {
   async componentDidMount() {
     const { discourseId } = this.state;
     this.subscribeToMessageUpdates(discourseId);
-
-    // Authentication component
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in.
-        this.setState({
-          displayName: user.displayName,
-          email: user.email,
-          loggedIn: true
-        });
-      } else {
-        // No user is signed in.
-        console.log("No user logged in");
-      }
-    });
   }
 
   async getInitialMessages(discourseId, limit = 50) {
@@ -56,9 +38,10 @@ class ChatBucket extends Component {
 
   addSingleMessageToState(message) {
     const { messages } = this.state;
-    let newMessageState = new Set([...messages, message]);
-    let messageState = Array.from(newMessageState);
-    this.setState({ messages: messageState });
+    // let newMessageState = new Set([...messages, message]);
+    // let messageState = Array.from(newMessageState);
+    const newMessages = [ ...messages, message ]
+    this.setState({ messages: newMessages });
   }
 
   async subscribeToMessageUpdates(discourseId) {
@@ -67,8 +50,8 @@ class ChatBucket extends Component {
       .collection("discourseList")
       .doc(discourseId)
       .collection("messages")
-      .orderBy("timestamp", "asc")
-      .limit(20)
+      .orderBy("timestamp", "desc")
+      .limit(100)
       .onSnapshot((snapshot) => {
         snapshot.docChanges().forEach((change) => {
           let messageArray = messages;
@@ -79,18 +62,22 @@ class ChatBucket extends Component {
   }
 
   // This method for TimeStamp is INSECURE
-  postMessage(message, discourseId, user = this.state.displayName) {
+  postMessage(message) {
+    const { user, discourseId } = this.props;
+    const { displayName } = user
     const date = new Date();
-    console.log("The Date is: ", date);
+    const messageObj = {
+      body: message,
+      userName: displayName,
+      timestamp: date
+    }
+
+    this.addSingleMessageToState(messageObj)
     firestore
       .collection("discourseList")
       .doc(discourseId)
       .collection("messages")
-      .add({
-        body: message,
-        userName: user,
-        timestamp: date
-      })
+      .add(messageObj)
       .then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
       })
@@ -99,46 +86,49 @@ class ChatBucket extends Component {
       });
   }
 
-  isLoggedIn = () => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-  };
-
-  doLogOut = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        console.log("Logout");
-        this.setState(() => {
-          return { loggedIn: false };
-        });
-      });
-  };
-
   render() {
-    const { discourseId, messages, loggedIn } = this.state;
+    const { discourseId, messages } = this.state;
+    const { logOutUser, logInUser, isLoggedIn, displayName } = this.props;
     return (
       <div className="Chatbucket-container">
-        {loggedIn ? (
-          <div onClick={() => this.doLogOut()}>Logout</div>
-        ) : (
-          <Login />
-        )}
+        {isLoggedIn ?
+          <div onClick={() => logOutUser()}>Logout</div>
+        :
+          <div onClick={() => logInUser()}>Login</div>
+        }
         <ChatBox msgArray={messages} />
-        {loggedIn ? (
+        {isLoggedIn ?
           <ChatInput postMessage={this.postMessage} discourseId={discourseId} />
-        ) : (
-          <Login />
-        )}
+        :
+          <div onClick={() => logInUser()}>Login</div>
+        }
       </div>
     );
   }
 }
+
+//CONTAINER====================================================================
+function mapState(state) {
+  return {
+    user: state.userReducer.user,
+    isLoggedIn: state.userReducer.isLoggedIn
+  };
+}
+
+function mapDispatch(dispatch) {
+  return {
+    logOutUser: () => {
+      dispatch(thunkLogOutUser());
+    },
+    logInUser: () => {
+      dispatch(thunkLogInUser());
+    }
+  };
+}
+
+ChatBucket = connect(
+  mapState,
+  mapDispatch
+)(ChatBucket);
 
 export default ChatBucket;

@@ -11,9 +11,8 @@ class ChatInput extends Component {
   
 	handleSubmit(event) {
     const { message } = this.state
-    const { discourseId } = this.props
 		event.preventDefault();
-		this.props.postMessage(message, discourseId);
+		this.props.postMessage(message);
 		this.setState({ message: '' });
 	}
 
