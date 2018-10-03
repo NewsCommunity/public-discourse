@@ -5,7 +5,7 @@ export default props => (
   <nav className='navbar navbar-inverse'>
     <div className='container-fluid'>
       <div className='navbar-header'>
-        <Link className='navbar-brand' to={`/discourseList`}>publicDiscourse</Link>
+        <Link className='navbar-brand' to={`/`}>publicDiscourse</Link>
 
       </div>
       <ul className='nav navbar-nav'>
