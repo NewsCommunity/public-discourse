@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { subscribeToDatabase_THUNK, postToDatabase } from '../state/chatRoom/actions';
-import { getChatMessages_THUNK, setChatMessages } from '../state/chatRoom';
+import { thunkSubscribeToDatabase, thunkPostToDatabase } from '../state/chatRoom/actions';
+import { thunkGetChatMessages, setChatMessages } from '../state/chatRoom';
 import ChatBucket from '../components/ChatBox/ChatBucket';
 import { firestore} from '../fire';
 
@@ -16,8 +16,8 @@ function mapState(state) {
 
 function mapDispatch(dispatch) {
 	return {
-		// postMsg: (msg) => dispatch(postMsg(msg)),
-		//subscribe: (chatRoomId, limit) => dispatch(subscribeToDatabase_THUNK(chatRoomId, limit))
+		// postMessage: (msg) => dispatch(postMessage(msg)),
+		//subscribe: (chatRoomId, limit) => dispatch(thunkSubscribeToDatabase(chatRoomId, limit))
 	};
 }
 

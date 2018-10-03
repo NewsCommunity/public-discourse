@@ -1,6 +1,8 @@
 import types from './types'
 import { firestore } from '../../fire'
 
+
+//ACTION CREATORS==============================================================
 export function setChatMessages (messages) {
   return {
     type: types.SET_CHAT_MESSAGES,
@@ -10,34 +12,30 @@ export function setChatMessages (messages) {
 
 const demoData = { text: '', id: '-LNMaYZP70GirAaotNzF' }
 
-export function getChatMessages_THUNK (articleId = 'messages') {
+//THUNKS=======================================================================
+export function thunkGetChatMessages (discourseId) {
   return async dispatch => {
     const demoMess = [demoData]
     dispatch(setChatMessages(demoMess))
   }
 }
 
-// I am defining this outside of the function so that when we recall the
-// subscribeToDatabase we are sure to overright the previous instance
-// of messages. This might solve our unsubcribe needs.
-let messagesRef
-
-export function subscribeToDatabase_THUNK (databaseId = 'messages', limit = 100) {
+export function thunkSubscribeToDatabase (discourseId, limit = 100) {
   return async dispatch => {
-    firestore.collection('rooms').doc('nJlBQWLv9YLjHug62z17').collection('messages').onSnapshot(function (doc) {
-      doc.forEach(thing => {
+    firestore.collection('discourseList').doc(discourseId).collection('messages').onSnapshot(function (doc) {
+      doc.forEach(doc => {
 
-        dispatch(setChatMessages(thing.data()))
+        dispatch(setChatMessages(doc.data()))
       })
     })
   }
 }
 
-export function postToDatabase (message, databaseId = 'messages', user = 'demoUser') {
+export function thunkPostToDatabase (message, discourseId, user = 'demoUser') {
   return async dispatch => {
     firestore
-            .collection('rooms')
-            .doc('nJlBQWLv9YLjHug62z17')
+            .collection('discourseList')
+            .doc(discourseId)
             .collection('messages')
             .add({
               body: message,
