@@ -12,7 +12,17 @@ export default props => (
         <li className='active'><a href='#'>Login/logout</a></li>
       </ul>
       <ul className='nav navbar-nav navbar-right'>
-        <a href='#'><span className='glyphicon glyphicon-log-in' /> ACCOUNT</a>
+        <li className='dropdown'>
+          <a className='dropdown-toggle' data-toggle='dropdown' href='#'>
+                        UserStuff
+                        <span class='caret' />
+          </a>
+          <ul className='dropdown-menu'>
+            <li>UserStuff1</li>
+            <li>UserStuff2</li>
+            <li>UserStuff3</li>
+          </ul>
+        </li>
       </ul>
     </div>
   </nav>
