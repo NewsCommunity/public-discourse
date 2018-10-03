@@ -7,13 +7,14 @@ class ChatInput extends Component {
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-	}
+  }
+  
 	handleSubmit(event) {
+    const { message } = this.state
+    const { discourseId } = this.props
 		event.preventDefault();
-		this.props.postMsg(this.state.message);
-		this.setState(() => {
-			return { message: '' };
-		});
+		this.props.postMessage(message, discourseId);
+		this.setState({ message: '' });
 	}
 
 	handleChange(event) {
@@ -21,13 +22,14 @@ class ChatInput extends Component {
 	}
 
 	render() {
+    const { message } = this.state
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<span className="input">
 					<input
 						className="chat-box-input"
 						type="text"
-						value={this.state.message}
+						value={message}
 						name="message"
 						onChange={this.handleChange}
 						placeholder="...add discourse"
