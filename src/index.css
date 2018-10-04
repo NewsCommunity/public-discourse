@@ -277,7 +277,7 @@ align-content: space-around;
 }
 
 .BlockChain-Bar {
-	background-color: #92e1ff;
+	background-color: #c92587;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -290,6 +290,7 @@ align-content: space-around;
 	justify-content: center;
 	align-items: center;
 	flex: 1;
+	color:white;
 }
 
 .BlockChain-Container {
@@ -298,9 +299,36 @@ align-content: space-around;
 }
 
 .BlockChain-Bar-Eth-Balance {
-
+	margin-left: 8px;
+	color: white;
 }
+
+.tip-over {
+	color: red;
+	animation: shake 200ms 2 linear;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(6px, 0);
+  }
+  50% {
+    transform: translate(-6px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
 
 .BlockChain-Bar-Account-Availible {
 
+}
+
+i.icon-fire {
+	color: orange;
+}
+
+.chip-bar {
+	color: white;
 }
