@@ -1,7 +1,10 @@
-body {
+body { 
+	padding-top: 40px;
 	margin: 0;
-	padding: 0;
 	font-family: sans-serif;
+ }
+@media screen and (max-width: 768px) {
+    body { padding-top: 0px; }
 }
 
 .single-room {
@@ -208,6 +211,37 @@ html::after {
 	flex-direction: column;
 }
 
+<<<<<<< HEAD
+/* Desktops and laptops */
+@media only screen and (min-width : 1224px) {
+ 
+}
+ 
+/* Large screens */
+@media only screen and (min-width : 1824px) {
+ 
+}
+ 
+/* Tablets (landscape) */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+ 
+}
+ 
+/* Tablets (portrait) */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+ 
+}
+ 
+/* Smartphones (landscape) */
+@media only screen and (min-width : 321px) {
+ 
+}
+ 
+/* Smartphones (portrait) */
+@media only screen and (max-width : 320px) {
+ 
+}
+=======
 .navbar {
 	display: flex;
 	padding-left: 1vw;
@@ -243,3 +277,4 @@ flex-direction: row;
 justify-content: center;
 align-content: space-around;
 }
+>>>>>>> 12097e8b10febe14d688bd6a7bebe4fb90cac900

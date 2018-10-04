@@ -36,6 +36,32 @@ class ChatBucket extends Component {
       .orderBy("timestamp")
       .get();
 
+<<<<<<< HEAD
+  addSingleMessageToState (message) {
+    const { messages } = this.state
+        // why are we using a Set here instead of array?
+    let newMessageState = new Set([...messages, message])
+    let messageState = Array.from(newMessageState)
+    this.setState({ messages: messageState })
+  }
+
+  async subscribeToMessageUpdates (discourseId) {
+    const { messages } = this.state
+    await firestore
+            .collection('discourseList')
+            .doc(discourseId)
+            .collection('messages')
+            .orderBy('timestamp', 'asc')
+            .limit(20)
+            .onSnapshot(snapshot => {
+              snapshot.docChanges().forEach(change => {
+                    // why do we make a message array variable when messages are already an array?
+                let messageArray = messages
+                messageArray.push(change.doc.data())
+                this.setState({ messages: messageArray })
+              })
+            })
+=======
     messages.forEach((message) => {
       this.addSingleMessageToState(message.data());
     });
@@ -47,6 +73,7 @@ class ChatBucket extends Component {
     // let messageState = Array.from(newMessageState);
     const newMessages = [ ...messages, message ]
     this.setState({ messages: newMessages });
+>>>>>>> 12097e8b10febe14d688bd6a7bebe4fb90cac900
   }
 
   async subscribeToMessageUpdates(discourseId) {
@@ -117,6 +144,11 @@ class ChatBucket extends Component {
   }
 }
 
+<<<<<<< HEAD
+// can we pull out the functionality and add it as a button to the navbar?
+
+export default ChatBucket
+=======
 //CONTAINER====================================================================
 function mapState(state) {
   return {
@@ -142,3 +174,4 @@ ChatBucket = connect(
 )(ChatBucket);
 
 export default ChatBucket;
+>>>>>>> 12097e8b10febe14d688bd6a7bebe4fb90cac900
