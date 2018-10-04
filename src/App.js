@@ -3,7 +3,7 @@ import fire from './fire'
 import SingleDiscourse from './components/SingleDiscourse'
 import { Router, withRouter, Route, Switch } from 'react-router-dom'
 import DiscourseListContainer from './containers/DiscourseListContainer'
-import Navbar from './components/layouts/NavBar'
+import Navbar from './components/NavBar'
 class App extends Component {
   render () {
     return (
