@@ -28,13 +28,13 @@ class BlockChainBucket extends Component {
 	}
 
   handleOpen = () => {
-    this.setState({ open: true });
+    this.setState(() => {return { modalOpen: true }});
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState(() => {return { modalOpen: false }});
   };
-  
+
   onIncrement = () => {
     let tip = this.state.tipAmount + 10000
     if (tip >= this.state.currentBalance){
@@ -78,10 +78,9 @@ class BlockChainBucket extends Component {
 							<i className="material-icons" onClick={() => this.onDecrement()}>expand_more</i>
 						</button>
 					</div>
-					<span className="mdl-chip mdl-chip--deletable">
+					<span className="mdl-chip mdl-chip--deletable" onClick={() => {this.handleOpen}}>
 						<span className="mdl-chip__text chip-bar" >{this.state.tipAmount}</span>
-						<button type="button" className="mdl-chip__action">
-
+						<button type="button" className="mdl-chip__action" >
 							<i className="material-icons icon-fire" >whatshot</i>
 						</button>
 					</span>
@@ -98,19 +97,11 @@ class BlockChainBucket extends Component {
 
 
         <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={this.state.open}
+          open={this.state.modalOpen}
           onClose={this.handleClose}
         >
-          <div style={getModalStyle()} className={classes.paper}>
-            <Typography variant="title" id="modal-title">
-              Text in a modal
-            </Typography>
-            <Typography variant="subheading" id="simple-modal-description">
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-            <ConfirmModalWrapped />
+          <div>
+            MODAL IS HERE!
           </div>
         </Modal>
 
