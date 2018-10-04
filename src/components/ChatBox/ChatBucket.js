@@ -1,133 +1,134 @@
-import React, { Component } from 'react'
-import { ChatBox, ChatInput } from './index'
-import { firestore } from '../../fire'
-import Login from '../authentication/login'
-var firebase = require('firebase')
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { ChatBox, ChatInput } from "./index";
+import { firestore } from "../../fire";
+import { thunkLogInUser, thunkLogOutUser } from "../../state/user/reducer";
 
 class ChatBucket extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       discourseId: props.discourseId,
-      messages: [],
-      displayName: '',
-      email: '',
-      loggedIn: false
-    }
-    console.log('props.discourseId', props.discourseId)
-    this.getInitialMessages = this.getInitialMessages.bind(this)
-    this.addSingleMessageToState = this.addSingleMessageToState.bind(this)
-    this.postMessage = this.postMessage.bind(this)
+      messages: []
+    };
+
+    this.getInitialMessages = this.getInitialMessages.bind(this);
+    this.addSingleMessageToState = this.addSingleMessageToState.bind(this);
+    this.postMessage = this.postMessage.bind(this);
   }
 
-  async componentDidMount () {
-    const { discourseId } = this.state
-    this.subscribeToMessageUpdates(discourseId)
-
-        // Authentication component
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-                // User is signed in.
-        this.setState({
-          displayName: user.displayName,
-          email: user.email,
-          loggedIn: true
-        })
-      } else {
-                // No user is signed in.
-        console.log('No user logged in')
-      }
-    })
+  async componentDidMount() {
+    const { discourseId } = this.state;
+    this.subscribeToMessageUpdates(discourseId);
   }
 
-  async getInitialMessages (discourseId, limit = 50) {
+  async getInitialMessages(discourseId, limit = 50) {
     const messages = await firestore
-            .collection('discourseList')
-            .doc(discourseId)
-            .collection('messages')
-            .limit(limit)
-            .orderBy('timestamp')
-            .get()
+      .collection("discourseList")
+      .doc(discourseId)
+      .collection("messages")
+      .limit(limit)
+      .orderBy("timestamp")
+      .get();
 
-    messages.forEach(message => {
-      this.addSingleMessageToState(message.data())
-    })
+    messages.forEach((message) => {
+      this.addSingleMessageToState(message.data());
+    });
   }
 
-  addSingleMessageToState (message) {
-    const { messages } = this.state
-    let newMessageState = new Set([...messages, message])
-    let messageState = Array.from(newMessageState)
-    this.setState({ messages: messageState })
+  addSingleMessageToState(message) {
+    const { messages } = this.state;
+    // let newMessageState = new Set([...messages, message]);
+    // let messageState = Array.from(newMessageState);
+    const newMessages = [ ...messages, message ]
+    this.setState({ messages: newMessages });
   }
 
-  async subscribeToMessageUpdates (discourseId) {
-    const { messages } = this.state
+  async subscribeToMessageUpdates(discourseId) {
+    const { messages } = this.state;
     await firestore
-            .collection('discourseList')
-            .doc(discourseId)
-            .collection('messages')
-            .orderBy('timestamp', 'asc')
-            .limit(20)
-            .onSnapshot(snapshot => {
-              snapshot.docChanges().forEach(change => {
-                let messageArray = messages
-                messageArray.push(change.doc.data())
-                this.setState({ messages: messageArray })
-              })
-            })
+      .collection("discourseList")
+      .doc(discourseId)
+      .collection("messages")
+      .orderBy("timestamp", "desc")
+      .limit(100)
+      .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          let messageArray = messages;
+          messageArray.push(change.doc.data());
+          this.setState({ messages: messageArray });
+        });
+      });
   }
 
-    // This method for TimeStamp is INSECURE
-  postMessage (message, discourseId, user = this.state.displayName) {
-    const date = new Date()
-    console.log('The Date is: ', date)
+  // This method for TimeStamp is INSECURE
+  postMessage(message) {
+    const { user, discourseId } = this.props;
+    const { displayName } = user
+    const date = new Date();
+    const messageObj = {
+      body: message,
+      userName: displayName,
+      timestamp: date
+    }
+
+    this.addSingleMessageToState(messageObj)
     firestore
-            .collection('discourseList')
-            .doc(discourseId)
-            .collection('messages')
-            .add({
-              body: message,
-              userName: user,
-              timestamp: date
-            })
-            .then(function (docRef) {
-              console.log('Document written with ID: ', docRef.id)
-            })
-            .catch(function (error) {
-              console.error('Error adding document: ', error)
-            })
-  }
-
-  isLoggedIn = () => {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        return true
-      } else {
-        return false
-      }
-    })
-  }
-
-  doLogOut = () => {
-    firebase.auth().signOut().then(() => {
-      console.log('Logout')
-      this.setState(() => {
-        return { loggedIn: false }
+      .collection("discourseList")
+      .doc(discourseId)
+      .collection("messages")
+      .add(messageObj)
+      .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
       })
-    })
+      .catch(function(error) {
+        console.error("Error adding document: ", error);
+      });
   }
 
-  render () {
-    const { discourseId, messages, loggedIn } = this.state
+  render() {
+    const { discourseId, messages } = this.state;
+    const { logOutUser, logInUser, isLoggedIn, displayName } = this.props;
     return (
-      <div className='Chatbucket-container'>
-        {loggedIn ? <div onClick={() => this.doLogOut()}>Logout</div> : <Login />}
+      <div className="Chatbucket-container">
+        {isLoggedIn ?
+          <div onClick={() => logOutUser()}>Logout</div>
+        :
+          <div onClick={() => logInUser()}>Login</div>
+        }
         <ChatBox msgArray={messages} />
-        {loggedIn ? <ChatInput postMessage={this.postMessage} discourseId={discourseId} /> : <Login />}
+        {isLoggedIn ?
+          <ChatInput postMessage={this.postMessage} discourseId={discourseId} />
+        :
+          <div onClick={() => logInUser()}>Login</div>
+        }
       </div>
-    )
+    );
   }
 }
 
-export default ChatBucket
+//CONTAINER====================================================================
+function mapState(state) {
+  return {
+    user: state.userReducer.user,
+    isLoggedIn: state.userReducer.isLoggedIn
+  };
+}
+
+function mapDispatch(dispatch) {
+  return {
+    logOutUser: () => {
+      dispatch(thunkLogOutUser());
+    },
+    logInUser: () => {
+      dispatch(thunkLogInUser());
+    }
+  };
+}
+
+ChatBucket = connect(
+  mapState,
+  mapDispatch
+)(ChatBucket);
+
+export default ChatBucket;
