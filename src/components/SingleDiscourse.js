@@ -6,15 +6,18 @@ import { connect } from 'react-redux'
 class SingleDiscourse extends Component {
   constructor (props) {
     super(props)
-    console.log('inside singlediscourse', this.props.match.params.docId)
+    
   }
 
   componentDidMount = async () => {
     await this.props.getSingleDiscourse(this.props.match.params.docId)
+    
   }
 
   render () {
-    const { discourse } = this.props
+    const { discourse, match } = this.props
+    const discourseId = match.params.docId
+    
     if (discourse.article) {
       const { url, title } = discourse.article
       return (
@@ -25,7 +28,7 @@ class SingleDiscourse extends Component {
               <div className='iframe-container'>
                 <iframe src={url} />
               </div>
-              <ChatBucket discourseId={discourse.docId} />
+              <ChatBucket discourseId={discourseId} />
             </div>
           </div>
         </div>

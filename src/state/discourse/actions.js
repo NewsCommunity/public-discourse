@@ -53,20 +53,20 @@ export function thunkGetDiscourseList() {
           discourseList.push(doc);
         });
       });
-    console.log("Discourse LIST is: ", discourseList);
+    
     dispatch(setDiscourseList(discourseList));
   };
 }
 
 export function thunkGetSingleDiscourse(discourseId) {
-  console.log('invoking thunkGetSingleDiscourse')
+  
   return async (dispatch) => {
     
     let doc = await firestore
       .collection("discourseList")
       .doc(discourseId)
       .get();
-      console.log('single doc: ', doc)
+      
     const id = doc._key.path.segments[doc._key.path.segments.length - 1];
     let docData = doc.data();
     docData = { ...docData, docId: id };

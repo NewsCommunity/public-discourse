@@ -27,5 +27,6 @@
     "deploy": "firebase deploy",
     "serve": "firebase serve",
     "watch": "start react-scripts watch"
-  }
+  },
+  "lint": "eslint src/*"
 }
