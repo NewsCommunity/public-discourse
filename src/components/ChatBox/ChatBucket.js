@@ -11,9 +11,9 @@ var firebase = require("firebase");
 
 class ChatBucket extends Component {
   constructor(props) {
+    
     super(props);
     this.state = {
-      discourseId: props.discourseId,
       messages: []
     };
 
@@ -23,11 +23,13 @@ class ChatBucket extends Component {
   }
 
   async componentDidMount() {
-    const { discourseId } = this.state;
+    const { discourseId } = this.props;
+    
     this.subscribeToMessageUpdates(discourseId);
   }
 
   async getInitialMessages(discourseId, limit = 50) {
+    
     const messages = await firestore
       .collection("discourseList")
       .doc(discourseId)
@@ -50,6 +52,7 @@ class ChatBucket extends Component {
   }
 
   async subscribeToMessageUpdates(discourseId) {
+    
     const { messages } = this.state;
     await firestore
       .collection("discourseList")
@@ -84,7 +87,7 @@ class ChatBucket extends Component {
       .collection("messages")
       .add(messageObj)
       .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
+        
       })
       .catch(function(error) {
         console.error("Error adding document: ", error);
@@ -92,8 +95,10 @@ class ChatBucket extends Component {
   }
 
   render() {
-    const { discourseId, messages } = this.state;
-    const { logOutUser, logInUser, isLoggedIn, displayName } = this.props;
+    
+    
+    const { messages } = this.state;
+    const { logOutUser, logInUser, isLoggedIn, displayName, discourseId } = this.props;
     return (
       <div className="Chatbucket-container">
       <BlockChainBar />
