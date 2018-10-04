@@ -16,6 +16,7 @@ class Navbar extends Component {
           </div>
           <ul className='nav navbar-nav'>
             <li className='active'><a href='#'>Login/logout</a></li>
+            <Link className='navbar-brand' to={`/data`}>Data</Link>
           </ul>
           <ul className='nav navbar-nav navbar-right'>
             <li className='dropdown'>
