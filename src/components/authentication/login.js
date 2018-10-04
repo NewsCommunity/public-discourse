@@ -20,11 +20,11 @@ class Login extends React.Component {
 		.auth()
 		.getRedirectResult()
 		.then(function(result) {
-			console.log('login result', result)
+			
 			if (result.credential) {
 					// This gives you a Google Access Token. You can use it to access the Google API.
 					var token = result.credential.accessToken;
-					console.log('This is the Token: ', token);
+					
 					// ...
 				}
 				// The signed-in user info.
