@@ -4,7 +4,7 @@ import SingleDiscourse from './components/SingleDiscourse'
 import { Router, withRouter, Route, Switch } from 'react-router-dom'
 import DiscourseListContainer from './containers/DiscourseListContainer'
 import Navbar from './components/NavBar'
-import Data from './components/data.js/Data'
+import Data from './components/data/Data'
 
 class App extends Component {
   render () {

@@ -11,6 +11,7 @@
     "firebaseui": "^3.4.1",
     "newsapi": "^2.4.0",
     "react": "^16.5.2",
+    "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
