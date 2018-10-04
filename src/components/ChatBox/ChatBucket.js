@@ -56,6 +56,7 @@ class ChatBucket extends Component {
 
   addSingleMessageToState (message) {
     const { messages } = this.state
+        // why are we using a Set here instead of array?
     let newMessageState = new Set([...messages, message])
     let messageState = Array.from(newMessageState)
     this.setState({ messages: messageState })
@@ -71,6 +72,7 @@ class ChatBucket extends Component {
             .limit(20)
             .onSnapshot(snapshot => {
               snapshot.docChanges().forEach(change => {
+                    // why do we make a message array variable when messages are already an array?
                 let messageArray = messages
                 messageArray.push(change.doc.data())
                 this.setState({ messages: messageArray })
@@ -129,5 +131,7 @@ class ChatBucket extends Component {
     )
   }
 }
+
+// can we pull out the functionality and add it as a button to the navbar?
 
 export default ChatBucket
