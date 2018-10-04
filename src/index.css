@@ -10,6 +10,7 @@ body {
 }
 
 .Chatbucket-container {
+	background: #ffffff;
 	position: fixed;
 	border-top: solid red;
 	bottom: 0px;
@@ -88,10 +89,10 @@ body {
 }
 
 .chat-box-input {
-	border-radius: 15px 50px 15px;
+	border-radius: 50px 50px 50px;
 }
 
-.input {
+/* .input {
   position: relative;
   font-size: 1.5em;
   background: linear-gradient(21deg, #10abff, #1beabd);
@@ -138,9 +139,9 @@ input {
   line-height: inherit;
   color: #2e3750;
   min-width: 12em;
-}
+} */
 
-
+/*
 ::-webkit-input-placeholder {
   color: #cbd0d5;
 }
@@ -169,7 +170,8 @@ html::after {
 	display: flex;
 	flex-direction: column;
 }
-}
+} */
+
 .discourse-card {
 	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
   transition: 0.4s;
@@ -209,4 +211,35 @@ html::after {
 .navbar {
 	display: flex;
 	padding-left: 1vw;
+}
+
+.chat-button {
+	width: 40px;
+	height: 40px;
+	min-width: 40px;
+	margin: 8px;
+}
+
+
+.Form-Flex {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.chat-box-input{
+	width: 25em;
+	padding-left: 12px;
+	padding-top: 4px;
+	background-color: #f1f1f1;
+	border: none;
+  margin-top: 8px;
+}
+
+.bottom-nav {
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-content: space-around;
 }

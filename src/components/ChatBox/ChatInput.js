@@ -8,7 +8,7 @@ class ChatInput extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
   }
-  
+
 	handleSubmit(event) {
     const { message } = this.state
 		event.preventDefault();
@@ -23,20 +23,26 @@ class ChatInput extends Component {
 	render() {
     const { message } = this.state
 		return (
-			<form onSubmit={this.handleSubmit}>
+			<div className="Form-Flex">
+			<form className="Form-Flex" onSubmit={this.handleSubmit}>
 				<span className="input">
-					<input
+					<textarea
 						className="chat-box-input"
-						type="text"
+						type="text-area" multiline="true"
 						value={message}
 						name="message"
 						onChange={this.handleChange}
 						placeholder="...add discourse"
+						onKeyPress={(e)=>{e.target.keyCode === 13 && e.preventDefault();}}
 					/>
 					<span />
 				</span>
-				<input type="submit" />
+
+<button className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored chat-button">
+  <i className="material-icons" type="submit">send</i>
+</button>
 			</form>
+			</div>
 		);
 	}
 }

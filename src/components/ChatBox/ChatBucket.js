@@ -1,8 +1,13 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+
 import { ChatBox, ChatInput } from "./index";
 import { firestore } from "../../fire";
+import Login from "../authentication/login";
+import BottomNav from "../BottomNavigation/BottomNav";
+var firebase = require("firebase");
 import { thunkLogInUser, thunkLogOutUser } from "../../state/user/reducer";
+import { connect } from "react-redux";
+
 
 class ChatBucket extends Component {
   constructor(props) {
@@ -97,11 +102,16 @@ class ChatBucket extends Component {
           <div onClick={() => logInUser()}>Login</div>
         }
         <ChatBox msgArray={messages} />
-        {isLoggedIn ?
+
+        {isLoggedIn ? (
           <ChatInput postMessage={this.postMessage} discourseId={discourseId} />
-        :
+        ) : (
           <div onClick={() => logInUser()}>Login</div>
-        }
+        )}
+        <div className="bottom-nav">
+        <BottomNav />
+        </div>
+
       </div>
     );
   }
