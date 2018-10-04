@@ -5,6 +5,7 @@ import Login from "../authentication/login";
 import BottomNav from "../BottomNavigation/BottomNav";
 import { thunkLogInUser, thunkLogOutUser } from "../../state/user/reducer";
 import { connect } from "react-redux";
+import BlockChainBar from "../ethereum/BlockChainBar";
 var firebase = require("firebase");
 
 
@@ -95,6 +96,7 @@ class ChatBucket extends Component {
     const { logOutUser, logInUser, isLoggedIn, displayName } = this.props;
     return (
       <div className="Chatbucket-container">
+      <BlockChainBar />
         {isLoggedIn ?
           <div onClick={() => logOutUser()}>Logout</div>
         :
