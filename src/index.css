@@ -277,7 +277,7 @@ align-content: space-around;
 }
 
 .BlockChain-Bar {
-	background-color: #c92587;
+	background-color: #25c9a37a;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -305,7 +305,7 @@ align-content: space-around;
 
 .tip-over {
 
-	animation: shake 400ms 2 linear;
+	animation: shake 200ms 2 linear;
 }
 
 @keyframes shake {
