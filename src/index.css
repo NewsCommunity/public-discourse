@@ -287,6 +287,20 @@ align-content: space-around;
 .BlockChain-Center {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
+	flex: 1;
+}
+
+.BlockChain-Container {
+	display: flex;
+
+}
+
+.BlockChain-Bar-Eth-Balance {
+
+}
+
+.BlockChain-Bar-Account-Availible {
+
 }
