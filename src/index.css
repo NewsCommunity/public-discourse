@@ -211,7 +211,6 @@ html::after {
 	flex-direction: column;
 }
 
-<<<<<<< HEAD
 /* Desktops and laptops */
 @media only screen and (min-width : 1224px) {
  
@@ -241,7 +240,6 @@ html::after {
 @media only screen and (max-width : 320px) {
  
 }
-=======
 .navbar {
 	display: flex;
 	padding-left: 1vw;
@@ -277,4 +275,3 @@ flex-direction: row;
 justify-content: center;
 align-content: space-around;
 }
->>>>>>> 12097e8b10febe14d688bd6a7bebe4fb90cac900

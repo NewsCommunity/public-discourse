@@ -16,7 +16,7 @@ const actionSetUser = (userObj, isLoggedIn) => {
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 export const thunkLogInUser = (provider = googleProvider) => async (dispatch) => {
-  // Authentication component
+
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       const { displayName, email, } = user
@@ -26,7 +26,7 @@ export const thunkLogInUser = (provider = googleProvider) => async (dispatch) =>
     }
   });
 
-  firebase.auth().signInWithRedirect(provider);
+  firebase.auth().signInWithPopup(provider);
 };
 
 export const thunkLogOutUser = () => async (dispatch) => {
