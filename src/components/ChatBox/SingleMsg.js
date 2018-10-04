@@ -4,7 +4,7 @@ function SingleMsg (props) {
   const { text, user } = props
   return (
     <div className='single-msg'>
-      <div className='single-msg-box'>
+      <div className='single-msg-box' >
         <div className='single-msg-profile'>
           <div className='user-profile-pic'>
             <img
