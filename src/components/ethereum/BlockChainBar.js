@@ -24,7 +24,6 @@ class BlockChainBucket extends Component {
 		this.state = {
 			tipAmount: "0",
 			currentAccount: '0x0',
-      currentBalance: "24982477800000000000",
       tipOver: false,
 			accounts: [],
       destination: '0x0',
@@ -118,7 +117,7 @@ class BlockChainBucket extends Component {
 		return (
 
 			<div className="BlockChain-Bar">
-				<div className={this.state.tipOver ? "BlockChain-Bar-Eth-Balance tip-over": "BlockChain-Bar-Eth-Balance"}>{Eth.fromWei(this.state.currentBalance, 'ether')} ETH</div>
+				<div className={this.state.tipOver ? "BlockChain-Bar-Eth-Balance tip-over": "BlockChain-Bar-Eth-Balance"}>{Eth.fromWei(this.props.currentBalance, 'ether')} ETH</div>
 
 				<div className="BlockChain-Center">
 					<div>
@@ -140,7 +139,7 @@ class BlockChainBucket extends Component {
 				</div>
 
 				<div className="BlockChain-Bar-Account-Availible">
-  <AccountMenu />
+  <AccountMenu accounts={this.props.availibleAccounts}/>
 				</div>
 
 
@@ -164,7 +163,13 @@ function mapState(state) {
 	return {
 		user: state.userReducer.user,
     isLoggedIn: state.userReducer.isLoggedIn,
-    fullUserState: state.userReducer
+    fullUserState: state.userReducer,
+    currentBalance: state.userReducer.currentEthBalance,
+    currentAccount: state.userReducer.currentEthAccount,
+    availibleAccounts: state.userReducer.ethAccounts,
+    isFetchingEth: state.userReducer.isFetchingEth,
+    ethProvider: state.userReducer.ethProvider
+
 	};
 }
 
