@@ -8,24 +8,38 @@ import Modal from '@material-ui/core/Modal';
 import ConfirmModal from '../ethereum/ConfirmModal';
 import AccountMenu from '../ethereum/AccountMenu';
 import Web3 from 'web3';
+import Eth from 'ethjs';
+import {etherscan} from '../../secrets';
+import axios from 'axios';
+
 
 const web3= new Web3();
-var firebase = require('firebase');
+
 
 
 class BlockChainBucket extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			tipAmount: 0,
+			tipAmount: "0",
 			currentAccount: '0x0',
-      currentBalance: 20000,
+      currentBalance: "24982477800000000000",
       tipOver: false,
 			accounts: [],
       destination: '0x0',
       modalOpen: false,
+      ethPrice: 0
 		};
-	}
+  }
+
+  // async componentDidMount() {
+  //   try {
+  //     const accounts = await eth.accounts();
+  //     console.log("These are the accounts: ", accounts);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   handleOpen = () => {
     this.setState(() => {return { modalOpen: true }});
@@ -36,33 +50,67 @@ class BlockChainBucket extends Component {
   };
 
   onIncrement = () => {
-    let tip = this.state.tipAmount + 10000
-    if (tip >= this.state.currentBalance){
+    let tip = new Eth.BN(this.state.tipAmount);
+    let increment = new Eth.BN("100000000000000000");
+    tip = tip.add(increment);
+    let balance = new Eth.BN(this.state.currentBalance);
+    console.log(tip.toString());
+    if (tip.gt(balance)){
       this.setState(() => {return {tipOver: true}})
+    } else {
+    this.setState(() => {return {tipAmount: tip.toString(10, 4)}})
     }
-    this.setState(() => {return {tipAmount: tip}})
 
   }
 
   onDecrement = () => {
-    let tip = this.state.tipAmount - 10000
-    if (tip < this.state.currentBalance){
+    let tip = new Eth.BN(this.state.tipAmount);
+    let decrement = new Eth.BN("100000000000000000");
+    tip = tip.sub(decrement);
+    let balance = new Eth.BN(this.state.currentBalance);
+    console.log(tip.toString());
+    const zero = new Eth.BN(0);
+
+    if (tip.lt(balance)){
       this.setState(()=> {return {tipOver: false}})
     }
-    if(tip < 0){
-    this.setState(() => {return {tipAmount: 0}})
+
+    if(tip.isNeg()){
+    this.setState(() => {return {tipAmount: zero}})
     } else {
     this.setState(() => {return {tipAmount: tip}})
     }
 
   }
 
+  toEther =(bigNumber, decimalPlaces=2) =>{
+    let value = Eth.fromWei(bigNumber, 'ether');
+
+    return value.slice(0, value.indexOf(".")+decimalPlaces+1);
+   }
+
   convertToEth = (wei) => {
 
     return web3.version.toString;
   }
 
-	async componentDidMount() {}
+  ethPriceInUSD = () => {
+    let tip = new Eth.BN(this.state.tipAmount);
+    let price = new Eth.BN(this.state.ethPrice);
+    let ethUSD = tip.mul(price);
+    return ethUSD.toString();
+  }
+
+
+
+	async componentDidMount() {
+    axios.get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${etherscan}`)
+      .then(res => {
+        const rate = res.data.result.ethusd;
+        console.log("Eth Rate: ", rate);
+        this.setState(() => {return {ethPrice: rate}});
+      })
+  }
 
 	render() {
 		const { tipAmount, currentAccount, currentBalance, accounts, destination } = this.state;
@@ -70,7 +118,7 @@ class BlockChainBucket extends Component {
 		return (
 
 			<div className="BlockChain-Bar">
-				<div className={this.state.tipOver ? "BlockChain-Bar-Eth-Balance tip-over": "BlockChain-Bar-Eth-Balance"}>{this.state.currentBalance}:ETH</div>
+				<div className={this.state.tipOver ? "BlockChain-Bar-Eth-Balance tip-over": "BlockChain-Bar-Eth-Balance"}>{Eth.fromWei(this.state.currentBalance, 'ether')} ETH</div>
 
 				<div className="BlockChain-Center">
 					<div>
@@ -79,7 +127,7 @@ class BlockChainBucket extends Component {
 						</button>
 					</div>
 					<span className="mdl-chip mdl-chip--deletable" onClick={() => {this.handleOpen}}>
-						<span className="mdl-chip__text chip-bar" >{this.state.tipAmount}</span>
+						<span className="mdl-chip__text chip-bar" >{Eth.fromWei(this.state.tipAmount, 'ether')} ETH / {Eth.fromWei(this.ethPriceInUSD(), 'ether')} USD </span>
 						<button type="button" className="mdl-chip__action" >
 							<i className="material-icons icon-fire" >whatshot</i>
 						</button>

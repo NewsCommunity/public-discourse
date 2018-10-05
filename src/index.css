@@ -299,6 +299,7 @@ align-content: space-around;
 }
 
 .BlockChain-Bar-Eth-Balance {
+	font-family: 'PT Sans', sans-serif;
 	margin-left: 8px;
 	color: white;
 }
@@ -331,4 +332,5 @@ i.icon-fire {
 
 .chip-bar {
 	color: white;
+	font-family: 'Prompt', sans-serif;
 }
