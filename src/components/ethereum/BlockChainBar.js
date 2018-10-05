@@ -25,7 +25,7 @@ class BlockChainBucket extends Component {
 			destination: '0x0',
 			modalOpen: false,
       ethPrice: 0,
-      tipRecipient: {displayName: '', id: '', ethAddress: ''}
+      tipRecipient: {displayName: 'demoPerson', id: '', ethAddress: '0x2228e04be053abfc224b937205c902d81a0cb2a1'}
 		};
 	}
 
@@ -165,7 +165,7 @@ class BlockChainBucket extends Component {
 						</button>
 					</div>
 				</div>
-        Tip: Drake Evans
+        Tip! {this.state.tipRecipient.displayName ? <div>{this.state.tipRecipient.displayName}</div> : <div></div>}
         </div>
 
 				<div className="BlockChain-Bar-Account-Availible">
