@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { firestore } from '../../fire';
 import Login from '../authentication/login';
 import BottomNav from '../BottomNavigation/BottomNav';
-//import { thunkLogInUser, thunkLogOutUser } from "../../state/user/reducer";
+import { thunkSetEthProdiver } from "../../state/user/reducer";
 import { connect } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
 import ConfirmModal from '../ethereum/ConfirmModal';
@@ -11,6 +11,7 @@ import Web3 from 'web3';
 import Eth from 'ethjs';
 import {etherscan} from '../../secrets';
 import axios from 'axios';
+
 
 
 const web3= new Web3();
@@ -32,14 +33,10 @@ class BlockChainBucket extends Component {
 		};
   }
 
-  // async componentDidMount() {
-  //   try {
-  //     const accounts = await eth.accounts();
-  //     console.log("These are the accounts: ", accounts);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+  async componentDidMount() {
+    console.log("The State of User: ", this.props);
+    console.log("The state of dispatch", this.props.setEthProvider);
+  }
 
   handleOpen = () => {
     this.setState(() => {return { modalOpen: true }});
@@ -163,12 +160,16 @@ class BlockChainBucket extends Component {
 function mapState(state) {
 	return {
 		user: state.userReducer.user,
-		isLoggedIn: state.userReducer.isLoggedIn
+    isLoggedIn: state.userReducer.isLoggedIn,
+    fullUserState: state.userReducer
 	};
 }
 
 function mapDispatch(dispatch) {
 	return {
+    setEthProvider: () => {
+      dispatch(thunkSetEthProdiver());
+    }
 		// logOutUser: () => {
 		// 	dispatch(thunkLogOutUser());
 		// },
