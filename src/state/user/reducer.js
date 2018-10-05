@@ -115,6 +115,14 @@ export const thunkGetEthBalance = (account, eth) => async (dispatch) => {
 
 }
 
+export const thunkSetNewAccount = (account, eth) =>
+async (dispatch) => {
+
+  const balance = await eth.getBalance(account);
+  dispatch(actionSetCurrentBalance)
+  dispatch(actionSetCurrentAccount(account));
+  
+}
 //REDUCER=====================================================================
 const initialState = {
   user: {},

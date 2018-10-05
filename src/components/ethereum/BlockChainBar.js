@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { firestore } from '../../fire';
 import Login from '../authentication/login';
 import BottomNav from '../BottomNavigation/BottomNav';
-import { thunkSetEthProdiver } from "../../state/user/reducer";
+import { thunkSetEthProdiver, thunkSetNewAccount } from "../../state/user/reducer";
 import { connect } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
 import ConfirmModal from '../ethereum/ConfirmModal';
@@ -177,6 +177,9 @@ function mapDispatch(dispatch) {
 	return {
     setEthProvider: () => {
       dispatch(thunkSetEthProdiver());
+    },
+    setNewAccount: (account) => {
+      dispatch(thunkSetNewAccount(account));
     }
 		// logOutUser: () => {
 		// 	dispatch(thunkLogOutUser());
