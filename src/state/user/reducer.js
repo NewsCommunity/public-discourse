@@ -84,7 +84,17 @@ export const thunkLogOutUser = () => async (dispatch) => {
 export const thunkSetEthProdiver = () => async (dispatch) => {
 
   dispatch(actionFetchEth(true));
-  if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
+  if (window.ethereum) {
+    window.web3 = new Eth(ethereum);
+    try {
+        // Request account access if needed
+        await ethereum.enable();
+        // Acccounts now exposed
+        console.log("Accounts exposed");
+    } catch (error) {
+        // User denied account access...
+    }
+} else if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
 		// We are in the browser and metamask is running.
     let eth = new Eth(window.web3.currentProvider);
     console.log("THE ETH IS:", eth);
@@ -121,7 +131,7 @@ async (dispatch) => {
   const balance = await eth.getBalance(account);
   dispatch(actionSetCurrentBalance)
   dispatch(actionSetCurrentAccount(account));
-  
+
 }
 //REDUCER=====================================================================
 const initialState = {
