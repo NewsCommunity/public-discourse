@@ -33,10 +33,6 @@ class BlockChainBucket extends Component {
 		};
   }
 
-  async componentDidMount() {
-    console.log("The State of User: ", this.props);
-    console.log("The state of dispatch", this.props.setEthProvider);
-  }
 
   handleOpen = () => {
     this.setState(() => {return { modalOpen: true }});
@@ -101,6 +97,9 @@ class BlockChainBucket extends Component {
 
 
 	async componentDidMount() {
+    console.log("The State of User: ", this.props);
+    console.log("The state of dispatch", this.props.setEthProvider);
+    
     axios.get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${etherscan}`)
       .then(res => {
         const rate = res.data.result.ethusd;
