@@ -17,8 +17,12 @@ const options = [
 const ITEM_HEIGHT = 48;
 
 class AccountMenu extends React.Component {
+  constructor(props){
+    super(props)
+  }
   state = {
     anchorEl: null,
+    accounts: []
   };
 
   handleClick = event => {
@@ -29,10 +33,11 @@ class AccountMenu extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+
   render() {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-
+    console.log("The props", this.props);
     return (
       <div>
         <IconButton
@@ -52,11 +57,11 @@ class AccountMenu extends React.Component {
           PaperProps={{
             style: {
               maxHeight: ITEM_HEIGHT * 4.5,
-              width: 200,
+              width: 350,
             },
           }}
         >
-          {options.map(option => (
+          {this.props.accounts.map(option => (
             <MenuItem key={option} selected={option === 'Pyxis'} onClick={this.handleClose}>
               {option}
             </MenuItem>

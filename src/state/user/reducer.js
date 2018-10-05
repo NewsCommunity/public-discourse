@@ -91,6 +91,7 @@ export const thunkSetEthProdiver = () => async (dispatch) => {
     const accounts = await eth.accounts();
     console.log("The accounts:", accounts)
 
+    dispatch(actionSetEthAccounts(accounts));
     dispatch(actionSetCurrentAccount(accounts[0]));
     dispatch(thunkGetEthBalance(accounts[0], eth));
     dispatch(actionSetEthProviderOnState(eth));
