@@ -5,7 +5,7 @@ import BottomNav from '../BottomNavigation/BottomNav';
 import { thunkSetEthProdiver, thunkSetNewAccount } from '../../state/user/reducer';
 import { connect } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
-import ConfirmModal from '../ethereum/ConfirmModal';
+import TipRecipient from '../ethereum/TipRecipient';
 import AccountMenu from '../ethereum/AccountMenu';
 import Web3 from 'web3';
 import Eth from 'ethjs';
@@ -39,7 +39,14 @@ class BlockChainBucket extends Component {
 		this.setState(() => {
 			return { modalOpen: false };
 		});
-	};
+  };
+
+  clearTip = () => {
+    console.log("ClearTip fired!")
+    this.setState(() => {
+      return {tipRecipient: {displayName: '', id: '', ethAddress: ''}}
+    })
+  }
 
 	onIncrement = () => {
 		let tip = new Eth.BN(this.state.tipAmount);
@@ -154,18 +161,18 @@ class BlockChainBucket extends Component {
 							{Eth.fromWei(this.state.tipAmount, 'ether')} ETH / {this.ethTipInUSD()} USD{' '}
 						</span>
 						<button type="button" className="mdl-chip__action">
-							<i className="material-icons icon-fire">whatshot</i>
+							<i className="material-icons icon-fire" onClick={() => {this.clearTip()}}>cancel</i>
 						</button>
 					</span>
 					<div>
 						<button className="mdl-button mdl-js-button mdl-button--icon">
-							<i className="material-icons" onClick={() => this.onIncrement()}>
+							<i className="material-icons" onClick={() => {this.onIncrement()}}>
 								expand_less
 							</i>
 						</button>
 					</div>
 				</div>
-        Tip! {this.state.tipRecipient.displayName ? <div>{this.state.tipRecipient.displayName}</div> : <div></div>}
+        {this.state.tipRecipient.displayName ? <div><TipRecipient displayName={this.state.tipRecipient.displayName} /></div> : <div></div>}
         </div>
 
 				<div className="BlockChain-Bar-Account-Availible">
