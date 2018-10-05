@@ -12,11 +12,11 @@ class TipRecipient extends Component {
 		const { displayName } = this.props;
 		return (
 			<div>
-				<span class="mdl-chip mdl-chip--contact mdl-chip--deletable">
-					<img class="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg" />
-					<span class="mdl-chip__text">Tip: {displayName}</span>
-					<a href="#" class="mdl-chip__action">
-						<i class="material-icons">done</i>
+				<span className="mdl-chip mdl-chip--contact mdl-chip--deletable">
+					<img className="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg" />
+					<span className="mdl-chip__text">Tip: {displayName}</span>
+					<a href="#" className="mdl-chip__action">
+						<i className="material-icons">done</i>
 					</a>
 				</span>
 			</div>
