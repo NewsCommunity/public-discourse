@@ -21,7 +21,7 @@ ReactDOM.render(
   </Provider>,
     document.getElementById('root')
 )
-registerServiceWorker()
+//registerServiceWorker()
 
 window.addEventListener('load', async () => {
 //thunk here
