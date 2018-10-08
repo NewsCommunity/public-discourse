@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import Drawer from './Drawer'
+import UserMenu from './UserMenu'
 import NavMenu from './NavMenu'
 const styles = {
   root: {
@@ -30,7 +30,7 @@ function NavBar (props) {
             <div style={display}>
               <Link to={`/`}>publicDiscourse</Link>{' '}
               <NavMenu />
-              <Drawer />
+              <UserMenu />
             </div>
 
           </Typography>
