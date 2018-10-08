@@ -112,18 +112,25 @@ class ChatBucket extends Component {
       tipDestination,
     } = this.props;
 
+      console.log("The props of chatBucket are:", this.props);
 
     return (
       <div className={this.state.chatOpen ? "Chatbucket-Container White-Background" : "Chatbucket-Container" }>
+        {isLoggedIn ? (
+          <React.Fragment>
+          <BlockChainBar />
+          <ChatInput postMessage={this.postMessage} user={this.props.user} />
+          </React.Fragment>
+        ) : (<span/>)}
+        
         {this.state.chatOpen ? (
           <div>
-          <BlockChainBar />
-          <ChatInput postMessage={this.postMessage}/>
+          
           <ChatBox msgArray={messages} setTipDestination={this.props.setTipDestination} />
           
           </div>
           ) :( <div/>)}
-          <BottomNav onShowToggle={this.onShowToggle} isOpen={this.state.chatOpen}/>
+          <BottomNav onShowToggle={this.onShowToggle} isOpen={this.state.chatOpen} isLoggedIn={isLoggedIn} logInUser={logInUser}/>
       </div>
     );
   }
