@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ChatTrigger from './ChatTrigger'
 
 class ChatInput extends Component {
   constructor (props) {
@@ -40,7 +41,7 @@ class ChatInput extends Component {
 
 <button className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored chat-button">
   <i className="material-icons" type="submit">send</i>
-</button>
+</button> <ChatTrigger />
 			</form>
 			</div>
 		);

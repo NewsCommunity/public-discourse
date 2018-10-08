@@ -185,6 +185,8 @@ body {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: baseline;
+	border-radius: 12px;
+    margin: 3px;
 }
 
 .BlockChain-Center {

@@ -14,35 +14,35 @@ const SET_TIP_DESTINATION = 'SET_TIP_DESTINATION';
 
 // ACTIONS====================================================================
 const actionSetUser = (userObj, isLoggedIn) => ({
-    type: SET_USER,
-    user: userObj,
-    isLoggedIn,
-  });
+  type: SET_USER,
+  user: userObj,
+  isLoggedIn,
+});
 
-export const actionFetchEth = (fetch) => ({
-    type: FETCH_ETH_CONNECTION,
-    fetch,
-  });
+export const actionFetchEth = fetch => ({
+  type: FETCH_ETH_CONNECTION,
+  fetch,
+});
 
-export const actionSetEthAccounts = (ethAccounts) => ({
-    type: SET_ACCOUNTS,
-    ethAccounts,
-  });
+export const actionSetEthAccounts = ethAccounts => ({
+  type: SET_ACCOUNTS,
+  ethAccounts,
+});
 
-export const actionSetCurrentAccount = (account) => ({
-    type: SET_CURRENT_ACCOUNT,
-    account,
-  });
+export const actionSetCurrentAccount = account => ({
+  type: SET_CURRENT_ACCOUNT,
+  account,
+});
 
-export const actionSetCurrentBalance = (balance) => ({
-    type: SET_CURRENT_BALANCE,
-    balance,
-  });
+export const actionSetCurrentBalance = balance => ({
+  type: SET_CURRENT_BALANCE,
+  balance,
+});
 
-export const actionSetEthProviderOnState = (ethProvider) => ({
-    type: SET_ETH_PROVIDER,
-    ethProvider,
-  });
+export const actionSetEthProviderOnState = ethProvider => ({
+  type: SET_ETH_PROVIDER,
+  ethProvider,
+});
 
 export const actionSetTipDestination = (tipDestination) => {
   console.log('Set Tip Destination in the User Reducer is fired!');
@@ -60,11 +60,19 @@ export const thunkLogInUser = (provider = googleProvider) => async (dispatch) =>
     if (user) {
       console.log('MY USER IS: ', user);
       const {
- displayName, email, photoURL, uid 
-} = user;
-      dispatch(actionSetUser({
- displayName, email, photoURL, uid 
-}, true));
+        displayName, email, photoURL, uid,
+      } = user;
+      dispatch(
+        actionSetUser(
+          {
+            displayName,
+            email,
+            photoURL,
+            uid,
+          },
+          true,
+        ),
+      );
     } else {
       console.log('No user logged in');
     }

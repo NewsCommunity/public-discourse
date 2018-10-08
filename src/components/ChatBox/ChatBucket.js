@@ -121,6 +121,8 @@ class ChatBucket extends Component {
           <ChatBox msgArray={messages} setTipDestination={this.props.setTipDestination} />
           </div>
           ) :( <ChatTrigger onShowToggle={this.onShowToggle}/>)}
+
+          {this.state.chatOpen ? (<ChatInput />) : (<div/>)}
       </div>
     );
   }

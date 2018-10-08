@@ -13,7 +13,7 @@ const styles = theme => ({
   },
   absolute: {
     position: 'absolute',
-    bottom: theme.spacing.unit * 2,
+    bottom: theme.spacing.unit * 20,
     right: theme.spacing.unit * 3,
   },
 });
