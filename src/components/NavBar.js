@@ -13,6 +13,11 @@ const styles = {
   }
 }
 
+const display = {
+  display: 'flex',
+  borderRadius: '12px'
+}
+
 function SimpleAppBar (props) {
   const { classes } = props
 
@@ -21,9 +26,11 @@ function SimpleAppBar (props) {
       <AppBar position='static' color='default'>
         <Toolbar>
           <Typography variant='h6' color='inherit'>
+            <div style={display}>
+              <Link to={`/`}>publicDiscourse</Link>{' '}
+              <Drawer />
+            </div>
 
-            <Link to={`/`}>publicDiscourse</Link>{' '}
-            <Drawer />
           </Typography>
         </Toolbar>
       </AppBar>
