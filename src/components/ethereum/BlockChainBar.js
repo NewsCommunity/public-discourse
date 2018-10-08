@@ -126,8 +126,6 @@ class BlockChainBucket extends Component {
 
 		console.log('The State of User: ', this.props);
 		console.log('The state of dispatch', this.props.setEthProvider);
-
-		console.log('HELLO!');
 		axios.get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${etherscan}`).then((res) => {
 			const rate = res.data.result.ethusd;
 			console.log('Eth Rate: ', rate);

@@ -15,7 +15,8 @@ const styles = {
 
 const display = {
   display: 'flex',
-  borderRadius: '12px'
+  borderRadius: '12px',
+  alignItems: 'baseline'
 }
 
 function SimpleAppBar (props) {
