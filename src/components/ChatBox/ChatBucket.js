@@ -122,7 +122,7 @@ class ChatBucket extends Component {
           </div>
           ) :( <ChatTrigger onShowToggle={this.onShowToggle}/>)}
 
-          {this.state.chatOpen ? (<ChatInput />) : (<div/>)}
+          {this.state.chatOpen ? (<ChatInput onShowToggle={this.onShowToggle}/>) : (<div/>)}
       </div>
     );
   }
