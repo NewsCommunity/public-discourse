@@ -114,15 +114,16 @@ class ChatBucket extends Component {
 
 
     return (
-      <div className="Chatbucket-container">
+      <div className={this.state.chatOpen ? "Chatbucket-Container White-Background" : "Chatbucket-Container" }>
         {this.state.chatOpen ? (
           <div>
           <BlockChainBar />
+          <ChatInput postMessage={this.postMessage}/>
           <ChatBox msgArray={messages} setTipDestination={this.props.setTipDestination} />
+          
           </div>
-          ) :( <ChatTrigger onShowToggle={this.onShowToggle}/>)}
-
-          {this.state.chatOpen ? (<ChatInput onShowToggle={this.onShowToggle}/>) : (<div/>)}
+          ) :( <div/>)}
+          <BottomNav onShowToggle={this.onShowToggle} isOpen={this.state.chatOpen}/>
       </div>
     );
   }

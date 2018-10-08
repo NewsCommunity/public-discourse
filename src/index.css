@@ -1,246 +1,253 @@
 @import "./css/desktop.css";
-@import './css/tabletPortrait.css';
-@import './css/tabletLandscape.css';
-@import './css/phonePortrait.css';
-@import './css/phoneLandscape.css';
-
+@import "./css/tabletPortrait.css";
+@import "./css/tabletLandscape.css";
+@import "./css/phonePortrait.css";
+@import "./css/phoneLandscape.css";
 
 body {
-	padding-top: 40px;
-	margin: 0;
-	font-family: sans-serif;
+  
+  margin: 0;
+  font-family: sans-serif;
 }
 @media screen and (max-width: 768px) {
-
 }
 
 .single-room {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-.Chatbucket-container {
-	background: #ffffff;
-	position: fixed;
-	border-top: solid red;
-	bottom: 0px;
-	width: 100%;
+.Chatbucket-Container {
+  position: fixed;
+	
+  bottom: 0px;
+  width: 100%;
+}
+
+.White-Background {
+	background: white;
 }
 
 .chat-box {
-	overflow-wrap: normal;
-	max-height: 200px;
-	bottom: 0;
-	overflow: scroll;
+	background: white;
+  overflow-wrap: normal;
+  max-height: 200px;
+  bottom: 0;
+  overflow: scroll;
 }
 
 .iframe-container {
-	/* overflow: hidden; */
-	padding-top: 100%;
-	position: relative;
-	border-bottom: 1px solid black;
+  /* overflow: hidden; */
+  padding-top: 100%;
+	
+  border-bottom: 1px solid black;
 }
 
 .iframe-container iframe {
-	border: 0;
-	height: 100%;
-	left: 0;
-	top: 0;
-	position: absolute;
-	width: 100%;
+  border: 0;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 100%;
 }
 
 .single-msg {
-	display: flex;
+  display: flex;
 }
 
 .single-msg-box {
-	flex: 1;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: stretch;
-	margin: 5px;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin: 5px;
 }
 
 .single-msg-profile {
-	background-color: rgb(255, 255, 255);
-	justify-content: flex-end;
-	align-content: flex-end;
+  background-color: rgb(255, 255, 255);
+  justify-content: flex-end;
+  align-content: flex-end;
 }
 
 .single-msg-text-container {
-	background-color: rgba(235, 235, 235, 0.287);
-	flex-grow: 5;
-	border-radius: 15px 50px 30px;
+  background-color: rgba(235, 235, 235, 0.287);
+  flex-grow: 5;
+  border-radius: 15px 50px 30px;
 }
 
 .single-msg-textBody {
-	justify-content: flex-end;
-	font-family: 'Varela Round', sans-serif;
-	margin-left: 10px;
-	margin-top: 5px;
+  justify-content: flex-end;
+  font-family: "Varela Round", sans-serif;
+  margin-left: 10px;
+  margin-top: 5px;
 }
 
 .img-round {
-	border-radius: 50%;
-	width: 30px;
+  border-radius: 50%;
+  width: 30px;
 }
 
 .user-profile-pic {
-	justify-self: flex-end;
+  justify-self: flex-end;
 }
 
 .user-profile-name {
-	font-family: 'Muli', sans-serif;
-	color: rgba(19, 54, 75, 0.493);
+  font-family: "Muli", sans-serif;
+  color: rgba(19, 54, 75, 0.493);
 }
 
 .chat-box-input {
-	border-radius: 50px 50px 50px;
+  border-radius: 50px 50px 50px;
 }
 
 .discourse-card {
-	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
-	transition: 0.4s;
-	background: #fff;
-	text-align: center;
-	font-size: 16px;
-	font-family: sans-serif;
-	margin: 10px;
-	padding-bottom: 5%;
-	padding-left: 5%;
-	margin-left: 5%;
-	margin-right: 5%;
-	padding-right: 5%;
-	display: flex;
-	flex-direction: row;
-	border-radius: 16px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
+  transition: 0.4s;
+  background: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-family: sans-serif;
+  margin: 10px;
+  padding-bottom: 5%;
+  padding-left: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-right: 5%;
+  display: flex;
+  flex-direction: row;
+  border-radius: 16px;
 }
 
 .discourse-card:hover {
-	box-shadow: 0 4px 8px #e0e0eb;
+  box-shadow: 0 4px 8px #e0e0eb;
 }
 
 .discourse-card-img {
-	width: 100px;
-	height: 100px;
-	margin-left: 4px;
-	margin: 5% auto;
-	border-radius: 16px;
+  width: 100px;
+  height: 100px;
+  margin-left: 4px;
+  margin: 5% auto;
+  border-radius: 16px;
 }
 .discourse-card-content {
-	margin-top: 5%;
-	margin-left: 5px;
-	display: flex;
-	flex-direction: column;
+  margin-top: 5%;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
-
-
-
-
-
-
+.Bottom-Nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
 
 .navbar {
-	display: flex;
-	padding-left: 1vw;
+  display: flex;
+  padding-left: 1vw;
 }
 
 .chat-button {
-	width: 40px;
-	height: 40px;
-	min-width: 40px;
-	margin: 8px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  margin: 8px;
 }
 
 .Form-Flex {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .chat-box-input {
-	width: 25em;
-	padding-left: 12px;
-	padding-top: 4px;
-	background-color: #f1f1f1;
-	border: none;
-	margin-top: 8px;
+  width: 25em;
+  padding-left: 12px;
+  padding-top: 4px;
+  background-color: #f1f1f1;
+  border: none;
+  margin-top: 8px;
 }
 
 .bottom-nav {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: space-around;
 }
 
 .BlockChain-Bar {
-	background-color: #25c9a37a;
-	background: 25c9a37a;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: baseline;
-	border-radius: 12px;
-    margin: 3px;
+  background-color: #93f5de;
+  background: 25c9a37a;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  border-radius: 12px;
+  margin: 3px;
 }
 
 .BlockChain-Center {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	flex: 1;
-	color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  color: white;
 }
 
 .BlockChain-Center-inner {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	flex: 1;
-	color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  color: white;
 }
 
 .BlockChain-Container {
-	display: flex;
+  display: flex;
 }
 
 .BlockChain-Bar-Eth-Balance {
-	font-family: 'PT Sans', sans-serif;
-	margin-left: 8px;
-	color: white;
+  font-family: "PT Sans", sans-serif;
+  margin-left: 8px;
+  color: white;
 }
 
 .tip-over {
-	animation: shake 200ms 2 linear;
+  animation: shake 200ms 2 linear;
 }
 
 @keyframes shake {
-	0% {
-		transform: translate(6px, 0);
-	}
-	50% {
-		transform: translate(-6px, 0);
-	}
-	100% {
-		transform: translate(0, 0);
-	}
+  0% {
+    transform: translate(6px, 0);
+  }
+  50% {
+    transform: translate(-6px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 .BlockChain-Bar-Account-Availible {
 }
 
 i.icon-fire {
-	color: orange;
+  color: orange;
 }
 
 .chip-bar {
-	color: white;
-	font-family: 'Prompt', sans-serif;
+  color: white;
+  font-family: "Prompt", sans-serif;
+}
+
+.SimpleAppBar-root-1 {
+    /* flex-grow: 1; */
+    /* z-index: 2; */
+    display: flex;
 }
