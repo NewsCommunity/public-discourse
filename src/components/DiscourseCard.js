@@ -1,22 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
-// const DiscourseCard = props => {
-//   const { discourseId, discourseTitle, discourseDescription, discourseImg, discoursePublishedAt } = props
-//   return (
-//     <div className='card'>
-//       <img className='card-img-top' src={`${discourseImg}`} alt='Card image cap' />
-//       <div className='card-body'>
-//         <h5 className='card-title'>{discourseTitle}</h5>
-//         <p className='card-text'>{discourseDescription}</p>
-//         <Link to={`/discourse/${discourseId}`}>Chat about this!</Link>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default DiscourseCard
-
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -29,7 +12,7 @@ import Typography from '@material-ui/core/Typography'
 
 const styles = {
   card: {
-    maxWidth: 345
+    maxWidth: '100%'
   },
   media: {
         // ⚠️ object-fit is not supported by IE11.
@@ -47,7 +30,7 @@ function ImgMediaCard (props) {
           component='img'
           alt='Contemplative Reptile'
           className={classes.media}
-          height='140'
+          height='100%'
           image={`${discourseImg}`}
           title='Contemplative Reptile'
                 />
@@ -63,7 +46,8 @@ function ImgMediaCard (props) {
       <CardActions>
         <Button size='small' color='primary'>
                     Share
-                </Button>
+                    {/* eventually add some share functionality here? */}
+        </Button>
         <Button size='small' color='primary'>
           <Link to={`/discourse/${discourseId}`}>Chat about this!</Link>
         </Button>
