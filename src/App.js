@@ -4,6 +4,9 @@ import SingleDiscourse from './components/SingleDiscourse'
 import { Router, withRouter, Route, Switch } from 'react-router-dom'
 import DiscourseListContainer from './containers/DiscourseListContainer'
 import Navbar from './components/NavBar'
+import Data from './components/data/Data'
+import Player from './components/audioStream/player'
+
 class App extends Component {
   render () {
     return (
@@ -11,6 +14,8 @@ class App extends Component {
         <Navbar />
         <Switch>
           {/* Routes placed here are available to all visitors */}
+          <Route path='/audio' component={Player} />
+          <Route path='/data' component={Data} />
           <Route path='/discourse/:docId' component={SingleDiscourse} />
           <Route path='/' component={DiscourseListContainer} />
         </Switch>

@@ -23,7 +23,7 @@ class SingleDiscourse extends Component {
       return (
         <div>
           <div className='discourse-container'>
-            <h1>publicDiscourse: {title}</h1>
+            <h3>publicDiscourse: {title}</h3>
             <div className='single-room'>
               <div className='iframe-container'>
                 <iframe src={url} />
