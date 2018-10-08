@@ -134,7 +134,7 @@ const initialState = {
   currentEthAccount: '',
   currentEthBalance: '',
   ethProvider: undefined,
-
+  tipDestination: ''
 };
 
 export function userReducer(state = initialState, action) {
