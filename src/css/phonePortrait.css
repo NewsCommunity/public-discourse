@@ -1,3 +1,130 @@
 /* Smartphones (portrait) */
 @media only screen and (max-width: 320px) {
+  body {
+    padding-top: 0px;
+    margin: 0;
+    font-family: sans-serif;
+  }
+
+  .single-room {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Chatbucket-container {
+    background: #ffffff;
+    position: fixed;
+    border-top: solid red;
+    bottom: 0px;
+    width: 100%;
+  }
+
+  .chat-box {
+    overflow-wrap: normal;
+    max-height: 200px;
+    bottom: 0;
+    overflow: scroll;
+  }
+
+  .iframe-container {
+    /* overflow: hidden; */
+    padding-top: 100%;
+    position: relative;
+    border-bottom: 1px solid black;
+  }
+
+  .iframe-container iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 100%;
+  }
+
+  .single-msg {
+    display: flex;
+  }
+
+  .single-msg-box {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin: 5px;
+  }
+
+  .single-msg-profile {
+    background-color: rgb(255, 255, 255);
+    justify-content: flex-end;
+    align-content: flex-end;
+  }
+
+  .single-msg-text-container {
+    background-color: rgba(235, 235, 235, 0.287);
+    flex-grow: 5;
+    border-radius: 15px 50px 30px;
+  }
+
+  .single-msg-textBody {
+    justify-content: flex-end;
+    font-family: "Varela Round", sans-serif;
+    margin-left: 10px;
+    margin-top: 5px;
+  }
+
+  .img-round {
+    border-radius: 50%;
+    width: 60px;
+  }
+
+  .user-profile-pic {
+    justify-self: flex-end;
+  }
+
+  .user-profile-name {
+    font-family: "Muli", sans-serif;
+    color: rgba(19, 54, 75, 0.493);
+  }
+
+  .chat-box-input {
+    border-radius: 50px 50px 50px;
+  }
+
+  .discourse-card {
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
+    transition: 0.4s;
+    background: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-family: sans-serif;
+    margin: 10px;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-right: 5%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 16px;
+  }
+
+  .discourse-card:hover {
+    box-shadow: 0 4px 8px #e0e0eb;
+  }
+
+  .discourse-card-img {
+    width: 100px;
+    height: 100px;
+    margin-left: 4px;
+    margin: 5% auto;
+    border-radius: 16px;
+  }
+  .discourse-card-content {
+    margin-top: 5%;
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+  }
 }
