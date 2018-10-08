@@ -100,7 +100,7 @@ class ChatBucket extends Component {
     
     
     const { messages } = this.state;
-    const { logOutUser, logInUser, isLoggedIn, displayName, discourseId } = this.props;
+    const { logOutUser, logInUser, isLoggedIn, displayName, discourseId, tipDestination } = this.props;
     return (
       <div className="Chatbucket-container">
       <BlockChainBar />
@@ -109,7 +109,7 @@ class ChatBucket extends Component {
         :
           <div onClick={() => logInUser()}>Login</div>
         }
-        <ChatBox msgArray={messages} />
+        <ChatBox msgArray={messages} tipDestination={tipDestination}/>
 
         {isLoggedIn ? (
           <ChatInput postMessage={this.postMessage} discourseId={discourseId} />

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { firestore } from '../../fire';
 import Login from '../authentication/login';
 import BottomNav from '../BottomNavigation/BottomNav';
-import { thunkSetEthProdiver, thunkSetNewAccount } from '../../state/user/reducer';
+import { thunkSetEthProdiver, thunkSetNewAccount, actionSetTipDestination } from '../../state/user/reducer';
 import { connect } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
 import TipRecipient from '../ethereum/TipRecipient';
@@ -41,12 +41,16 @@ class BlockChainBucket extends Component {
 		});
   };
 
+  //NEEDS TO BE DISPATCH
   clearTip = () => {
-    console.log("ClearTip fired!")
+	console.log("ClearTip fired!")
+	this.props.clearTipDestination();
     this.setState(() => {
       return {tipRecipient: {displayName: '', id: '', ethAddress: ''}}
     })
   }
+
+  
 
 	onIncrement = () => {
 		let tip = new Eth.BN(this.state.tipAmount);
@@ -208,6 +212,9 @@ function mapDispatch(dispatch) {
 		},
 		setNewAccount: (account) => {
 			dispatch(thunkSetNewAccount(account));
+		},
+		clearTipDestination: () => {
+			dispatch(actionSetTipDestination({}));
 		}
 		// logOutUser: () => {
 		// 	dispatch(thunkLogOutUser());

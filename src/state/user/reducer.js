@@ -4,11 +4,14 @@ import Eth from 'ethjs';
 //TYPES======================================================================
 const SET_USER = "SET_USER";
 
+
 const SET_ETH_PROVIDER = "SET_ETH_PROVIDER";
 const SET_ACCOUNTS = "SET_ACCOUNTS";
 const SET_CURRENT_BALANCE = "SET_CURRENT_BALANCE";
 const SET_CURRENT_ACCOUNT = "SET_CURRENT_ACCOUNT";
 const FETCH_ETH_CONNECTION = "FETCH_ETH_CONNECTION";
+
+const SET_TIP_DESTINATION = "SET_TIP_DESTINATION";
 
 
 //ACTIONS====================================================================
@@ -54,6 +57,14 @@ export const actionSetEthProviderOnState = (ethProvider) => {
     ethProvider
   }
 }
+
+export const actionSetTipDestination = (tipDestination) => {
+  return {
+    type: SET_TIP_DESTINATION,
+    tipDestination
+  }
+}
+
 
 //THUNKS=====================================================================
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -134,7 +145,7 @@ const initialState = {
   currentEthAccount: '',
   currentEthBalance: '',
   ethProvider: undefined,
-  tipDestination: ''
+  tipDestination: {}
 };
 
 export function userReducer(state = initialState, action) {
@@ -169,6 +180,11 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
         ethProvider: action.ethProvider
+      }
+      case SET_TIP_DESTINATION:
+      return {
+        ...state,
+        tipDestination: action.tipDestination
       }
     default:
       return state;
