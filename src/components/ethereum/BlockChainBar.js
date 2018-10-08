@@ -25,7 +25,7 @@ class BlockChainBucket extends Component {
 			destination: '0x0',
 			modalOpen: false,
       ethPrice: 0,
-      tipRecipient: {displayName: 'demoPerson', id: '', ethAddress: '0x2228e04be053abfc224b937205c902d81a0cb2a1'}
+      tipRecipient: {displayName: '', id: '', ethAddress: ''}
 		};
 	}
 
@@ -139,7 +139,7 @@ class BlockChainBucket extends Component {
 
 	render() {
 		const { tipAmount, currentAccount, currentBalance, accounts, destination } = this.state;
-		const { logOutUser, logInUser, isLoggedIn, displayName } = this.props;
+		const { logOutUser, logInUser, isLoggedIn, displayName, tipDestination } = this.props;
 		return (
 			<div className="BlockChain-Bar">
 				<div
@@ -180,7 +180,7 @@ class BlockChainBucket extends Component {
 						</button>
 					</div>
 				</div>
-        {this.state.tipRecipient.displayName ? <div><TipRecipient displayName={this.state.tipRecipient.displayName} ethAddress={this.state.tipRecipient.ethAddress} /></div> : <div></div>}
+        {tipDestination.user ? <div><TipRecipient displayName={tipDestination.user} photo={tipDestination.photo} ethAddress={tipDestination.uid} /></div> : <div></div>}
         </div>
 
 				<div className="BlockChain-Bar-Account-Availible">
@@ -205,7 +205,8 @@ function mapState(state) {
 		currentAccount: state.userReducer.currentEthAccount,
 		availibleAccounts: state.userReducer.ethAccounts,
 		isFetchingEth: state.userReducer.isFetchingEth,
-		ethProvider: state.userReducer.ethProvider
+		ethProvider: state.userReducer.ethProvider,
+		tipDestination: state.userReducer.tipDestination,
 	};
 }
 

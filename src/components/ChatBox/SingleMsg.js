@@ -6,7 +6,7 @@ function SingleMsg(props) {
   console.log("Single Message, setTipDestination", props);
 
   return (
-    <div className='single-msg' onClick={() => {setTipDestination(uid)}}>
+    <div className='single-msg' onClick={() => {setTipDestination({user,photo,uid})}}>
       <div className='single-msg-box' >
         <div className='single-msg-profile'>
           <div className='user-profile-pic'>
