@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+//import QuestionIcon from '@material-ui/icons/Question';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const styles = {
@@ -29,10 +29,10 @@ class BottomNav extends React.Component {
 		return (
 			<div>
 				<BottomNavigation value={value} onChange={this.handleChange} showLabels className={classes.root}>
-					<BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+					{/* <BottomNavigationAction label="Recents" icon={<RestoreIcon />} /> */}
 
-					<BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} data-badge="4" />
-					<BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+					<BottomNavigationAction label="Discourse" icon={<RestoreIcon />} data-badge="4" />
+					{/* <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} /> */}
 				</BottomNavigation>
 			</div>
 			// <div className="bottom-nav">
