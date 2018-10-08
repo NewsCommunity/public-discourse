@@ -2,10 +2,11 @@ import React from 'react'
 import Tooltip from '@material-ui/core/Tooltip';
 
 function SingleMsg(props) {
-  const { text, user, uid, photo} = props;
+  const { text, user, uid, photo, setTipDestination} = props;
+  console.log("Single Message, setTipDestination", props);
 
   return (
-    <div className='single-msg'>
+    <div className='single-msg' onClick={() => {setTipDestination(uid)}}>
       <div className='single-msg-box' >
         <div className='single-msg-profile'>
           <div className='user-profile-pic'>

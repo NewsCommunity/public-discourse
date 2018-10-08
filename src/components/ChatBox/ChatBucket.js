@@ -3,7 +3,7 @@ import { ChatBox, ChatInput } from "./index";
 import { firestore } from "../../fire";
 import Login from "../authentication/login";
 import BottomNav from "../BottomNavigation/BottomNav";
-import { thunkLogInUser, thunkLogOutUser } from "../../state/user/reducer";
+import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination} from "../../state/user/reducer";
 import { connect } from "react-redux";
 import BlockChainBar from "../ethereum/BlockChainBar";
 var firebase = require("firebase");
@@ -109,7 +109,7 @@ class ChatBucket extends Component {
         :
           <div onClick={() => logInUser()}>Login</div>
         }
-        <ChatBox msgArray={messages} tipDestination={tipDestination}/>
+        <ChatBox msgArray={messages} setTipDestination={this.props.setTipDestination}/>
 
         {isLoggedIn ? (
           <ChatInput postMessage={this.postMessage} discourseId={discourseId} />
@@ -140,7 +140,10 @@ function mapDispatch(dispatch) {
     },
     logInUser: () => {
       dispatch(thunkLogInUser());
-    }
+    },
+    setTipDestination: (destination) => {
+			dispatch(actionSetTipDestination(destination));
+		}
   };
 }
 

@@ -59,6 +59,7 @@ export const actionSetEthProviderOnState = (ethProvider) => {
 }
 
 export const actionSetTipDestination = (tipDestination) => {
+  console.log("Set Tip Destination in the User Reducer is fired!")
   return {
     type: SET_TIP_DESTINATION,
     tipDestination

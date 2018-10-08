@@ -50,7 +50,11 @@ class BlockChainBucket extends Component {
     })
   }
 
-  
+  setTipDestination = () => {
+
+  }
+
+
 
 	onIncrement = () => {
 		let tip = new Eth.BN(this.state.tipAmount);
@@ -215,6 +219,9 @@ function mapDispatch(dispatch) {
 		},
 		clearTipDestination: () => {
 			dispatch(actionSetTipDestination({}));
+		},
+		setTipDestination: (destination) => {
+			dispatch(actionSetTipDestination(destination));
 		}
 		// logOutUser: () => {
 		// 	dispatch(thunkLogOutUser());

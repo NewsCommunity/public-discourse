@@ -2,13 +2,14 @@ import React from 'react';
 import SingleMsg from './SingleMsg';
 
 function ChatBox(props) {
-	let msgArray = props.msgArray;
-	let user = props.user;
-	console.log("Chat box props! ", msgArray);
+	const {msgArray, setTipDestination} = props;
+	// let msgArray = props.msgArray;
+	// let user = props.user;
+	// console.log("Chat box props! ", msgArray);
 	return (
 		<div className="chat-box">
 			{msgArray.reverse().map((msg) => {
-				return <SingleMsg key={msg.timestamp.nanoseconds+msg.timestamp.seconds} text={msg.body} user={msg.userName} photo={msg.photoURL} uid={msg.uid}/>;
+				return <SingleMsg key={msg.timestamp.nanoseconds+msg.timestamp.seconds} text={msg.body} user={msg.userName} photo={msg.photoURL} uid={msg.uid} setTipDestination={setTipDestination}/>;
 			})}
 		</div>
 	);
