@@ -103,7 +103,7 @@ export const thunkSetEthProdiver = () => async (dispatch) => {
     // const provider = new Web3.providers.HttpProvider('http://loalhost:7545');
     // web3 = new Eth(provider);
 
-    const eth;
+    const eth = {};
     dispatch(actionSetEthProviderOnState(eth));
   }
 };

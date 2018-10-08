@@ -6,6 +6,7 @@ import Login from '../authentication/login';
 import BottomNav from '../BottomNavigation/BottomNav';
 import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer';
 import BlockChainBar from '../ethereum/BlockChainBar';
+import ChatTrigger from '../ChatBox/ChatTrigger';
 
 const firebase = require('firebase');
 
@@ -14,12 +15,13 @@ class ChatBucket extends Component {
     super(props);
     this.state = {
       messages: [],
-      chatOpen: false
+      chatOpen: false,
     };
 
     this.getInitialMessages = this.getInitialMessages.bind(this);
     this.addSingleMessageToState = this.addSingleMessageToState.bind(this);
     this.postMessage = this.postMessage.bind(this);
+    this.onShowToggle = this.onShowToggle.bind(this);
   }
 
   async componentDidMount() {
@@ -37,7 +39,7 @@ class ChatBucket extends Component {
       .orderBy('timestamp')
       .get();
 
-    messages.forEach((message) => {
+    messages.forEach(message => {
       this.addSingleMessageToState(message.data());
     });
   }
@@ -50,6 +52,11 @@ class ChatBucket extends Component {
     this.setState({ messages: newMessages });
   }
 
+  onShowToggle() {
+    const toggleState = !this.state.chatOpen;
+    this.setState(()=> {return { chatOpen: toggleState }});
+  }
+
   async subscribeToMessageUpdates(discourseId) {
     const { messages } = this.state;
     await firestore
@@ -58,8 +65,8 @@ class ChatBucket extends Component {
       .collection('messages')
       .orderBy('timestamp', 'desc')
       .limit(100)
-      .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
+      .onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(change => {
           const messageArray = messages;
           messageArray.push(change.doc.data());
           this.setState({ messages: messageArray });
@@ -86,11 +93,13 @@ class ChatBucket extends Component {
       .doc(discourseId)
       .collection('messages')
       .add(messageObj)
-      .then((docRef) => {})
-      .catch((error) => {
+      .then(docRef => {})
+      .catch(error => {
         console.error('Error adding document: ', error);
       });
   }
+
+ 
 
   render() {
     const { messages } = this.state;
@@ -102,30 +111,16 @@ class ChatBucket extends Component {
       discourseId,
       tipDestination,
     } = this.props;
+
+
     return (
       <div className="Chatbucket-container">
-        <BlockChainBar />
-        {isLoggedIn ? (
-          <div onClick={() => logOutUser()}>Logout</div>
-        ) : (
-          <div onClick={() => logInUser()}>Login</div>
-        )}
-        <ChatBox
-          msgArray={messages}
-          setTipDestination={this.props.setTipDestination}
-        />
-
-        {isLoggedIn ? (
-          <ChatInput
-            postMessage={this.postMessage}
-            discourseId={discourseId}
-          />
-        ) : (
-          <div onClick={() => logInUser()}>Login</div>
-        )}
-        <div className="bottom-nav">
-          
-        </div>
+        {this.state.chatOpen ? (
+          <div>
+          <BlockChainBar />
+          <ChatBox msgArray={messages} setTipDestination={this.props.setTipDestination} />
+          </div>
+          ) :( <ChatTrigger onShowToggle={this.onShowToggle}/>)}
       </div>
     );
   }
@@ -147,7 +142,7 @@ function mapDispatch(dispatch) {
     logInUser: () => {
       dispatch(thunkLogInUser());
     },
-    setTipDestination: (destination) => {
+    setTipDestination: destination => {
       dispatch(actionSetTipDestination(destination));
     },
   };
