@@ -7,6 +7,14 @@ class TipRecipient extends Component {
 		this.state = {};
 	}
 
+
+// 	sendTip = () => {
+
+// 	web3.eth.sendTransaction({from:myaddress,to:toaddress, value:web3.toWei(1, "ether")};
+
+// }
+
+
 	render() {
 
 		const { displayName } = this.props;

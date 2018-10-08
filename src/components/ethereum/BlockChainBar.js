@@ -139,7 +139,7 @@ class BlockChainBucket extends Component {
 						this.state.tipOver ? 'BlockChain-Bar-Eth-Balance tip-over' : 'BlockChain-Bar-Eth-Balance'
 					}
 				>
-					{Eth.fromWei(this.props.currentBalance, 'ether')} ETH
+					{parseFloat(Eth.fromWei(this.props.currentBalance, 'ether')).toFixed(2)} ETH
 				</div>
 
            <div className="BlockChain-Center">
@@ -172,7 +172,7 @@ class BlockChainBucket extends Component {
 						</button>
 					</div>
 				</div>
-        {this.state.tipRecipient.displayName ? <div><TipRecipient displayName={this.state.tipRecipient.displayName} /></div> : <div></div>}
+        {this.state.tipRecipient.displayName ? <div><TipRecipient displayName={this.state.tipRecipient.displayName} ethAddress={this.state.tipRecipient.ethAddress} /></div> : <div></div>}
         </div>
 
 				<div className="BlockChain-Bar-Account-Availible">
