@@ -6,6 +6,12 @@ import registerServiceWorker from './registerServiceWorker'
 import { Provider } from 'react-redux'
 import { store } from './state/store'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import {thunkSetEthProdiver} from './state/user/reducer'
+
+
+import Eth from 'ethjs';
+
+
 
 ReactDOM.render(
   <Provider store={store}>
@@ -15,4 +21,9 @@ ReactDOM.render(
   </Provider>,
     document.getElementById('root')
 )
-registerServiceWorker()
+//registerServiceWorker()
+
+window.addEventListener('load', async () => {
+//thunk here
+
+});
