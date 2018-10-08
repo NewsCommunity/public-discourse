@@ -62,8 +62,9 @@ export const thunkLogInUser = (provider = googleProvider) => async (dispatch) =>
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      const { displayName, email, } = user
-      dispatch(actionSetUser({displayName, email}, true))
+      console.log("MY USER IS: ", user)
+      const { displayName, email, photoURL, uid } = user
+      dispatch(actionSetUser({displayName, email, photoURL, uid}, true))
     } else {
       console.log("No user logged in");
     }

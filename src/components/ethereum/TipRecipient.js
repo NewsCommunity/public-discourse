@@ -36,7 +36,7 @@ class TipRecipient extends Component {
 function mapState(state) {
 	return {
 		// user: state.userReducer.user,
-		// isLoggedIn: state.userReducer.isLoggedIn,
+		// isLoggedIn: state.userReducer.isLoggedIn,	
 		// fullUserState: state.userReducer,
 		// currentBalance: state.userReducer.currentEthBalance,
 		// currentAccount: state.userReducer.currentEthAccount,

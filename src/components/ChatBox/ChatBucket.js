@@ -72,12 +72,14 @@ class ChatBucket extends Component {
   // This method for TimeStamp is INSECURE
   postMessage(message) {
     const { user, discourseId } = this.props;
-    const { displayName } = user
+    const { displayName, uid, photoURL } = user
     const date = new Date();
     const messageObj = {
       body: message,
       userName: displayName,
-      timestamp: date
+      timestamp: date,
+      uid: uid,
+      photoURL: photoURL,
     }
 
     this.addSingleMessageToState(messageObj)
