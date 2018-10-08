@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { firestore } from '../../fire';
 import Login from '../authentication/login';
 import BottomNav from '../BottomNavigation/BottomNav';
-import { thunkSetEthProdiver, thunkSetNewAccount } from '../../state/user/reducer';
+import { thunkSetEthProdiver, thunkSetNewAccount, actionSetTipDestination } from '../../state/user/reducer';
 import { connect } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
 import TipRecipient from '../ethereum/TipRecipient';
@@ -25,7 +25,7 @@ class BlockChainBucket extends Component {
 			destination: '0x0',
 			modalOpen: false,
       ethPrice: 0,
-      tipRecipient: {displayName: 'demoPerson', id: '', ethAddress: '0x2228e04be053abfc224b937205c902d81a0cb2a1'}
+      tipRecipient: {displayName: '', id: '', ethAddress: ''}
 		};
 	}
 
@@ -41,12 +41,20 @@ class BlockChainBucket extends Component {
 		});
   };
 
+  //NEEDS TO BE DISPATCH
   clearTip = () => {
-    console.log("ClearTip fired!")
+	console.log("ClearTip fired!")
+	this.props.clearTipDestination();
     this.setState(() => {
       return {tipRecipient: {displayName: '', id: '', ethAddress: ''}}
     })
   }
+
+  setTipDestination = () => {
+
+  }
+
+
 
 	onIncrement = () => {
 		let tip = new Eth.BN(this.state.tipAmount);
@@ -131,7 +139,7 @@ class BlockChainBucket extends Component {
 
 	render() {
 		const { tipAmount, currentAccount, currentBalance, accounts, destination } = this.state;
-		const { logOutUser, logInUser, isLoggedIn, displayName } = this.props;
+		const { logOutUser, logInUser, isLoggedIn, displayName, tipDestination } = this.props;
 		return (
 			<div className="BlockChain-Bar">
 				<div
@@ -172,7 +180,7 @@ class BlockChainBucket extends Component {
 						</button>
 					</div>
 				</div>
-        {this.state.tipRecipient.displayName ? <div><TipRecipient displayName={this.state.tipRecipient.displayName} ethAddress={this.state.tipRecipient.ethAddress} /></div> : <div></div>}
+        {tipDestination.user ? <div><TipRecipient displayName={tipDestination.user} photo={tipDestination.photo} ethAddress={tipDestination.uid} /></div> : <div></div>}
         </div>
 
 				<div className="BlockChain-Bar-Account-Availible">
@@ -197,7 +205,8 @@ function mapState(state) {
 		currentAccount: state.userReducer.currentEthAccount,
 		availibleAccounts: state.userReducer.ethAccounts,
 		isFetchingEth: state.userReducer.isFetchingEth,
-		ethProvider: state.userReducer.ethProvider
+		ethProvider: state.userReducer.ethProvider,
+		tipDestination: state.userReducer.tipDestination,
 	};
 }
 
@@ -208,6 +217,12 @@ function mapDispatch(dispatch) {
 		},
 		setNewAccount: (account) => {
 			dispatch(thunkSetNewAccount(account));
+		},
+		clearTipDestination: () => {
+			dispatch(actionSetTipDestination({}));
+		},
+		setTipDestination: (destination) => {
+			dispatch(actionSetTipDestination(destination));
 		}
 		// logOutUser: () => {
 		// 	dispatch(thunkLogOutUser());

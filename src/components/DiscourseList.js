@@ -8,8 +8,12 @@ export default class DiscourseList extends Component {
 
   render () {
     const { discourseList } = this.props
+    let styles = {
+      display: 'flex',
+      flexDirection: 'column'
+    }
     return (
-      <div className='discourse-list'>
+      <div className='discourse-list' style={styles}>
         {discourseList.map(elem => {
           if (elem.article) {
             return (

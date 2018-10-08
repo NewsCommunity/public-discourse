@@ -1,18 +1,24 @@
 import React from 'react'
+import Tooltip from '@material-ui/core/Tooltip';
 
-function SingleMsg (props) {
-  const { text, user } = props
+function SingleMsg(props) {
+  const { text, user, uid, photo, setTipDestination} = props;
+  console.log("Single Message, setTipDestination", props);
+
   return (
-    <div className='single-msg'>
+    <div className='single-msg' onClick={() => {setTipDestination({user,photo,uid})}}>
       <div className='single-msg-box' >
         <div className='single-msg-profile'>
           <div className='user-profile-pic'>
+          <Tooltip title={user} >
             <img
               className='img-round'
-              src='https://previews.123rf.com/images/demkat/demkat1602/demkat160200082/52934624-a-single-white-glazed-donut-with-sprinkles-isolated-white-background.jpg'
+              src={photo}
                         />
+                        </Tooltip>
+
           </div>
-          <div className='user-profile-name'>{user}</div>
+          
         </div>
 
         <div className='single-msg-text-container'>
@@ -28,4 +34,4 @@ function SingleMsg (props) {
   )
 }
 
-export default SingleMsg
+export default SingleMsg;

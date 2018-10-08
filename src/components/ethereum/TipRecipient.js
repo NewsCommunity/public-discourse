@@ -17,11 +17,11 @@ class TipRecipient extends Component {
 
 	render() {
 
-		const { displayName } = this.props;
+		const { displayName, photo } = this.props;
 		return (
 			<div>
 				<span className="mdl-chip mdl-chip--contact mdl-chip--deletable">
-					<img className="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg" />
+					<img className="mdl-chip__contact" src={photo} />
 					<span className="mdl-chip__text">Tip: {displayName}</span>
 					<a href="#" className="mdl-chip__action">
 						<i className="material-icons">done</i>
@@ -36,7 +36,7 @@ class TipRecipient extends Component {
 function mapState(state) {
 	return {
 		// user: state.userReducer.user,
-		// isLoggedIn: state.userReducer.isLoggedIn,
+		// isLoggedIn: state.userReducer.isLoggedIn,	
 		// fullUserState: state.userReducer,
 		// currentBalance: state.userReducer.currentEthBalance,
 		// currentAccount: state.userReducer.currentEthAccount,
