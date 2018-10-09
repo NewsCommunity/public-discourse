@@ -7,6 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import UserMenu from './UserMenu'
 import NavMenu from './NavMenu'
+
 const styles = {
   root: {
     flexGrow: 1

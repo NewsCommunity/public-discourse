@@ -25,6 +25,7 @@ class NavMenu extends React.Component {
         <Button aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup='true' onClick={this.handleClick}>
                     More!
                 </Button>
+
         <Menu id='simple-menu' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
           <MenuItem onClick={this.handleClose}>
             <Link to={`/data`}>Data</Link>

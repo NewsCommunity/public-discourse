@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { thunkLogInUser, thunkLogOutUser } from '../../state/user/reducer'
-// connect this to user reducer to get user props
+
 class UserMenu extends React.Component {
   state = {
     anchorEl: null
@@ -21,7 +21,6 @@ class UserMenu extends React.Component {
 
   render () {
     const { anchorEl } = this.state
-    console.log('THE PROPS IN USERMENU', this.props.user)
     const { user, isLoggedIn, logOutUser, logInUser } = this.props
     if (!isLoggedIn) {
       return <div onClick={() => logInUser()}>Login</div>
@@ -36,7 +35,7 @@ class UserMenu extends React.Component {
             <Link to={`/data`}>Data</Link>
           </MenuItem>
           <MenuItem onClick={this.handleClose}>
-                        <div onClick={() => logOutUser()}>Log Out</div>
+            <div onClick={() => logOutUser()}>Log Out</div>
           </MenuItem>
         </Menu>
       </div>
@@ -45,7 +44,6 @@ class UserMenu extends React.Component {
 }
 
 // CONTAINER
-
 function mapState (state) {
   return {
     user: state.userReducer.user,

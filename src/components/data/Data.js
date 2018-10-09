@@ -32,6 +32,7 @@ class Data extends Component {
   }
 
   render () {
+    console.log('THE PROPS IN DATA', this.props)
     return (
       <div>
         <h1>WORK IN PROGRESS</h1>
