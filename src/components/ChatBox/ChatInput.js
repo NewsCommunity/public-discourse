@@ -1,4 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/Add';
+import Icon from '@material-ui/core/Icon';
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit,
+  },
+});
 
 class ChatInput extends Component {
   constructor(props) {
@@ -25,41 +39,44 @@ class ChatInput extends Component {
 
   render() {
     const { message } = this.state;
+    const { classes } = this.props;
     return (
-      <div className="Form-Flex">
+      <React.Fragment>
         <form
           className="Form-Flex"
           onSubmit={this.handleSubmit}
         >
-          
-          <span className="input">
-            <textarea
-              autoFocus
-              className="chat-box-input"
-              type="text-area"
-              multiline="true"
-              value={message}
-              name="message"
-              onChange={this.handleChange}
-              placeholder="...add discourse"
-              onKeyPress={(e) => {
-                e.target.keyCode === 13 && e.preventDefault();
-              }}
-            />
-            <span />
-          </span>
-          <button className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored chat-button">
-            <i
-              className="material-icons"
-              type="submit"
-            >
-              send
-            </i>
-          </button>
+          <textarea
+            autoFocus
+            className="chat-box-input"
+            type="text-area"
+            multiline="true"
+            value={message}
+            name="message"
+            onChange={this.handleChange}
+            placeholder="...add discourse"
+            onKeyPress={(e) => {
+              e.target.keyCode === 13 && e.preventDefault();
+            }}
+          />
+
+          <Button
+            variant="fab"
+            color="secondary"
+            aria-label="Edit"
+            type="submit"
+            className={classes.button}
+          >
+            <Icon>edit_icon</Icon>
+          </Button>
         </form>
-      </div>
+      </React.Fragment>
     );
   }
 }
 
-export default ChatInput;
+ChatInput.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(ChatInput);
