@@ -8,6 +8,7 @@ export default class DiscourseList extends Component {
 
   render () {
     const { discourseList } = this.props
+    console.log('THE DISCOURSELIST', discourseList)
     let styles = {
       display: 'flex',
       flexDirection: 'column'
@@ -21,7 +22,7 @@ export default class DiscourseList extends Component {
                 discourseId={elem.docId}
                 discourseTitle={elem.article.title}
                 discourseDescription={elem.article.content}
-                discourseImg={elem.article.urlToImage}
+                discourseImg={elem.article.thread.main_image}
                 discoursePublishedAt={elem.article.publishedAt}
                 key={elem.docId}
                             />

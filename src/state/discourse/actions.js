@@ -22,7 +22,6 @@ export function thunkGetDiscourseList () {
   return async dispatch => {
     let discourseList = []
     let discourseListRef = firestore.collection('discourseList_2')
-
     let query = discourseListRef.limit(10)
     await query
             .get()
@@ -38,17 +37,6 @@ export function thunkGetDiscourseList () {
               console.error('ERROR GETTING DOCUMENTS', err)
             })
 
-    const discourses = await firestore.collection('discourseList')
-
-        // firestore
-        //   .collection("discourseList")
-        //   .get()
-        //   .then((snapshot) => {
-        //     snapshot.forEach((doc) => {
-        //       discourseList.push(doc);
-        //     });
-        //   });
-
     dispatch(setDiscourseList(discourseList))
   }
 }
@@ -56,7 +44,6 @@ export function thunkGetDiscourseList () {
 export function thunkGetSingleDiscourse (discourseId) {
   return async dispatch => {
     let doc = await firestore.collection('discourseList').doc(discourseId).get()
-
     const id = doc._key.path.segments[doc._key.path.segments.length - 1]
     let docData = doc.data()
     docData = { ...docData, docId: id }
