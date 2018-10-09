@@ -207,10 +207,6 @@ class BlockChainBucket extends Component {
         <div className="BlockChain-Bar-Account-Availible">
           <AccountMenu accounts={this.props.availibleAccounts} />
         </div>
-
-        <Modal open={this.state.modalOpen} onClose={this.handleClose}>
-          <div>MODAL IS HERE!</div>
-        </Modal>
       </div>
     );
   }
@@ -228,6 +224,7 @@ function mapState(state) {
     isFetchingEth: state.userReducer.isFetchingEth,
     ethProvider: state.userReducer.ethProvider,
     tipDestination: state.userReducer.tipDestination,
+    isTipActive: state.userReducer.isTipActive,
   };
 }
 
