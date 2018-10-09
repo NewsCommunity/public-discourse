@@ -21,7 +21,7 @@ export function setDiscourseList (discourseList) {
 export function thunkGetDiscourseList () {
   return async dispatch => {
     let discourseList = []
-    let discourseListRef = firestore.collection('discourseList_3')
+    let discourseListRef = firestore.collection('discourseList')
     let query = discourseListRef.limit(10)
     await query
             .get()
