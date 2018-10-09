@@ -19,9 +19,13 @@ class Data extends Component {
     discourseList.forEach(discourse => {
       sources[discourse.article.thread.site] = sources[discourse.article.thread.site] + 1 || 0
     })
+    const styles = {
+      overFlow: 'scroll'
+    }
+
     if (this.props.discourseList) {
       return (
-        <div className='data-container'>
+        <div className='data-container' style={{ overflowX: 'auto', fontSize: '14px' }}>
           <h1>Our Sources</h1>
           <PieChart sourcesData={sources} />
           <ChatBucket discourseId={'dataChat'} />
