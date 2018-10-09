@@ -8,10 +8,19 @@ class Me extends Component {
   }
 
   render () {
+    console.log('WHAT PROPS WE GOT, YO?', this.props)
+    let { displayName, photoUrl } = this.props.user
+    if (!this.props.isLoggedIn) {
+      return (
+        <div>
+          <p>Please log in to see your information</p>
+        </div>
+      )
+    }
     return (
       <div>
-                THE USER PAGE
-            </div>
+        <p>Welcome, {displayName}</p>
+      </div>
     )
   }
 }
