@@ -1,70 +1,62 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-  },
-  extendedIcon: {
-    marginRight: theme.spacing.unit,
-  },
-});
+const styles = {
+	root: {
+		width: 414
+	}
+};
 
-function BottomNav(props) {
-  const {
-    classes, onShowToggle, isOpen, isLoggedIn, logInUser,
-  } = props;
-  return (
-    <div className="Bottom-Nav">
-      {(isLoggedIn && !isOpen) ? (
-        <span />
-      ) : (
-        <React.Fragment>
-          <Button
-            variant="contained"
-            color="secondary"
-            aria-label="Edit"
-			className={classes.button}
-			onClick={logInUser}
-          >
-            Log in to Chat
-          </Button>
-        </React.Fragment>
-      )}
+class BottomNav extends React.Component {
+	state = {
+		value: 0
+	};
 
-      {isOpen ? (
-        <React.Fragment>
-          <Button
-            variant="fab"
-            color="secondary"
-            aria-label="Edit"
-            className={classes.button}
-          >
-            <Icon>edit_icon</Icon>
-          </Button>
-        </React.Fragment>
-      ) : (
-        <div />
-      )}
-      <Button
-        variant="fab"
-        color="primary"
-        aria-label="Add"
-        className={classes.button}
-        onClick={onShowToggle}
-      >
-        <AddIcon />
-      </Button>
-    </div>
-  );
+	handleChange = (event, value) => {
+		this.setState({ value });
+	};
+
+	render() {
+		const { classes } = this.props;
+		const { value } = this.state;
+
+		return (
+			<div>
+				<BottomNavigation value={value} onChange={this.handleChange} showLabels className={classes.root}>
+					<BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+
+					<BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} data-badge="4" />
+					<BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+				</BottomNavigation>
+			</div>
+			// <div className="bottom-nav">
+			// <GeneralEth />
+			//   <div>
+			//     <span className="mdl-badge" data-badge="4">
+			//       Inbox
+			//     </span>
+			//   </div>
+			//   <div>
+			//     <div
+			//       className="material-icons mdl-badge mdl-badge--overlap"
+			//       data-badge="1"
+			//     >
+			//       account_box
+			//     </div>
+			//   </div>
+			// </div>
+		);
+	}
 }
 
 BottomNav.propTypes = {
-  classes: PropTypes.object.isRequired,
+	classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(BottomNav);
