@@ -4,7 +4,7 @@ import { Router, withRouter, Route, Switch } from 'react-router-dom'
 import DiscourseListContainer from './containers/DiscourseListContainer'
 import { NavBar } from './components/NavBar'
 import Data from './components/data/Data'
-import Player from './components/audioStream/player'
+import Player from './components/AudioStream/Player'
 import { About } from './components/About'
 class App extends Component {
   render () {

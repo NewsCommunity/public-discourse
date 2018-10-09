@@ -8,7 +8,10 @@ export default class PieChart extends Component {
 
   render () {
     let sources = Object.keys(this.props.sourcesData)
-    let values = Object.values(this.props.sourcesData)
+    let values = []
+    sources.forEach(source => {
+      values.push(this.props.sourcesData[source])
+    })
 
     const data = {
       labels: sources,

@@ -7,23 +7,26 @@ export default class BarChart extends Component {
   }
 
   render () {
-    const { titles, numMessages } = this.props
+    let countries = Object.keys(this.props.countries)
+    let values = Object.values(this.props.countries)
     const data = {
-      labels: titles,
+      labels: countries,
       datasets: [
         {
-          label: 'Messages',
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
-          data: numMessages
+          label: 'Story origin',
+          display: 'false',
+          data: values,
+          backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']
         }
       ]
     }
-
+    const options = {
+      responsive: false
+    }
     return (
       <div>
-                HELLO
-            </div>
+        <Bar data={data} options={options} />
+      </div>
     )
   }
 }

@@ -30,53 +30,53 @@ class ChatBucket extends Component {
     this.subscribeToMessageUpdates(discourseId)
   }
 
-  onShowToggle() {
-    const { chatOpen } = this.state;
-    const toggleState = !chatOpen;
-    this.setState(() => ({ chatOpen: toggleState }));
+  onShowToggle () {
+    const { chatOpen } = this.state
+    const toggleState = !chatOpen
+    this.setState(() => ({ chatOpen: toggleState }))
   }
 
-  async getInitialMessages(discourseId, limit = 50) {
+  async getInitialMessages (discourseId, limit = 50) {
     const messages = await firestore
-            .collection('discourseList_2')
+            .collection('discourseList')
             .doc(discourseId)
             .collection('messages')
             .limit(limit)
             .orderBy('timestamp')
             .get()
 
-    messages.forEach((message) => {
-      this.addSingleMessageToState(message.data());
-    });
+    messages.forEach(message => {
+      this.addSingleMessageToState(message.data())
+    })
   }
 
-  addSingleMessageToState(message) {
-    const { messages } = this.state;
-    const newMessages = [...messages, message];
-    this.setState({ messages: newMessages });
+  addSingleMessageToState (message) {
+    const { messages } = this.state
+    const newMessages = [...messages, message]
+    this.setState({ messages: newMessages })
   }
 
-  async subscribeToMessageUpdates(discourseId) {
-    const { messages } = this.state;
+  async subscribeToMessageUpdates (discourseId) {
+    const { messages } = this.state
     await firestore
-      .collection('discourseList')
-      .doc(discourseId)
-      .collection('messages')
-      .orderBy('timestamp', 'desc')
-      .limit(100)
-      .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-          const messageArray = messages;
-          messageArray.push(change.doc.data());
-          this.setState({ messages: messageArray });
-        });
-      });
+            .collection('discourseList')
+            .doc(discourseId)
+            .collection('messages')
+            .orderBy('timestamp', 'desc')
+            .limit(100)
+            .onSnapshot(snapshot => {
+              snapshot.docChanges().forEach(change => {
+                const messageArray = messages
+                messageArray.push(change.doc.data())
+                this.setState({ messages: messageArray })
+              })
+            })
   }
 
-  postMessage(message) {
-    const { user, discourseId } = this.props;
-    const { displayName, uid, photoURL } = user;
-    const date = new Date();
+  postMessage (message) {
+    const { user, discourseId } = this.props
+    const { displayName, uid, photoURL } = user
+    const date = new Date()
     const messageObj = {
       body: message,
       userName: displayName,
@@ -87,56 +87,43 @@ class ChatBucket extends Component {
 
     this.addSingleMessageToState(messageObj)
     firestore
-      .collection('discourseList')
-      .doc(discourseId)
-      .collection('messages')
-      .add(messageObj)
-      .then(() => {})
-      .catch((error) => {
-        console.log('Error adding document: ', error);
-      });
+            .collection('discourseList')
+            .doc(discourseId)
+            .collection('messages')
+            .add(messageObj)
+            .then(() => {})
+            .catch(error => {
+              console.log('Error adding document: ', error)
+            })
   }
 
-  render() {
-    const { messages, chatOpen } = this.state;
-    const {
-      logInUser, isLoggedIn, user, setTipDestination,
-    } = this.props;
+  render () {
+    const { messages, chatOpen } = this.state
+    const { logInUser, isLoggedIn, user, setTipDestination } = this.props
 
-    console.log('The props of chatBucket are:', this.props);
+    console.log('The props of chatBucket are:', this.props)
 
     return (
       <div className={chatOpen ? 'Chatbucket-Container White-Background' : 'Chatbucket-Container'}>
-        {isLoggedIn ? (
-          <React.Fragment>
-            <BlockChainBar />
-            <ChatInput
-              postMessage={this.postMessage}
-              user={user}
-            />
-          </React.Fragment>
-        ) : (
-          <span />
-        )}
+        {isLoggedIn
+                    ? <React.Fragment>
+                      <BlockChainBar />
+                      <ChatInput postMessage={this.postMessage} user={user} />
+                    </React.Fragment>
+                    : <span />}
 
-        {chatOpen ? (
-          <div>
-            <ChatBox
-              msgArray={messages}
-              setTipDestination={setTipDestination}
-            />
-          </div>
-        ) : (
-          <div />
-        )}
+        {chatOpen
+                    ? <div>
+                      <ChatBox msgArray={messages} setTipDestination={setTipDestination} />
+                    </div>
+                    : <div />}
 
-        
         <BottomNav
           onShowToggle={this.onShowToggle}
           isOpen={chatOpen}
           isLoggedIn={isLoggedIn}
           logInUser={logInUser}
-        />
+                />
       </div>
     )
   }
@@ -158,13 +145,10 @@ function mapDispatch (dispatch) {
     logInUser: () => {
       dispatch(thunkLogInUser())
     },
-    setTipDestination: (destination) => {
-      dispatch(actionSetTipDestination(destination));
-    },
-  };
+    setTipDestination: destination => {
+      dispatch(actionSetTipDestination(destination))
+    }
+  }
 }
 
-export default (ChatBucket = connect(
-  mapState,
-  mapDispatch,
-)(ChatBucket));
+export default (ChatBucket = connect(mapState, mapDispatch)(ChatBucket))

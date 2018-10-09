@@ -21,7 +21,7 @@ export function setDiscourseList (discourseList) {
 export function thunkGetDiscourseList () {
   return async dispatch => {
     let discourseList = []
-    let discourseListRef = firestore.collection('discourseList_2')
+    let discourseListRef = firestore.collection('discourseList')
     let query = discourseListRef.limit(10)
     await query
             .get()
@@ -43,7 +43,7 @@ export function thunkGetDiscourseList () {
 
 export function thunkGetSingleDiscourse (discourseId) {
   return async dispatch => {
-    let doc = await firestore.collection('discourseList_2').doc(discourseId).get()
+    let doc = await firestore.collection('discourseList').doc(discourseId).get()
     const id = doc._key.path.segments[doc._key.path.segments.length - 1]
     let docData = doc.data()
     docData = { ...docData, docId: id }

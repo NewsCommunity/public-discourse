@@ -21,7 +21,7 @@ export default class DiscourseList extends Component {
                 discourseId={elem.docId}
                 discourseTitle={elem.article.title}
                 discourseDescription={elem.article.content}
-                discourseImg={elem.article.thread.main_image}
+                discourseImg={elem.article.urlToImage}
                 discoursePublishedAt={elem.article.publishedAt}
                 key={elem.docId}
                             />
