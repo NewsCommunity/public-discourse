@@ -8,6 +8,8 @@ const SET_CURRENT_BALANCE = 'SET_CURRENT_BALANCE';
 const SET_CURRENT_ACCOUNT = 'SET_CURRENT_ACCOUNT';
 const FETCH_ETH_CONNECTION = 'FETCH_ETH_CONNECTION';
 const SET_TIP_DESTINATION = 'SET_TIP_DESTINATION';
+const SET_CHAT_STATUS = 'SET_CHAT_STATUS';
+const SET_TIP_STATUS = 'SET_TIP_STATUS';
 // ACTIONS====================================================================
 const actionSetUser = (userObj, isLoggedIn) => ({
   type: SET_USER,
@@ -47,6 +49,17 @@ export const actionSetTipDestination = (tipDestination) => {
     tipDestination,
   };
 };
+
+export const actionSetChatStatus = chatStatus => ({
+  type: SET_CHAT_STATUS,
+  chatStatus,
+});
+
+export const actionSetTipStatus = tipStatus => ({
+  type: SET_TIP_STATUS,
+  tipStatus,
+});
+
 // THUNKS=====================================================================
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const thunkLogInUser = (provider = googleProvider) => async (dispatch) => {
@@ -124,6 +137,8 @@ export const thunkSetNewAccount = (account, eth) => async (dispatch) => {
 const initialState = {
   user: {},
   isLoggedIn: false,
+  isChatOpen: false,
+  isTipActive: false,
   isFetchingEth: false,
   ethAccounts: [],
   currentEthAccount: '',
@@ -169,6 +184,16 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
         tipDestination: action.tipDestination,
+      };
+    case SET_CHAT_STATUS:
+      return {
+        ...state,
+        isChatOpen: action.chatStatus,
+      };
+    case SET_TIP_STATUS:
+      return {
+        ...state,
+        isTipActive: action.tipStatus,
       };
     default:
       return state;
