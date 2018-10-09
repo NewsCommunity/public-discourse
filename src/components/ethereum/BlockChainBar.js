@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { firestore } from '../../fire';
-import Login from '../authentication/login';
-import BottomNav from '../BottomNavigation/BottomNav';
 import {
   thunkSetEthProdiver,
   thunkSetNewAccount,
