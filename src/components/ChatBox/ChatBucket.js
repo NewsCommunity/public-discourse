@@ -136,6 +136,7 @@ class ChatBucket extends Component {
           isOpen={chatOpen}
           isLoggedIn={isLoggedIn}
           logInUser={logInUser}
+          postMessage={this.postMessage}
         />
       </div>
     )
@@ -161,6 +162,9 @@ function mapDispatch (dispatch) {
     setTipDestination: (destination) => {
       dispatch(actionSetTipDestination(destination));
     },
+    postMessage: (message) => {
+      dispatch()
+    }
   };
 }
 
