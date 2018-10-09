@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { thunkGetDiscourseList } from '../../state/discourse/actions'
 import PieChart from './PieChart'
+import ChatBucket from '../ChatBox/ChatBucket'
 
 class Data extends Component {
   constructor (props) {
@@ -23,6 +24,7 @@ class Data extends Component {
         <div className='data-container'>
           <h1>Our Sources</h1>
           <PieChart sourcesData={sources} />
+          <ChatBucket discourseId={'dataChat'} />
         </div>
       )
     } else {
