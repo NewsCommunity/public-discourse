@@ -17,13 +17,19 @@ const styles = theme => ({
 
 function BottomNav(props) {
   const {
-    classes, onShowToggle, isOpen, isLoggedIn, logInUser, postMessage
+    classes, onShowToggle, isOpen, isLoggedIn, logInUser, postMessage,
   } = props;
+
+  let multiRender = false;
+  if (isOpen && isLoggedIn) {
+    multiRender = true;
+  }
 
   return (
     <div className="Bottom-Nav">
+    
       <div className="chat-input-left">
-        <ChatInput postMessage={postMessage}/>
+        {multiRender ? <ChatInput postMessage={postMessage} /> : <div/>}
       </div>
       <div className="chat-input-right">
         <Button

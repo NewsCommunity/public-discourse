@@ -1,33 +1,33 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { ChatBox, ChatInput } from './index'
-import { firestore } from '../../fire'
-import Login from '../authentication/login'
-import BottomNav from '../BottomNavigation/BottomNav'
-import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer'
-import BlockChainBar from '../ethereum/BlockChainBar'
-import ChatTrigger from '../ChatBox/ChatTrigger'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { ChatBox, ChatInput } from './index';
+import { firestore } from '../../fire';
+import Login from '../authentication/login';
+import BottomNav from '../BottomNavigation/BottomNav';
+import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer';
+import BlockChainBar from '../ethereum/BlockChainBar';
+import ChatTrigger from './ChatTrigger';
 
-const firebase = require('firebase')
+const firebase = require('firebase');
 
 class ChatBucket extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       messages: [],
-      chatOpen: false
-    }
+      chatOpen: false,
+    };
 
-    this.getInitialMessages = this.getInitialMessages.bind(this)
-    this.addSingleMessageToState = this.addSingleMessageToState.bind(this)
-    this.postMessage = this.postMessage.bind(this)
-    this.onShowToggle = this.onShowToggle.bind(this)
+    this.getInitialMessages = this.getInitialMessages.bind(this);
+    this.addSingleMessageToState = this.addSingleMessageToState.bind(this);
+    this.postMessage = this.postMessage.bind(this);
+    this.onShowToggle = this.onShowToggle.bind(this);
   }
 
-  async componentDidMount () {
-    const { discourseId } = this.props
+  async componentDidMount() {
+    const { discourseId } = this.props;
 
-    this.subscribeToMessageUpdates(discourseId)
+    this.subscribeToMessageUpdates(discourseId);
   }
 
   onShowToggle() {
@@ -38,12 +38,12 @@ class ChatBucket extends Component {
 
   async getInitialMessages(discourseId, limit = 50) {
     const messages = await firestore
-            .collection('discourseList_2')
-            .doc(discourseId)
-            .collection('messages')
-            .limit(limit)
-            .orderBy('timestamp')
-            .get()
+      .collection('discourseList_2')
+      .doc(discourseId)
+      .collection('messages')
+      .limit(limit)
+      .orderBy('timestamp')
+      .get();
 
     messages.forEach((message) => {
       this.addSingleMessageToState(message.data());
@@ -82,10 +82,10 @@ class ChatBucket extends Component {
       userName: displayName,
       timestamp: date,
       uid,
-      photoURL
-    }
+      photoURL,
+    };
 
-    this.addSingleMessageToState(messageObj)
+    this.addSingleMessageToState(messageObj);
     firestore
       .collection('discourseList')
       .doc(discourseId)
@@ -100,37 +100,26 @@ class ChatBucket extends Component {
   render() {
     const { messages, chatOpen } = this.state;
     const {
-      logInUser, isLoggedIn, user, setTipDestination,
+      logInUser, isLoggedIn, user, setTipDestination, tipDestination, isTipActive
     } = this.props;
 
     console.log('The props of chatBucket are:', this.props);
 
     return (
       <div className={chatOpen ? 'Chatbucket-Container White-Background' : 'Chatbucket-Container'}>
-        {isLoggedIn ? (
-          <React.Fragment>
-            <BlockChainBar />
-            <ChatInput
-              postMessage={this.postMessage}
-              user={user}
-            />
-          </React.Fragment>
-        ) : (
-          <span />
-        )}
-
         {chatOpen ? (
-          <div>
-            <ChatBox
-              msgArray={messages}
-              setTipDestination={setTipDestination}
-            />
-          </div>
+          <React.Fragment>
+            <div>
+              <BlockChainBar tipDestination={tipDestination} />
+              <ChatBox
+                msgArray={messages}
+                setTipDestination={setTipDestination}
+              />
+            </div>
+          </React.Fragment>
         ) : (
           <div />
         )}
-
-        
         <BottomNav
           onShowToggle={this.onShowToggle}
           isOpen={chatOpen}
@@ -139,32 +128,34 @@ class ChatBucket extends Component {
           postMessage={this.postMessage}
         />
       </div>
-    )
+    );
   }
 }
 
 // CONTAINER====================================================================
-function mapState (state) {
+function mapState(state) {
   return {
     user: state.userReducer.user,
-    isLoggedIn: state.userReducer.isLoggedIn
-  }
+    isLoggedIn: state.userReducer.isLoggedIn,
+    tpDestination: state.userReducer.tipDestination,
+    isTipActive: state.userReducer.isTipActive,
+  };
 }
 
-function mapDispatch (dispatch) {
+function mapDispatch(dispatch) {
   return {
     logOutUser: () => {
-      dispatch(thunkLogOutUser())
+      dispatch(thunkLogOutUser());
     },
     logInUser: () => {
-      dispatch(thunkLogInUser())
+      dispatch(thunkLogInUser());
     },
     setTipDestination: (destination) => {
       dispatch(actionSetTipDestination(destination));
     },
     postMessage: (message) => {
-      dispatch()
-    }
+      dispatch();
+    },
   };
 }
 
