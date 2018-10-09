@@ -97,37 +97,16 @@ class ChatBucket extends Component {
             })
   }
 
-<<<<<<< HEAD
-  render () {
-    const { messages, chatOpen } = this.state
-    const { logInUser, isLoggedIn, user, setTipDestination } = this.props
-=======
   render() {
     const { messages, chatOpen } = this.state;
     const {
       logInUser, isLoggedIn, user, setTipDestination, tipDestination, isTipActive
     } = this.props;
->>>>>>> 4e2e35072aa14f6d1217b4c5403c290c5c08fbed
 
     console.log('The props of chatBucket are:', this.props)
 
     return (
       <div className={chatOpen ? 'Chatbucket-Container White-Background' : 'Chatbucket-Container'}>
-<<<<<<< HEAD
-        {isLoggedIn
-                    ? <React.Fragment>
-                      <BlockChainBar />
-                      <ChatInput postMessage={this.postMessage} user={user} />
-                    </React.Fragment>
-                    : <span />}
-
-        {chatOpen
-                    ? <div>
-                      <ChatBox msgArray={messages} setTipDestination={setTipDestination} />
-                    </div>
-                    : <div />}
-
-=======
         {chatOpen ? (
           <React.Fragment>
             <div>
@@ -141,18 +120,13 @@ class ChatBucket extends Component {
         ) : (
           <div />
         )}
->>>>>>> 4e2e35072aa14f6d1217b4c5403c290c5c08fbed
         <BottomNav
           onShowToggle={this.onShowToggle}
           isOpen={chatOpen}
           isLoggedIn={isLoggedIn}
           logInUser={logInUser}
-<<<<<<< HEAD
-                />
-=======
           postMessage={this.postMessage}
         />
->>>>>>> 4e2e35072aa14f6d1217b4c5403c290c5c08fbed
       </div>
     );
   }
@@ -176,12 +150,6 @@ function mapDispatch(dispatch) {
     logInUser: () => {
       dispatch(thunkLogInUser());
     },
-<<<<<<< HEAD
-    setTipDestination: destination => {
-      dispatch(actionSetTipDestination(destination))
-    }
-  }
-=======
     setTipDestination: (destination) => {
       dispatch(actionSetTipDestination(destination));
     },
@@ -189,7 +157,6 @@ function mapDispatch(dispatch) {
       dispatch();
     },
   };
->>>>>>> 4e2e35072aa14f6d1217b4c5403c290c5c08fbed
 }
 
 export default (ChatBucket = connect(mapState, mapDispatch)(ChatBucket))

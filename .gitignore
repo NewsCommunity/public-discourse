@@ -22,3 +22,5 @@ yarn-error.log*
 /src/secrets.js
 /src/secretNewsApiKey.js
 firebase-debug.log
+
+server/testWriteArticles.js
