@@ -13,6 +13,7 @@ export default class Player extends Component {
       display: 'flex',
       paddingTop: '15px'
     }
+
     return (
       <div className='audio' styles={styles}>
         <img src='https://media.wnyc.org/media/photologue/photos/logo_m.gif' alt='' />
