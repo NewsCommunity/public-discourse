@@ -248,12 +248,6 @@ function mapDispatch(dispatch) {
     setTipDestination: destination => {
       dispatch(actionSetTipDestination(destination));
     },
-    // logOutUser: () => {
-    // 	dispatch(thunkLogOutUser());
-    // },
-    // logInUser: () => {
-    // 	dispatch(thunkLogInUser());
-    // }
   };
 }
 
