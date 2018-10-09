@@ -7,12 +7,7 @@ class TipRecipient extends Component {
     this.state = {};
   }
 
-  // 	sendTip = () => {
-
-  // 	web3.eth.sendTransaction({from:myaddress,to:toaddress, value:web3.toWei(1, "ether")};
-
-  // }
-
+  // Need to implement actual sending of tip.
   render() {
     const { displayName, photo } = this.props;
     return (
@@ -21,14 +16,16 @@ class TipRecipient extends Component {
           <img
             className="mdl-chip__contact"
             src={photo}
+            alt="Contact you're sending to"
           />
           <span className="mdl-chip__text">
-Tip:
+            Tip:
             {displayName}
           </span>
           <a
             href="#"
             className="mdl-chip__action"
+            alt="Button where your tip goes"
           >
             <i className="material-icons">done</i>
           </a>
