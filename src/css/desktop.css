@@ -26,7 +26,6 @@
 
   .iframe-container {
     /* overflow: hidden; */
-    padding-top: 100%;
     position: relative;
     border-bottom: 1px solid black;
   }
