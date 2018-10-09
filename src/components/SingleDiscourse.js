@@ -3,6 +3,7 @@ import ChatBucket from '../containers/ChatBucket'
 import { thunkGetSingleDiscourse } from '../state/discourse/actions'
 import { connect } from 'react-redux'
 import Loading from './Loading'
+import Parser from 'html-react-parser'
 class SingleDiscourse extends Component {
   constructor (props) {
     super(props)
@@ -25,7 +26,7 @@ class SingleDiscourse extends Component {
             {/* <h3>publicDiscourse: {title}</h3> */}
             <div className='single-room'>
               <div className='iframe-container'>
-                <iframe src={url} />
+                <h1>{Parser(discourse.article.title)}</h1>{Parser(discourse.article.html)}
               </div>
               <ChatBucket discourseId={discourseId} />
             </div>
