@@ -30,8 +30,12 @@ class NavMenu extends React.Component {
           <MenuItem onClick={this.handleClose}>
             <Link to={`/data`}>Data</Link>
           </MenuItem>
+
           <MenuItem onClick={this.handleClose}>
             <Link to={`/audio`}>WNYC</Link>
+          </MenuItem>
+          <MenuItem onClick={this.handleClose}>
+            <Link to={`/about`}>About</Link>
           </MenuItem>
         </Menu>
       </div>

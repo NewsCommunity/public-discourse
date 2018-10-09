@@ -8,7 +8,6 @@ export default class DiscourseList extends Component {
 
   render () {
     const { discourseList } = this.props
-    console.log('THE DISCOURSELIST', discourseList)
     let styles = {
       display: 'flex',
       flexDirection: 'column'

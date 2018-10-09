@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { thunkGetDiscourseList } from '../../state/discourse/actions'
 import PieChart from './PieChart'
 import ChatBucket from '../ChatBox/ChatBucket'
-
+import Loading from '../Loading'
 class Data extends Component {
   constructor (props) {
     super(props)
@@ -19,9 +19,6 @@ class Data extends Component {
     discourseList.forEach(discourse => {
       sources[discourse.article.thread.site] = sources[discourse.article.thread.site] + 1 || 0
     })
-    const styles = {
-      overFlow: 'scroll'
-    }
 
     if (this.props.discourseList) {
       return (
@@ -32,11 +29,7 @@ class Data extends Component {
         </div>
       )
     } else {
-      return (
-        <div>
-                    Loading...
-                </div>
-      )
+      return <Loading />
     }
   }
 }
