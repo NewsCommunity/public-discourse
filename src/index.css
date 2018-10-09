@@ -38,20 +38,10 @@ body {
 
 .iframe-container {
   /* overflow: hidden; */
-  padding-top: 100%;
+ 
 	
 }
 
-
-
-.iframe-container iframe {
-  border: 0;
-  height: 100%;
-  left: 0;
-  top: 0;
-  position: absolute;
-  width: 100%;
-}
 
 .single-msg {
   display: flex;
