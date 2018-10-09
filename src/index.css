@@ -36,11 +36,24 @@ body {
   overflow: scroll;
 }
 
-.iframe-container {
-  /* overflow: hidden; */
- 
+.iframe-container > *{
+  overflow: hidden;
+ margin: 10px;
 	
 }
+
+.iframe-container img {
+  max-width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+
+.iframe-container span {
+  color: rgb(29, 29, 29)
+}
+
 
 
 .single-msg {
@@ -240,6 +253,7 @@ i.icon-fire {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  z-index: 1;
 }
 
 .chat-input-container {
@@ -253,4 +267,18 @@ flex-direction: row;
 
 .chat-input-right {
 
+}
+
+.discourse-list {
+  margin: 10px;
+}
+
+.MuiCardContent-root-116 {
+padding-top: 4px;
+padding-left: 4px;
+padding-bottom: 4px;
+}
+
+.story-body__inner {
+  z-index: -1;
 }

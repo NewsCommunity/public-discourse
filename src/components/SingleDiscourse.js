@@ -22,11 +22,9 @@ class SingleDiscourse extends Component {
       return (
         <div>
           <div className='discourse-container'>
-            {/* This Thing renders terribly we need to delete it. */}
-            {/* <h3>publicDiscourse: {title}</h3> */}
             <div className='single-room'>
               <div className='iframe-container'>
-                <h1>{Parser(discourse.article.title)}</h1>{Parser(discourse.article.html)}
+                <h3>{Parser(discourse.article.title)}</h3>{Parser(discourse.article.html)}
               </div>
               <ChatBucket discourseId={discourseId} />
             </div>
