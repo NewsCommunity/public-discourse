@@ -38,21 +38,12 @@ class ChatBucket extends Component {
 
   async getInitialMessages(discourseId, limit = 50) {
     const messages = await firestore
-<<<<<<< HEAD
             .collection('discourseList')
             .doc(discourseId)
             .collection('messages')
             .limit(limit)
             .orderBy('timestamp')
             .get()
-=======
-      .collection('discourseList_2')
-      .doc(discourseId)
-      .collection('messages')
-      .limit(limit)
-      .orderBy('timestamp')
-      .get();
->>>>>>> de437e3f670aca2367e406c4447117eae65c767d
 
     messages.forEach((message) => {
       this.addSingleMessageToState(message.data());
