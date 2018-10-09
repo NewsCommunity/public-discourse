@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import AddIcon from '@material-ui/icons/Add'
@@ -14,10 +13,10 @@ const styles = theme => ({
   }
 })
 
-class ChatInput extends Component {
+class PublicKeyForm extends Component {
   constructor (props) {
     super(props)
-    this.state = { message: '', error: false }
+    this.state = { publicKey: '' }
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -27,56 +26,42 @@ class ChatInput extends Component {
     const { message } = this.state
     const { postMessage } = this.props
     event.preventDefault()
-    if (this.state.message === '') {
-      this.setState({
-        message: '',
-        error: true
-      })
-      return
-    }
-
-    postMessage(message)
-    this.setState({ message: '' })
+        // postMessage(message)
+        // this.setState({ message: '' })
   }
 
   handleChange (event) {
-    this.setState({ [event.target.name]: event.target.value, error: false })
+    this.setState({ [event.target.name]: event.target.value })
   }
 
     // We should prevent users from making blank comments, and rate limit them and no duplicates.
 
   render () {
-    const { message, error } = this.state
+    const { publicKey } = this.state
     const { classes } = this.props
-        // 'Form-Flex'
     return (
       <React.Fragment>
-        <form className={error ? 'Form-Flex tip-over' : 'Form-Flex'} onSubmit={this.handleSubmit}>
+        <form className='Form-Flex' onSubmit={this.handleSubmit}>
           <textarea
             autoFocus
             className='chat-box-input'
             type='text-area'
-            multiline='true'
-            value={message}
-            name='message'
+            value={publicKey}
+            name='publicKey'
             onChange={this.handleChange}
-            placeholder='...add discourse'
+            placeholder='Your public key'
             onKeyPress={e => {
               e.target.keyCode === 13 && e.preventDefault()
             }}
                     />
-
-          <Button variant='fab' color='secondary' aria-label='Edit' type='submit' className={classes.button}>
-            <Icon>edit_icon</Icon>
-          </Button>
         </form>
       </React.Fragment>
     )
   }
 }
 
-ChatInput.propTypes = {
-  classes: PropTypes.object.isRequired
-}
+// ChatInput.propTypes = {
+//   classes: PropTypes.object.isRequired
+// }
 
-export default withStyles(styles)(ChatInput)
+export default withStyles(styles)(PublicKeyForm)

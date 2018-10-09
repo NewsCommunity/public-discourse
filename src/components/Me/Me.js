@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer'
+import PublicKeyForm from './PublicKeyForm'
 
 class Me extends Component {
   constructor (props) {
@@ -9,7 +10,7 @@ class Me extends Component {
 
   render () {
     console.log('WHAT PROPS WE GOT, YO?', this.props)
-    let { displayName, photoUrl } = this.props.user
+    let { displayName } = this.props.user
     if (!this.props.isLoggedIn) {
       return (
         <div>
@@ -20,6 +21,8 @@ class Me extends Component {
     return (
       <div>
         <p>Welcome, {displayName}</p>
+        <p>Here you can set your public address</p>
+        <PublicKeyForm />
       </div>
     )
   }
