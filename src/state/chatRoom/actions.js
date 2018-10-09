@@ -21,7 +21,7 @@ export function thunkGetChatMessages (discourseId) {
 
 export function thunkSubscribeToDatabase (discourseId, limit = 100) {
   return async dispatch => {
-    firestore.collection('discourseList_2').doc(discourseId).collection('messages').onSnapshot(function (doc) {
+    firestore.collection('discourseList').doc(discourseId).collection('messages').onSnapshot(function (doc) {
       doc.forEach(doc => {
         dispatch(setChatMessages(doc.data()))
       })
