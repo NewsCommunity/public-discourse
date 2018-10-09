@@ -2,28 +2,26 @@ import React, { Component } from 'react'
 import ChatBucket from '../containers/ChatBucket'
 import { thunkGetSingleDiscourse } from '../state/discourse/actions'
 import { connect } from 'react-redux'
-
+import Loading from './Loading'
 class SingleDiscourse extends Component {
   constructor (props) {
     super(props)
-    
   }
 
   componentDidMount = async () => {
     await this.props.getSingleDiscourse(this.props.match.params.docId)
-    
   }
 
   render () {
     const { discourse, match } = this.props
     const discourseId = match.params.docId
-    
+
     if (discourse.article) {
       const { url, title } = discourse.article
       return (
         <div>
           <div className='discourse-container'>
-          {/* This Thing renders terribly we need to delete it. */}
+            {/* This Thing renders terribly we need to delete it. */}
             {/* <h3>publicDiscourse: {title}</h3> */}
             <div className='single-room'>
               <div className='iframe-container'>
@@ -34,8 +32,9 @@ class SingleDiscourse extends Component {
           </div>
         </div>
       )
+    } else {
+      return <Loading />
     }
-    return <div>Loading...</div>
   }
 }
 

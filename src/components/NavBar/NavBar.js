@@ -5,7 +5,8 @@ import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import Drawer from './drawer'
+import UserMenu from './UserMenu'
+import NavMenu from './NavMenu'
 
 const styles = {
   root: {
@@ -19,7 +20,7 @@ const display = {
   alignItems: 'baseline'
 }
 
-function SimpleAppBar (props) {
+function NavBar (props) {
   const { classes } = props
 
   return (
@@ -29,7 +30,8 @@ function SimpleAppBar (props) {
           <Typography variant='h6' color='inherit'>
             <div style={display}>
               <Link to={`/`}>publicDiscourse</Link>{' '}
-              <Drawer />
+              <NavMenu />
+              <UserMenu />
             </div>
 
           </Typography>
@@ -39,8 +41,8 @@ function SimpleAppBar (props) {
   )
 }
 
-SimpleAppBar.propTypes = {
+NavBar.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(SimpleAppBar)
+export default withStyles(styles)(NavBar)

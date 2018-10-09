@@ -25,7 +25,6 @@ const styles = {
 
 function ImgMediaCard (props) {
   const { discourseId, discourseTitle, discourseDescription, discourseImg, discoursePublishedAt, classes } = props
-
   return (
     <Card className={classes.card}>
       <CardActionArea>
@@ -38,7 +37,7 @@ function ImgMediaCard (props) {
           title='Contemplative Reptile'
                 />
         <CardContent>
-          <Typography gutterBottom variant='h5' component='h2'>
+          <Typography gutterBottom variant='h8' component='h6'>
             {discourseTitle}
           </Typography>
           <Typography component='p'>

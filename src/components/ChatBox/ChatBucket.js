@@ -1,29 +1,33 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { ChatBox, ChatInput } from './index';
-import { firestore } from '../../fire';
-import BottomNav from '../BottomNavigation/BottomNav';
-import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer';
-import BlockChainBar from '../ethereum/BlockChainBar';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { ChatBox, ChatInput } from './index'
+import { firestore } from '../../fire'
+import Login from '../authentication/login'
+import BottomNav from '../BottomNavigation/BottomNav'
+import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer'
+import BlockChainBar from '../ethereum/BlockChainBar'
+import ChatTrigger from '../ChatBox/ChatTrigger'
+
+const firebase = require('firebase')
 
 class ChatBucket extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
       messages: [],
-      chatOpen: false,
-    };
+      chatOpen: false
+    }
 
-    this.getInitialMessages = this.getInitialMessages.bind(this);
-    this.addSingleMessageToState = this.addSingleMessageToState.bind(this);
-    this.postMessage = this.postMessage.bind(this);
-    this.onShowToggle = this.onShowToggle.bind(this);
+    this.getInitialMessages = this.getInitialMessages.bind(this)
+    this.addSingleMessageToState = this.addSingleMessageToState.bind(this)
+    this.postMessage = this.postMessage.bind(this)
+    this.onShowToggle = this.onShowToggle.bind(this)
   }
 
-  async componentDidMount() {
-    const { discourseId } = this.props;
+  async componentDidMount () {
+    const { discourseId } = this.props
 
-    this.subscribeToMessageUpdates(discourseId);
+    this.subscribeToMessageUpdates(discourseId)
   }
 
   onShowToggle() {
@@ -34,12 +38,12 @@ class ChatBucket extends Component {
 
   async getInitialMessages(discourseId, limit = 50) {
     const messages = await firestore
-      .collection('discourseList')
-      .doc(discourseId)
-      .collection('messages')
-      .limit(limit)
-      .orderBy('timestamp')
-      .get();
+            .collection('discourseList_2')
+            .doc(discourseId)
+            .collection('messages')
+            .limit(limit)
+            .orderBy('timestamp')
+            .get()
 
     messages.forEach((message) => {
       this.addSingleMessageToState(message.data());
@@ -78,10 +82,10 @@ class ChatBucket extends Component {
       userName: displayName,
       timestamp: date,
       uid,
-      photoURL,
-    };
+      photoURL
+    }
 
-    this.addSingleMessageToState(messageObj);
+    this.addSingleMessageToState(messageObj)
     firestore
       .collection('discourseList')
       .doc(discourseId)
@@ -134,25 +138,25 @@ class ChatBucket extends Component {
           logInUser={logInUser}
         />
       </div>
-    );
+    )
   }
 }
 
 // CONTAINER====================================================================
-function mapState(state) {
+function mapState (state) {
   return {
     user: state.userReducer.user,
-    isLoggedIn: state.userReducer.isLoggedIn,
-  };
+    isLoggedIn: state.userReducer.isLoggedIn
+  }
 }
 
-function mapDispatch(dispatch) {
+function mapDispatch (dispatch) {
   return {
     logOutUser: () => {
-      dispatch(thunkLogOutUser());
+      dispatch(thunkLogOutUser())
     },
     logInUser: () => {
-      dispatch(thunkLogInUser());
+      dispatch(thunkLogInUser())
     },
     setTipDestination: (destination) => {
       dispatch(actionSetTipDestination(destination));

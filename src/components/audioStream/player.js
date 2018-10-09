@@ -7,19 +7,24 @@ export default class Player extends Component {
   }
 
   render () {
-    const docId = 'wdBKkCtb3CNdpTqO1KLQ'
-
     const styles = {
       display: 'flex',
-      paddingTop: '15px'
+      flexDirection: 'column',
+      marginTop: '4em',
+      alignItems: 'center'
     }
+    const imgStyles = {
+      height: '12em',
+      width: '14em'
+    }
+
     return (
-      <div className='audio' styles={styles}>
-        <img src='https://media.wnyc.org/media/photologue/photos/logo_m.gif' alt='' />
+      <div className='audio' style={styles}>
+        <img src='https://media.wnyc.org/media/photologue/photos/logo_m.gif' style={imgStyles} alt='' />
         <audio controls>
           <source src='https://nprdmp-live01-aac.akacast.akamaistream.net/7/91/364917/v1/npr.akacast.akamaistream.net/nprdmp_live01_aac' />
         </audio>
-        <ChatBucket discourseId={docId} />
+        <ChatBucket discourseId='WNYCChat' />
       </div>
     )
   }
