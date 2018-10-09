@@ -6,6 +6,8 @@ import { NavBar } from './components/NavBar'
 import Data from './components/data/Data'
 import Player from './components/audioStream/player'
 import { About } from './components/About'
+import BottomNav from './components/BottomNavigation/BottomNav';
+
 class App extends Component {
   render () {
     return (
@@ -18,6 +20,7 @@ class App extends Component {
           <Route path='/data' component={Data} />
           <Route path='/discourse/:docId' component={SingleDiscourse} />
           <Route path='/' component={DiscourseListContainer} />
+          
         </Switch>
       </div>
     )

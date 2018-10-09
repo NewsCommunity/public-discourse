@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Icon from '@material-ui/core/Icon';
+import ChatInput from '../ChatBox/ChatInput';
 
 const styles = theme => ({
   button: {
@@ -16,49 +17,31 @@ const styles = theme => ({
 
 function BottomNav(props) {
   const {
-    classes, onShowToggle, isOpen, isLoggedIn, logInUser,
+    classes, onShowToggle, isOpen, isLoggedIn, logInUser, postMessage,
   } = props;
+
+  let multiRender = false;
+  if (isOpen && isLoggedIn) {
+    multiRender = true;
+  }
+
   return (
     <div className="Bottom-Nav">
-      {(isLoggedIn && !isOpen) ? (
-        <span />
-      ) : (
-        <React.Fragment>
-          <Button
-            variant="contained"
-            color="secondary"
-            aria-label="Edit"
-			className={classes.button}
-			onClick={logInUser}
-          >
-            Log in to Chat
-          </Button>
-        </React.Fragment>
-      )}
-
-      {isOpen ? (
-        <React.Fragment>
-          <Button
-            variant="fab"
-            color="secondary"
-            aria-label="Edit"
-            className={classes.button}
-          >
-            <Icon>edit_icon</Icon>
-          </Button>
-        </React.Fragment>
-      ) : (
-        <div />
-      )}
-      <Button
-        variant="fab"
-        color="primary"
-        aria-label="Add"
-        className={classes.button}
-        onClick={onShowToggle}
-      >
-        <AddIcon />
-      </Button>
+    
+      <div className="chat-input-left">
+        {multiRender ? <ChatInput postMessage={postMessage} /> : <div/>}
+      </div>
+      <div className="chat-input-right">
+        <Button
+          variant="fab"
+          color="primary"
+          aria-label="Add"
+          className={classes.button}
+          onClick={onShowToggle}
+        >
+          <AddIcon />
+        </Button>
+      </div>
     </div>
   );
 }
@@ -68,3 +51,19 @@ BottomNav.propTypes = {
 };
 
 export default withStyles(styles)(BottomNav);
+
+// {(isLoggedIn && !isOpen) ? (
+//   <span />
+// ) : (
+//   <React.Fragment>
+//     <Button
+//       variant="contained"
+//       color="secondary"
+//       aria-label="Edit"
+// className={classes.button}
+// onClick={logInUser}
+//     >
+//       Log in to Chat
+//     </Button>
+//   </React.Fragment>
+// )}
