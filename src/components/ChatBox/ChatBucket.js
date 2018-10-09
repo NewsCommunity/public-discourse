@@ -6,8 +6,6 @@ import BottomNav from '../BottomNavigation/BottomNav';
 import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer';
 import BlockChainBar from '../ethereum/BlockChainBar';
 
-const firebase = require('firebase');
-
 class ChatBucket extends Component {
   constructor(props) {
     super(props);

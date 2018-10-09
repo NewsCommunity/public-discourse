@@ -11,14 +11,17 @@ class ChatInput extends Component {
 
   handleSubmit(event) {
     const { message } = this.state;
+    const { postMessage } = this.props;
     event.preventDefault();
-    this.props.postMessage(message);
+    postMessage(message);
     this.setState({ message: '' });
   }
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+
+  // We should prevent users from making blank comments, and rate limit them and no duplicates.
 
   render() {
     const { message } = this.state;
@@ -29,7 +32,8 @@ class ChatInput extends Component {
           onSubmit={this.handleSubmit}
         >
           <span className="input">
-            <textarea autoFocus
+            <textarea
+              autoFocus
               className="chat-box-input"
               type="text-area"
               multiline="true"
@@ -59,5 +63,3 @@ class ChatInput extends Component {
 }
 
 export default ChatInput;
-
-// we should prevent users from placing blank messages.
