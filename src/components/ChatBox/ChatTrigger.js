@@ -23,7 +23,12 @@ function ChatTrigger(props) {
   return (
     <div>
       <Tooltip title="FAB 'position: absolute;'">
-        <Button variant="fab" color="secondary" className={classes.absolute} onClick={onShowToggle}>
+        <Button
+          variant="fab"
+          color="secondary"
+          className={classes.absolute}
+          onClick={onShowToggle}
+        >
           <AddIcon />
         </Button>
       </Tooltip>

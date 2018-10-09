@@ -40,7 +40,6 @@ body {
   /* overflow: hidden; */
   padding-top: 100%;
 	
-  border-bottom: 1px solid black;
 }
 
 
@@ -252,4 +251,17 @@ i.icon-fire {
     /* flex-grow: 1; */
     /* z-index: 2; */
     display: flex;
+}
+
+.chat-input-container {
+display: flex;
+flex-direction: row;
+}
+
+.chat-input-left {
+
+}
+
+.chat-input-right {
+
 }

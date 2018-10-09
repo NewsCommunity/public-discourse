@@ -1,8 +1,7 @@
 import types from './types'
 import { firestore } from '../../fire'
 
-
-//ACTION CREATORS==============================================================
+// ACTION CREATORS==============================================================
 export function setChatMessages (messages) {
   return {
     type: types.SET_CHAT_MESSAGES,
@@ -12,7 +11,7 @@ export function setChatMessages (messages) {
 
 const demoData = { text: '', id: '-LNMaYZP70GirAaotNzF' }
 
-//THUNKS=======================================================================
+// THUNKS=======================================================================
 export function thunkGetChatMessages (discourseId) {
   return async dispatch => {
     const demoMess = [demoData]
@@ -22,9 +21,8 @@ export function thunkGetChatMessages (discourseId) {
 
 export function thunkSubscribeToDatabase (discourseId, limit = 100) {
   return async dispatch => {
-    firestore.collection('discourseList').doc(discourseId).collection('messages').onSnapshot(function (doc) {
+    firestore.collection('discourseList_2').doc(discourseId).collection('messages').onSnapshot(function (doc) {
       doc.forEach(doc => {
-
         dispatch(setChatMessages(doc.data()))
       })
     })
