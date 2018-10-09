@@ -31,6 +31,7 @@ class ChatInput extends Component {
           className="Form-Flex"
           onSubmit={this.handleSubmit}
         >
+          
           <span className="input">
             <textarea
               autoFocus
@@ -47,7 +48,6 @@ class ChatInput extends Component {
             />
             <span />
           </span>
-
           <button className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored chat-button">
             <i
               className="material-icons"

@@ -253,3 +253,16 @@ i.icon-fire {
     /* z-index: 2; */
     display: flex;
 }
+
+.chat-input-container {
+display: flex;
+flex-direction: row;
+}
+
+.chat-input-left {
+
+}
+
+.chat-input-right {
+
+}

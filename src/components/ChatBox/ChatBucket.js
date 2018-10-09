@@ -125,6 +125,8 @@ class ChatBucket extends Component {
         ) : (
           <div />
         )}
+
+        
         <BottomNav
           onShowToggle={this.onShowToggle}
           isOpen={chatOpen}
