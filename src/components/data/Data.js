@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { thunkGetDiscourseList } from '../../state/discourse/actions'
 import PieChart from './PieChart'
+
 class Data extends Component {
   constructor (props) {
     super(props)
   }
+
   async componentDidMount () {
     await this.props.getDiscourseList()
   }

@@ -7,11 +7,8 @@ export default class PieChart extends Component {
   }
 
   render () {
-    console.log('THE PASSED IN PROPS, ', this.props)
     let sources = Object.keys(this.props.sourcesData)
     let values = Object.values(this.props.sourcesData)
-    console.log('sources, ', Object.keys(this.props.sourcesData))
-    console.log('counts', Object.values(this.props.sourcesData))
 
     const data = {
       labels: sources,
