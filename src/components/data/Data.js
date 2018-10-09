@@ -17,7 +17,6 @@ class Data extends Component {
   render () {
     let discourseList = this.props.discourseList
     let sources = {}
-    console.log('The props in ', this.props.discourseList)
     discourseList.forEach(discourse => {
       sources[discourse.article.source.name] = sources[discourse.article.source.name] + 1 || 1
     })
