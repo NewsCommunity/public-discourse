@@ -295,6 +295,13 @@ padding-bottom: 4px;
   padding: 10px;
   border-style: solid;
 }
+
+.chatGif {
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 18px;
+}
 ._1KkHIRuOEYyPrmBuaClRnV{
   border-radius: 18px;
   padding: 5px;
