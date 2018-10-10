@@ -25,7 +25,7 @@ class Data extends Component {
     if (this.props.discourseList) {
       return (
         <div className='data-container' style={{ overflowX: 'auto', fontSize: '14px' }}>
-          <h1>Our Sources</h1>
+          <h3>Our Sources:</h3>
           <PieChart sourcesData={sources} />
           <ChatBucket discourseId={'dataChat'} />
         </div>

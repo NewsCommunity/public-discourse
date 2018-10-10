@@ -13,10 +13,11 @@ import DelayToolTips from './DelayToolTips'
 
 const styles = {
   card: {
-    maxWidth: '100%',
+    maxWidth: '55%',
     margin: '5px',
     marginBottom: '5px',
-    borderRadius: '12px'
+    borderRadius: '12px',
+    justifyContent: 'center'
   },
   media: {
         // ⚠️ object-fit is not supported by IE11.
