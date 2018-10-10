@@ -26,7 +26,7 @@ class SingleDiscourse extends Component {
     const { discourse, match } = this.props;
     const discourseId = match.params.docId;
 
-    if (discourse.article) {
+    if (discourse && discourse.article) {
       const { html, title } = discourse.article;
 
       return (
