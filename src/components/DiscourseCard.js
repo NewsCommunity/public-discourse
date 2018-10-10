@@ -50,11 +50,12 @@ function ImgMediaCard (props) {
         <Button
           size='small'
           color='primary'
-          onClick={() => {
-            console.log('I HAVE BEEN CLICKED!')
-          }}
+          onClick={() =>
+                        navigator.clipboard.writeText(
+                            `https://collaboration-2c632.firebaseapp.com/discourse/${discourseId}`
+                        )}
                 >
-                    Share
+                    Copy Link
 
                     {/* eventually add some share functionality here? */}
         </Button>

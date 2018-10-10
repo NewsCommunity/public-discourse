@@ -5,6 +5,7 @@ import PieChart from './PieChart'
 import BarChart from './BarChart'
 import ChatBucket from '../ChatBox/ChatBucket'
 import Loading from '../Loading'
+
 class Data extends Component {
   constructor (props) {
     super(props)
