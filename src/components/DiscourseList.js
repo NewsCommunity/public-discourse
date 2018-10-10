@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import DiscourseCard from './DiscourseCard'
 import Loading from './Loading'
+
+
 export default class DiscourseList extends Component {
   componentDidMount = async () => {
     await this.props.getDiscourseList()
