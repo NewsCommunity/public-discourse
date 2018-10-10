@@ -11,7 +11,13 @@ const FETCH_ETH_CONNECTION = 'FETCH_ETH_CONNECTION';
 const SET_TIP_DESTINATION = 'SET_TIP_DESTINATION';
 const SET_CHAT_STATUS = 'SET_CHAT_STATUS';
 const SET_TIP_STATUS = 'SET_TIP_STATUS';
+const SET_GIF_KEYBOARD = 'SET_GIF_KEYBOARD'
 // ACTIONS====================================================================
+export const actionSetGif = bool => ({
+  type: SET_GIF_KEYBOARD,
+  GIFStatus: bool,
+})
+
 export const actionSetUser = (userObj, isLoggedIn) => ({
   type: SET_USER,
   user: userObj,
@@ -155,6 +161,7 @@ const initialState = {
   currentEthBalance: '',
   ethProvider: undefined,
   tipDestination: {},
+  GIFStatus: false,
 };
 
 export function userReducer(state = initialState, action) {
@@ -210,6 +217,11 @@ export function userReducer(state = initialState, action) {
         ...state,
         user: action.user,
       };
+      case SET_GIF_KEYBOARD:
+      return {
+        ...state,
+        GIFStatus: action.GIFStatus,
+      }
     default:
       return state;
   }

@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import SingleDiscourse from './components/SingleDiscourse'
-import { Router, withRouter, Route, Switch } from 'react-router-dom'
+import { withRouter, Route, Switch } from 'react-router-dom'
 import DiscourseListContainer from './containers/DiscourseListContainer'
 import { NavBar } from './components/NavBar'
 import Data from './components/Data/Data'
 import Player from './components/AudioStream/Player'
 import { About } from './components/About'
-import BottomNav from './components/BottomNavigation/BottomNav'
+
 import Me from './components/Me/Me'
 import {actionSetUser} from './state/user/reducer'
 import { store } from './state/store';
