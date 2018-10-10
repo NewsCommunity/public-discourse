@@ -4,9 +4,10 @@ import { ChatBox, ChatInput } from './index'
 import { firestore } from '../../fire'
 import Login from '../authentication/login'
 import BottomNav from '../BottomNavigation/BottomNav'
-import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer'
+import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination, actionSetGif } from '../../state/user/reducer'
 import BlockChainBar from '../Ethereum/BlockChainBar'
 import ChatTrigger from './ChatTrigger'
+import {Selector, ResultSort, Rating} from "react-giphy-selector";
 
 const firebase = require('firebase')
 
@@ -99,12 +100,14 @@ class ChatBucket extends Component {
 
   render () {
     const { messages, chatOpen } = this.state
-    const { logInUser, isLoggedIn, user, setTipDestination, tipDestination, isTipActive } = this.props
+    const { logInUser, isLoggedIn, user, setTipDestination, tipDestination, isTipActive, GIFStatus, toggleGif } = this.props
 
-    console.log('The props of chatBucket are:', this.props)
 
     return (
       <div className={chatOpen ? 'Chatbucket-Container White-Background' : 'Chatbucket-Container'}>
+        {GIFStatus ? <Selector
+	apiKey={'KP3uURmACOmXvXYKnYDjglkk5LAOu9DQ'}
+	onGifSelected={console.log(this.saveGif)} /> : <div/>}
         {chatOpen
                     ? <React.Fragment>
                       <div>
@@ -119,6 +122,9 @@ class ChatBucket extends Component {
           isLoggedIn={isLoggedIn}
           logInUser={logInUser}
           postMessage={this.postMessage}
+          GIFStatus={GIFStatus}
+          toggleGif={toggleGif}
+          GIFStatus={GIFStatus}
                 />
       </div>
     )
@@ -131,7 +137,8 @@ function mapState (state) {
     user: state.userReducer.user,
     isLoggedIn: state.userReducer.isLoggedIn,
     tpDestination: state.userReducer.tipDestination,
-    isTipActive: state.userReducer.isTipActive
+    isTipActive: state.userReducer.isTipActive,
+    GIFStatus: state.userReducer.GIFStatus,
   }
 }
 
@@ -146,8 +153,8 @@ function mapDispatch (dispatch) {
     setTipDestination: destination => {
       dispatch(actionSetTipDestination(destination))
     },
-    postMessage: message => {
-      dispatch()
+    toggleGif: bool => {
+      dispatch(actionSetGif(bool))
     }
   }
 }
