@@ -7,6 +7,7 @@ function SingleMsg(props) {
   } = props;
   
 
+
   function isEmpty(obj) {
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) return false;
@@ -17,6 +18,7 @@ function SingleMsg(props) {
   if(!isEmpty(gif)){
     console.log('Single Message, setTipDestination', gif.images.fixed_height_small.gif_url);
   }
+
 
   return (
     <div

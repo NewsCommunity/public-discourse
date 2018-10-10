@@ -9,7 +9,7 @@ class Me extends Component {
   }
 
   render () {
-    console.log('WHAT PROPS WE GOT, YO?', this.props)
+    
     let { displayName } = this.props.user
     if (!this.props.isLoggedIn) {
       return (
