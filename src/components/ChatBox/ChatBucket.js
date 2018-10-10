@@ -69,6 +69,8 @@ class ChatBucket extends Component {
       .doc(discourseId)
       .collection("messages")
       .add(messageObj);
+
+    this.props.toggleGif(false);
   };
 
   render() {
