@@ -1,12 +1,12 @@
-import React from 'react';
-import SingleMsg from './SingleMsg';
+import React from "react";
+import SingleMsg from "./SingleMsg";
 
 function ChatBox(props) {
   const { msgArray, setTipDestination } = props;
 
   return (
     <div className="chat-box">
-      {msgArray.reverse().map(msg => (
+      {msgArray.map((msg) => (
         <SingleMsg
           key={msg.timestamp.nanoseconds + msg.timestamp.seconds}
           text={msg.body}
