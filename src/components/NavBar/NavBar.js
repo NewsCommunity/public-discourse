@@ -37,7 +37,7 @@ function NavBar (props) {
           <div style={display}>
 
             <div style={display}>
-              <Link to={`/`}>publicDiscourse</Link>{' '}
+              <Link className="TitleFont" to={`/`}>publicDiscourse</Link>{' '}
               <NavMenu />
             </div>
 
