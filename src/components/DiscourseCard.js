@@ -13,7 +13,7 @@ import DelayToolTips from './DelayToolTips'
 
 const styles = {
   card: {
-    maxWidth: '55%',
+    maxWidth: '90%',
     margin: '5px',
     marginBottom: '5px',
     borderRadius: '12px',
