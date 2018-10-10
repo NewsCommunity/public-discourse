@@ -105,9 +105,9 @@ class ChatBucket extends Component {
 
     return (
       <div className={chatOpen ? 'Chatbucket-Container White-Background' : 'Chatbucket-Container'}>
-        {GIFStatus ? <Selector
+        {GIFStatus ? <div className="gifBar"><Selector 
 	apiKey={'KP3uURmACOmXvXYKnYDjglkk5LAOu9DQ'}
-	onGifSelected={console.log(this.saveGif)} /> : <div/>}
+	onGifSelected={console.log(this.saveGif)} /></div> : <div/>}
         {chatOpen
                     ? <React.Fragment>
                       <div>

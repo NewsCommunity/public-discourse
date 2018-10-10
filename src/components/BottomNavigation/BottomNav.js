@@ -39,7 +39,8 @@ function BottomNav(props) {
           className={classes.button}
           onClick={onShowToggle}
         >
-          <AddIcon />
+          {/* <AddIcon /> */}
+          <Icon>chat</Icon>
         </Button>
       </div>
     </div>
