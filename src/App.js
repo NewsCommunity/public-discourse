@@ -18,11 +18,11 @@ class App extends Component {
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('MY USER IS3: ', user);
+        
         
         store.dispatch(actionSetUser(user, true));
       } else {
-        console.log('No user logged in');
+        
   
   
       }
