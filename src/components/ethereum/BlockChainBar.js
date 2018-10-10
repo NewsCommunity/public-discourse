@@ -6,8 +6,8 @@ import {
 } from '../../state/user/reducer';
 import { connect } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
-import TipRecipient from '../ethereum/TipRecipient';
-import AccountMenu from '../ethereum/AccountMenu';
+import TipRecipient from '../Ethereum/TipRecipient';
+import AccountMenu from '../Ethereum/AccountMenu';
 import Web3 from 'web3';
 import Eth from 'ethjs';
 import { etherscan } from '../../secrets';

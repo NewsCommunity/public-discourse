@@ -5,7 +5,7 @@ import { firestore } from '../../fire'
 import Login from '../authentication/login'
 import BottomNav from '../BottomNavigation/BottomNav'
 import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer'
-import BlockChainBar from '../ethereum/BlockChainBar'
+import BlockChainBar from '../Ethereum/BlockChainBar'
 import ChatTrigger from './ChatTrigger'
 
 const firebase = require('firebase')
