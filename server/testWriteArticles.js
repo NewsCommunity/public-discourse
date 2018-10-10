@@ -25,36 +25,18 @@ var Articles
 async function getArticles () {
   try {
     const res = await newsapi.v2.topHeadlines({
-<<<<<<< HEAD
-      sources: 'bbc-news,the-verge'
+      sources: 'bbc-news,the-new-york-times,the-washington-post'
     })
     const articles = res.articles
 
     articles.forEach(async article => {
-      read(article.url, function (err, articleSimple, meta) {
-        if (articleSimple.content) {
+      read(article.url, (err, articleSimple, meta) => {
+        if (!err && articleSimple.content) {
           article.html = articleSimple.content
-          console.log('article: ', article)
+                    // console.log("article: ", article);
           firestore.collection('discourseList').doc().set({
             article
           })
-=======
-      sources: "bbc-news,the-new-york-times,the-washington-post"
-    });
-    const articles = res.articles;
-
-    articles.forEach(async (article) => {
-      read(article.url, (err, articleSimple, meta) => {
-        if (!err && articleSimple.content) {
-          article.html = articleSimple.content;
-          // console.log("article: ", article);
-          firestore
-            .collection("discourseList")
-            .doc()
-            .set({
-              article
-            });
->>>>>>> eb29b0565fcc568c10964d5d05faa1259341d3da
         }
       })
     })

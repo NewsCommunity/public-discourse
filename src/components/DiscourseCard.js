@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import ToolTip from './ToolTip'
 
 const styles = {
   card: {
@@ -46,8 +47,15 @@ function ImgMediaCard (props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size='small' color='primary'>
+        <Button
+          size='small'
+          color='primary'
+          onClick={() => {
+            console.log('I HAVE BEEN CLICKED!')
+          }}
+                >
                     Share
+
                     {/* eventually add some share functionality here? */}
         </Button>
         <Button size='small' color='primary'>
