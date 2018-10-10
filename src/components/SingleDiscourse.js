@@ -7,59 +7,56 @@ import Parser from 'html-react-parser'
 import firebase from 'firebase'
 import {actionSetUser} from '../state/user/reducer'
 class SingleDiscourse extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
+    this.articleContainer = React.createRef();
   }
 
   componentDidMount = async () => {
-    await this.props.getSingleDiscourse(this.props.match.params.docId)
+    await this.props.getSingleDiscourse(this.props.match.params.docId);
+  };
 
-    // firebase.auth().onAuthStateChanged((user) => {
-    //   if (user) {
-    //     console.log('MY USER IS2: ', user);
-        
-    //     this.props.logInUser(user, true);
-    //   } else {
-    //     console.log('No user logged in');
-  
-  
-    //   }
-    // })
+  componentDidUpdate = () => {
+    window.scrollTo(0,0)
   }
+  
 
-  render () {
-    const { discourse, match } = this.props
-    const discourseId = match.params.docId
+
+  render() {
+    const { discourse, match } = this.props;
+    const discourseId = match.params.docId;
 
     if (discourse.article) {
-      const { url, title } = discourse.article
+      const { html, title } = discourse.article;
+
       return (
         <div>
-          <div className='discourse-container'>
-            <div className='single-room'>
-              <div className='iframe-container'>
-                <h3>{Parser(discourse.article.title)}</h3>{Parser(discourse.article.html)}
+          <div className="discourse-container">
+            <div className="single-room">
+              <div className="iframe-container" ref={this.articleContainer}>
+                <h3>{Parser(title)}</h3>
+                {Parser(html)}
               </div>
               <ChatBucket discourseId={discourseId} />
             </div>
           </div>
         </div>
-      )
+      );
     } else {
-      return <Loading />
+      return <Loading />;
     }
   }
 }
 
 // CONTAINER===============================
 
-function mapState (state) {
+function mapState(state) {
   return {
     discourse: state.discourseReducer.discourse
-  }
+  };
 }
 
-function mapDispatch (dispatch) {
+function mapDispatch(dispatch) {
   return {
     getSingleDiscourse: discourseId => {
       dispatch(thunkGetSingleDiscourse(discourseId))
@@ -67,7 +64,10 @@ function mapDispatch (dispatch) {
     logInUser: (user, bool) => {
       dispatch(actionSetUser(user, bool));
     }
-  }
+  };
 }
 
-export default (SingleDiscourse = connect(mapState, mapDispatch)(SingleDiscourse))
+export default (SingleDiscourse = connect(
+  mapState,
+  mapDispatch
+)(SingleDiscourse));
