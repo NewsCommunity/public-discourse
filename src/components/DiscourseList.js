@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import DiscourseCard from './DiscourseCard'
 import Loading from './Loading'
 
-
 export default class DiscourseList extends Component {
   componentDidMount = async () => {
     await this.props.getDiscourseList()
@@ -12,7 +11,8 @@ export default class DiscourseList extends Component {
     const { discourseList } = this.props
     let styles = {
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      alignItems: 'center'
     }
     return (
       <div className='discourse-list' style={styles}>

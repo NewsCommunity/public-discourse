@@ -23,12 +23,19 @@ class UserMenu extends React.Component {
     const { anchorEl } = this.state
     const { user, isLoggedIn, logOutUser, logInUser } = this.props
     if (!isLoggedIn) {
-      return (<Button size="small"  onClick={() => logInUser()}>
-      Login
-    </Button>)
+      return (
+        <Button size='small' onClick={() => logInUser()}>
+                    Login
+                </Button>
+      )
     }
+
+    const toTheRight = {
+      justifySelf: 'flex-end'
+    }
+
     return (
-      <div>
+      <div style={toTheRight}>
         <Button aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup='true' onClick={this.handleClick}>
           <img className='img-round' src={`${user.photoURL}`} alt='' />
         </Button>

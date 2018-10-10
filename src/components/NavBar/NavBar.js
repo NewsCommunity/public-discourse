@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import UserMenu from './UserMenu'
 import NavMenu from './NavMenu'
 
@@ -17,8 +16,15 @@ const styles = {
 const display = {
   display: 'flex',
   borderRadius: '12px',
-  alignItems: 'baseline'
+  alignItems: 'baseline',
+  justifyContent: 'space-between',
+  width: '100%'
 }
+
+const stuffOnTheLeft = {
+  display: 'flex'
+}
+const stuffOnTheRight = {}
 
 function NavBar (props) {
   const { classes } = props
@@ -27,14 +33,19 @@ function NavBar (props) {
     <div className={classes.root}>
       <AppBar position='static' color='default'>
         <Toolbar>
-          <Typography variant='h6' color='inherit'>
+
+          <div style={display}>
+
             <div style={display}>
               <Link to={`/`}>publicDiscourse</Link>{' '}
               <NavMenu />
-              <UserMenu />
             </div>
 
-          </Typography>
+            <div style={stuffOnTheRight}>
+              <UserMenu />
+            </div>
+          </div>
+
         </Toolbar>
       </AppBar>
     </div>

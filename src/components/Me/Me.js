@@ -22,6 +22,7 @@ class Me extends Component {
       <div>
         <p>Welcome, {displayName}</p>
         <p>Here you can set your public address</p>
+        <p>this feature is currently a work in progress</p>
         <PublicKeyForm />
       </div>
     )

@@ -5,6 +5,7 @@ import PieChart from './PieChart'
 import BarChart from './BarChart'
 import ChatBucket from '../ChatBox/ChatBucket'
 import Loading from '../Loading'
+
 class Data extends Component {
   constructor (props) {
     super(props)
@@ -24,7 +25,7 @@ class Data extends Component {
     if (this.props.discourseList) {
       return (
         <div className='data-container' style={{ overflowX: 'auto', fontSize: '14px' }}>
-          <h1>Our Sources</h1>
+          <h3>Our Sources:</h3>
           <PieChart sourcesData={sources} />
           <ChatBucket discourseId={'dataChat'} />
         </div>
