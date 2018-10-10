@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
-import AddIcon from '@material-ui/icons/Add'
 import Icon from '@material-ui/core/Icon'
+import {Selector, ResultSort, Rating} from "react-giphy-selector";
 
 const styles = theme => ({
   button: {
@@ -47,12 +47,16 @@ class ChatInput extends Component {
 
   render () {
     const { message, error } = this.state
-    const { classes } = this.props
+    const { classes, toggleGif, GIFStatus } = this.props
         // 'Form-Flex'
     return (
       <React.Fragment>
+        
         <form className={error ? 'Form-Flex tip-over' : 'Form-Flex'} onSubmit={this.handleSubmit}>
-          <textarea
+        <Button variant='fab' color='secondary' aria-label='Edit' className={classes.button} onClick={()=>(toggleGif(!GIFStatus))}>
+            <Icon>gif</Icon>
+          </Button>
+  <textarea
             autoFocus
             className='chat-box-input'
             type='text-area'

@@ -14,6 +14,7 @@ function ChatBox(props) {
           photo={msg.photoURL}
           uid={msg.uid}
           setTipDestination={setTipDestination}
+          gif={msg.gif}
         />
       ))}
     </div>
