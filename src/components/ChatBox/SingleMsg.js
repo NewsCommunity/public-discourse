@@ -5,7 +5,7 @@ function SingleMsg(props) {
   const {
     text, user, uid, photo, setTipDestination,
   } = props;
-  console.log('Single Message, setTipDestination', props);
+  
 
   return (
     <div

@@ -49,7 +49,7 @@ export const actionSetEthProviderOnState = ethProvider => ({
 });
 
 export const actionSetTipDestination = (tipDestination) => {
-  console.log('Set Tip Destination in the User Reducer is fired!');
+  
   return {
     type: SET_TIP_DESTINATION,
     tipDestination,
@@ -71,7 +71,7 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const thunkLogInUser = (provider = googleProvider) => async (dispatch) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      console.log('MY USER IS: ', user);
+      
       const {
         displayName, email, photoURL, uid,
       } = user;
@@ -87,10 +87,10 @@ export const thunkLogInUser = (provider = googleProvider) => async (dispatch) =>
         ),
       );
     } else {
-      console.log('No user logged in');
+      
       dispatch(actionClearUser());
       const test = firebase.auth().signInWithRedirect(provider);
-      console.log("Test of loging:", test)
+      
 
     }
   });
@@ -109,13 +109,13 @@ export const thunkLogOutUser = () => async (dispatch) => {
 
 export const thunkSetEthProdiver = () => async (dispatch) => {
   dispatch(actionFetchEth(true));
-  console.log('Window welement', window);
+  
   if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
     // We are in the browser and metamask is running.
     const eth = new Eth(window.web3.currentProvider);
-    console.log('THE ETH IS:', eth);
+    
     const accounts = await eth.accounts();
-    console.log('The accounts:', accounts);
+    
 
     dispatch(actionSetEthAccounts(accounts));
     dispatch(actionSetCurrentAccount(accounts[0]));
