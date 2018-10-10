@@ -314,3 +314,21 @@ padding-bottom: 4px;
   font-family: 'Roboto Slab', serif;
   font-size: 1.6em;
 }
+
+.MuiTypography-root-112 {
+  margin: 0;
+  display: block;
+  font-family: 'Roboto Slab', serif;
+}
+
+.MuiTypography-body1-121 {
+  color: rgba(0, 0, 0, 0.56);
+  font-size: 0.875rem;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.2em;
+}
+
+a{
+  text-decoration: none;
+}
