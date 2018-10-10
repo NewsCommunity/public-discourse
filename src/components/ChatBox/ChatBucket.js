@@ -45,8 +45,8 @@ class ChatBucket extends Component {
         snapshot.docChanges().forEach((change) => {
           messagesFromFirebase.push(change.doc.data());
         });
-        messagesFromFirebase.reverse();
-        const newMessages = [...messages, ...messagesFromFirebase];
+        // messagesFromFirebase.reverse();
+        const newMessages = [...messagesFromFirebase, ...messages];
         this.setState({ messages: newMessages });
       });
   }
