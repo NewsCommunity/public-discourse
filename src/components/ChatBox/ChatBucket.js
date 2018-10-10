@@ -46,7 +46,7 @@ class ChatBucket extends Component {
           messagesFromFirebase.push(change.doc.data());
         });
         // messagesFromFirebase.reverse();
-        const newMessages = [...messages, ...messagesFromFirebase];
+        const newMessages = [...messagesFromFirebase, ...messages];
         this.setState({ messages: newMessages });
       });
   }
