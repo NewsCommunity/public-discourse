@@ -2,6 +2,7 @@ import firebase from 'firebase';
 import Eth from 'ethjs';
 // TYPES======================================================================
 const SET_USER = 'SET_USER';
+const CLEAR_USER = 'CLEAR_USER';
 const SET_ETH_PROVIDER = 'SET_ETH_PROVIDER';
 const SET_ACCOUNTS = 'SET_ACCOUNTS';
 const SET_CURRENT_BALANCE = 'SET_CURRENT_BALANCE';
@@ -11,10 +12,15 @@ const SET_TIP_DESTINATION = 'SET_TIP_DESTINATION';
 const SET_CHAT_STATUS = 'SET_CHAT_STATUS';
 const SET_TIP_STATUS = 'SET_TIP_STATUS';
 // ACTIONS====================================================================
-const actionSetUser = (userObj, isLoggedIn) => ({
+export const actionSetUser = (userObj, isLoggedIn) => ({
   type: SET_USER,
   user: userObj,
   isLoggedIn,
+});
+
+export const actionClearUser = () => ({
+  type: CLEAR_USER,
+  user: {},
 });
 
 export const actionFetchEth = fetch => ({
@@ -82,10 +88,14 @@ export const thunkLogInUser = (provider = googleProvider) => async (dispatch) =>
       );
     } else {
       console.log('No user logged in');
+      dispatch(actionClearUser());
+      const test = firebase.auth().signInWithRedirect(provider);
+      console.log("Test of loging:", test)
+
     }
   });
 
-  firebase.auth().signInWithPopup(provider);
+  
 };
 
 export const thunkLogOutUser = () => async (dispatch) => {
@@ -194,6 +204,11 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
         isTipActive: action.tipStatus,
+      };
+    case CLEAR_USER:
+      return {
+        ...state,
+        user: action.user,
       };
     default:
       return state;
