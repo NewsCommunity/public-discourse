@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import ToolTip from './ToolTip'
+import DelayToolTips from './DelayToolTips'
 
 const styles = {
   card: {
@@ -47,7 +47,7 @@ function ImgMediaCard (props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button
+        {/* <Button
           size='small'
           color='primary'
           onClick={() =>
@@ -57,8 +57,8 @@ function ImgMediaCard (props) {
                 >
                     Copy Link
 
-                    {/* eventually add some share functionality here? */}
-        </Button>
+                        </Button> */}
+        <DelayToolTips discourseId={discourseId} />
         <Button size='small' color='primary'>
           <Link to={`/discourse/${discourseId}`}>Chat about this!</Link>
         </Button>
