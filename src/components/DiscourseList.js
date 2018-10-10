@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import DiscourseCard from './DiscourseCard'
+import Loading from './Loading'
+
 
 export default class DiscourseList extends Component {
   componentDidMount = async () => {
@@ -29,8 +31,8 @@ export default class DiscourseList extends Component {
           } else {
             return (
               <div>
-                                Loading...
-                            </div>
+                <Loading />
+              </div>
             )
           }
         })}

@@ -1,9 +1,11 @@
-import React, { Component } from "react";
-import ChatBucket from "../containers/ChatBucket";
-import { thunkGetSingleDiscourse } from "../state/discourse/actions";
-import { connect } from "react-redux";
-import Loading from "./Loading";
-import Parser from "html-react-parser";
+import React, { Component } from 'react'
+import ChatBucket from '../containers/ChatBucket'
+import { thunkGetSingleDiscourse } from '../state/discourse/actions'
+import { connect } from 'react-redux'
+import Loading from './Loading'
+import Parser from 'html-react-parser'
+import firebase from 'firebase'
+import {actionSetUser} from '../state/user/reducer'
 class SingleDiscourse extends Component {
   constructor(props) {
     super(props);
@@ -56,8 +58,11 @@ function mapState(state) {
 
 function mapDispatch(dispatch) {
   return {
-    getSingleDiscourse: (discourseId) => {
-      dispatch(thunkGetSingleDiscourse(discourseId));
+    getSingleDiscourse: discourseId => {
+      dispatch(thunkGetSingleDiscourse(discourseId))
+    },
+    logInUser: (user, bool) => {
+      dispatch(actionSetUser(user, bool));
     }
   };
 }
