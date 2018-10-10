@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { thunkGetDiscourseList } from '../../state/discourse/actions'
 import PieChart from './PieChart'
+import BarChart from './BarChart'
 import ChatBucket from '../ChatBox/ChatBucket'
 import Loading from '../Loading'
 class Data extends Component {
@@ -17,7 +18,7 @@ class Data extends Component {
     let discourseList = this.props.discourseList
     let sources = {}
     discourseList.forEach(discourse => {
-      sources[discourse.article.thread.site] = sources[discourse.article.thread.site] + 1 || 0
+      sources[discourse.article.source.name] = sources[discourse.article.source.name] + 1 || 1
     })
 
     if (this.props.discourseList) {
