@@ -1,4 +1,4 @@
-import { SET_SINGLE_DISCOURSE, SET_DISCOURSE_LIST, GET_DISCOURSE_LIST, GET_SINGLE_DISCOURSE } from './types'
+import { SET_SINGLE_DISCOURSE, SET_DISCOURSE_LIST} from './types'
 import { firestore } from '../../fire'
 
 export function setSingleDiscourse (discourse) {
@@ -22,7 +22,7 @@ export function thunkGetDiscourseList () {
   return async dispatch => {
     let discourseList = []
     let discourseListRef = firestore.collection('discourseList')
-    let query = discourseListRef.limit(10)
+    let query = discourseListRef.limit(100)
     await query
             .get()
             .then(snapshot => {
@@ -30,7 +30,9 @@ export function thunkGetDiscourseList () {
                 const id = doc._key.path.segments[doc._key.path.segments.length - 1]
                 let docData = doc.data()
                 docData = { ...docData, docId: id }
-                discourseList.push(docData)
+                if (docData.article) {
+                  discourseList.push(docData)
+                }
               })
             })
             .catch(err => {
