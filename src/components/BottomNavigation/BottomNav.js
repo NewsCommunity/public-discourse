@@ -51,19 +51,3 @@ BottomNav.propTypes = {
 };
 
 export default withStyles(styles)(BottomNav);
-
-// {(isLoggedIn && !isOpen) ? (
-//   <span />
-// ) : (
-//   <React.Fragment>
-//     <Button
-//       variant="contained"
-//       color="secondary"
-//       aria-label="Edit"
-// className={classes.button}
-// onClick={logInUser}
-//     >
-//       Log in to Chat
-//     </Button>
-//   </React.Fragment>
-// )}

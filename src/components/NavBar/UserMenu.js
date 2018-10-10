@@ -23,7 +23,9 @@ class UserMenu extends React.Component {
     const { anchorEl } = this.state
     const { user, isLoggedIn, logOutUser, logInUser } = this.props
     if (!isLoggedIn) {
-      return <div onClick={() => logInUser()}>Login</div>
+      return (<Button size="small"  onClick={() => logInUser()}>
+      Login
+    </Button>)
     }
     return (
       <div>
