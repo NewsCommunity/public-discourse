@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import Eth from 'ethjs';
 import Web3 from 'web3';
 // TYPES======================================================================
 const SET_USER = 'SET_USER';
@@ -91,7 +90,7 @@ export const thunkLogInUser = (provider = googleProvider) => async (dispatch) =>
       );
     } else {
       dispatch(actionClearUser());
-      const test = firebase.auth().signInWithRedirect(provider);
+      firebase.auth().signInWithRedirect(provider);
     }
   });
 };
@@ -138,16 +137,14 @@ export const thunkGetEthBalance = (account, eth) => async (dispatch) => {
   }
 };
 
-export const actionMakeTransaction = (source, destination, amount) => {
-  if (typeof amount !== string) {
-    console.log('Amount not a string');
-  }
+export const thunkMakeTransaction = (source, destination, amount, eth) => {
+
 
   eth.eth.sendTransaction(
     {
-      from: '0x627306090abaB3A6e1400e9345bC60c78a8BEf57',
-      to: '0x086912faa7f6598d28d80c448c8d1e9dae5a4dee',
-      value: web3.toWei(1, 'ether'),
+      from: source,
+      to: destination,
+      value: eth.utils.toWei(amount, 'ether'),
     },
     (err, transactionHash) => {
       if (err) {

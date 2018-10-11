@@ -6,7 +6,6 @@ import {
   thunkMakeTransaction
 } from '../../state/user/reducer';
 import { connect } from 'react-redux';
-import Modal from '@material-ui/core/Modal';
 import TipRecipient from '../Ethereum/TipRecipient';
 import AccountMenu from '../Ethereum/AccountMenu';
 import Web3 from 'web3';
@@ -47,7 +46,7 @@ class BlockChainBucket extends Component {
     });
   };
 
-  //NEEDS TO BE DISPATCH
+
   clearTip = () => {
     
     this.props.clearTipDestination();
@@ -126,8 +125,6 @@ class BlockChainBucket extends Component {
   async componentDidMount() {
     this.props.setEthProvider();
 
-    
-    
     axios
       .get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${etherscan}`)
       .then(res => {
@@ -206,6 +203,7 @@ class BlockChainBucket extends Component {
                 photo={tipDestination.photo}
                 ethAddress={tipDestination.uid}
                 makeTransaction={makeTransaction}
+                ethProvider={ethProvider}
               />
             </div>
           ) : (
@@ -252,9 +250,10 @@ function mapDispatch(dispatch) {
     setTipDestination: destination => {
       dispatch(actionSetTipDestination(destination));
     },
-    makeTransaction: (source, destination, amount) => {
-      dispatch(thunkMakeTransaction(source, destination, amount));
-  };
+    makeTransaction: (source, destination, amount, eth_provider) => {
+      dispatch(thunkMakeTransaction(source, destination, amount, eth_provider));
+    },
+  }
 }
 
 BlockChainBucket = connect(
