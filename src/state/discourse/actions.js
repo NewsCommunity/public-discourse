@@ -21,14 +21,14 @@ export function setDiscourseList(discourseList) {
 export function thunkGetDiscourseList() {
   return async (dispatch) => {
     const discourseList = [];
-    const discourseListRef = firestore.collection('discourseList').orderBy('retrivalDate');
+    const discourseListRef = firestore.collection('discourseList');
     const query = discourseListRef.limit(100);
     await query
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           const id = doc._key.path.segments[doc._key.path.segments.length - 1];
-          console.log("Looping through retrived articles");
+          console.log('Looping through retrived articles');
           let docData = doc.data();
           docData = { ...docData, docId: id };
           if (docData.article) {

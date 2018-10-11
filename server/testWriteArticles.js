@@ -50,11 +50,10 @@ async function getArticles() {
             .update(url)
             .digest('hex');
 
-          console.log('HASH: ', hash);
-          article.hash = hash;
+          
           firestore
             .collection('discourseList')
-            .doc()
+            .doc(hash)
             .set({
               article,
             });
