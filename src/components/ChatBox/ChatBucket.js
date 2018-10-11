@@ -42,17 +42,19 @@ class ChatBucket extends Component {
       .onSnapshot((snapshot) => {
         const { messages } = this.state;
         let messagesFromFirebase = [];
+        
         snapshot.docChanges().forEach((change) => {
-          messagesFromFirebase.push(change.doc.data());
+          if (change.type === 'added'){
+            messagesFromFirebase.push(change.doc.data());
+          }
         });
-        // messagesFromFirebase.reverse();
         const newMessages = [...messagesFromFirebase, ...messages];
         this.setState({ messages: newMessages });
       });
   }
 
   postMessage = (message, gif = {}) => {
-    console.log('postMessage fired')
+    
     const { user, discourseId, toggleGif } = this.props;
     const { displayName, uid, photoURL } = user;
     const date = new Date();

@@ -28,7 +28,7 @@ export function thunkGetDiscourseList() {
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           const id = doc._key.path.segments[doc._key.path.segments.length - 1];
-          console.log('Looping through retrived articles');
+          
           let docData = doc.data();
           docData = { ...docData, docId: id };
           if (docData.article) {
