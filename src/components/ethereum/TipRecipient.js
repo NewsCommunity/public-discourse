@@ -9,7 +9,7 @@ class TipRecipient extends Component {
 
   // Need to implement actual sending of tip.
   render() {
-    const { displayName, photo } = this.props;
+    const { displayName, photo, makeTransaction } = this.props;
     return (
       <div>
         <span className="mdl-chip mdl-chip--contact mdl-chip--deletable">
@@ -27,7 +27,7 @@ class TipRecipient extends Component {
             className="mdl-chip__action"
             alt="Button where your tip goes"
           >
-            <i className="material-icons">done</i>
+            <i className="material-icons" onClick={makeTransaction}>done</i>
           </a>
         </span>
       </div>

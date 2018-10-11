@@ -3,6 +3,7 @@ import {
   thunkSetEthProdiver,
   thunkSetNewAccount,
   actionSetTipDestination,
+  thunkMakeTransaction
 } from '../../state/user/reducer';
 import { connect } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
@@ -140,7 +141,7 @@ class BlockChainBucket extends Component {
 
   render() {
     const { tipAmount, currentAccount, currentBalance, accounts, destination } = this.state;
-    const { logOutUser, logInUser, isLoggedIn, displayName, tipDestination, ethProvider } = this.props;
+    const { logOutUser, logInUser, isLoggedIn, displayName, tipDestination, ethProvider, makeTransaction } = this.props;
     //console.log("demoWeb3");
     return (
       <div className="BlockChain-Bar">
@@ -204,6 +205,7 @@ class BlockChainBucket extends Component {
                 displayName={tipDestination.user}
                 photo={tipDestination.photo}
                 ethAddress={tipDestination.uid}
+                makeTransaction={makeTransaction}
               />
             </div>
           ) : (
@@ -232,6 +234,7 @@ function mapState(state) {
     ethProvider: state.userReducer.ethProvider,
     tipDestination: state.userReducer.tipDestination,
     isTipActive: state.userReducer.isTipActive,
+   
   };
 }
 
@@ -249,6 +252,8 @@ function mapDispatch(dispatch) {
     setTipDestination: destination => {
       dispatch(actionSetTipDestination(destination));
     },
+    makeTransaction: (source, destination, amount) => {
+      dispatch(thunkMakeTransaction(source, destination, amount));
   };
 }
 
