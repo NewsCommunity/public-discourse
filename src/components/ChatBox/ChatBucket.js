@@ -55,7 +55,7 @@ class ChatBucket extends Component {
     const { user, discourseId } = this.props;
     const { displayName, uid, photoURL } = user;
     const date = new Date();
-    message = message.replace(/\r/gm,' ');
+    //message = message.replace(/\r/gm,' ');
     const messageObj = {
       body: message,
       userName: displayName,
