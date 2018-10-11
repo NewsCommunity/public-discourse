@@ -15,6 +15,10 @@ import axios from 'axios';
 
 const web3 = new Web3();
 
+const demoWeb3 = new Web3(web3.currentProvider);
+
+console.log("This is the demoWeb3", demoWeb3);
+
 class BlockChainBucket extends Component {
   constructor(props) {
     super(props);
@@ -136,9 +140,11 @@ class BlockChainBucket extends Component {
 
   render() {
     const { tipAmount, currentAccount, currentBalance, accounts, destination } = this.state;
-    const { logOutUser, logInUser, isLoggedIn, displayName, tipDestination } = this.props;
+    const { logOutUser, logInUser, isLoggedIn, displayName, tipDestination, ethProvider } = this.props;
+    //console.log("demoWeb3");
     return (
       <div className="BlockChain-Bar">
+      
         <div
           className={
             this.state.tipOver
@@ -150,47 +156,48 @@ class BlockChainBucket extends Component {
         </div>
 
         <div className="BlockChain-Center">
-          <div className="BlockChain-Center-inner">
-            <div>
-              <button className="mdl-button mdl-js-button mdl-button--icon">
-                <i className="material-icons" onClick={() => this.onDecrement()}>
-                  expand_more
-                </i>
-              </button>
-            </div>
-            <span
-              className="mdl-chip mdl-chip--deletable"
-              onClick={() => {
-                this.handleOpen;
-              }}
-            >
-              <span className="mdl-chip__text chip-bar">
-                {Eth.fromWei(this.state.tipAmount, 'ether')} ETH / {this.ethTipInUSD()} USD{' '}
+
+          {!ethProvider ? (<div>No Web</div>):(<div className="BlockChain-Center-inner">
+              <div>
+                <button className="mdl-button mdl-js-button mdl-button--icon">
+                  <i className="material-icons" onClick={() => this.onDecrement()}>
+                    expand_more
+                  </i>
+                </button>
+              </div>
+              <span
+                className="mdl-chip mdl-chip--deletable"
+                onClick={() => {
+                  this.handleOpen;
+                }}
+              >
+                <span className="mdl-chip__text chip-bar">
+                  {Eth.fromWei(this.state.tipAmount, 'ether')} ETH / {this.ethTipInUSD()} USD{' '}
+                </span>
+                <button type="button" className="mdl-chip__action">
+                  <i
+                    className="material-icons icon-fire"
+                    onClick={() => {
+                      this.clearTip();
+                    }}
+                  >
+                    cancel
+                  </i>
+                </button>
               </span>
-              <button type="button" className="mdl-chip__action">
-                <i
-                  className="material-icons icon-fire"
-                  onClick={() => {
-                    this.clearTip();
-                  }}
-                >
-                  cancel
-                </i>
-              </button>
-            </span>
-            <div>
-              <button className="mdl-button mdl-js-button mdl-button--icon">
-                <i
-                  className="material-icons"
-                  onClick={() => {
-                    this.onIncrement();
-                  }}
-                >
-                  expand_less
-                </i>
-              </button>
-            </div>
-          </div>
+              <div>
+                <button className="mdl-button mdl-js-button mdl-button--icon">
+                  <i
+                    className="material-icons"
+                    onClick={() => {
+                      this.onIncrement();
+                    }}
+                  >
+                    expand_less
+                  </i>
+                </button>
+              </div>
+          </div>)}
           {tipDestination.user ? (
             <div>
               <TipRecipient

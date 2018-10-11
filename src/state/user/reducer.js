@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import Eth from 'ethjs';
+import Web3 from 'web3';
 // TYPES======================================================================
 const SET_USER = 'SET_USER';
 const CLEAR_USER = 'CLEAR_USER';
@@ -11,12 +12,12 @@ const FETCH_ETH_CONNECTION = 'FETCH_ETH_CONNECTION';
 const SET_TIP_DESTINATION = 'SET_TIP_DESTINATION';
 const SET_CHAT_STATUS = 'SET_CHAT_STATUS';
 const SET_TIP_STATUS = 'SET_TIP_STATUS';
-const SET_GIF_KEYBOARD = 'SET_GIF_KEYBOARD'
+const SET_GIF_KEYBOARD = 'SET_GIF_KEYBOARD';
 // ACTIONS====================================================================
 export const actionSetGif = bool => ({
   type: SET_GIF_KEYBOARD,
   GIFStatus: bool,
-})
+});
 
 export const actionSetUser = (userObj, isLoggedIn) => ({
   type: SET_USER,
@@ -54,13 +55,10 @@ export const actionSetEthProviderOnState = ethProvider => ({
   ethProvider,
 });
 
-export const actionSetTipDestination = (tipDestination) => {
-  
-  return {
-    type: SET_TIP_DESTINATION,
-    tipDestination,
-  };
-};
+export const actionSetTipDestination = tipDestination => ({
+  type: SET_TIP_DESTINATION,
+  tipDestination,
+});
 
 export const actionSetChatStatus = chatStatus => ({
   type: SET_CHAT_STATUS,
@@ -77,7 +75,6 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const thunkLogInUser = (provider = googleProvider) => async (dispatch) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      
       const {
         displayName, email, photoURL, uid,
       } = user;
@@ -93,15 +90,10 @@ export const thunkLogInUser = (provider = googleProvider) => async (dispatch) =>
         ),
       );
     } else {
-      
       dispatch(actionClearUser());
       const test = firebase.auth().signInWithRedirect(provider);
-      
-
     }
   });
-
-  
 };
 
 export const thunkLogOutUser = () => async (dispatch) => {
@@ -115,13 +107,13 @@ export const thunkLogOutUser = () => async (dispatch) => {
 
 export const thunkSetEthProdiver = () => async (dispatch) => {
   dispatch(actionFetchEth(true));
-  
+
   if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
     // We are in the browser and metamask is running.
-    const eth = new Eth(window.web3.currentProvider);
-    
-    const accounts = await eth.accounts();
-    
+    const eth = new Web3(window.web3.currentProvider);
+    console.log("what is eth", eth); 
+    //const accounts = await eth.accounts();
+    const accounts = await eth.eth.getAccounts();
 
     dispatch(actionSetEthAccounts(accounts));
     dispatch(actionSetCurrentAccount(accounts[0]));
@@ -140,8 +132,10 @@ export const thunkSetEthProdiver = () => async (dispatch) => {
 };
 
 export const thunkGetEthBalance = (account, eth) => async (dispatch) => {
-  const balance = await eth.getBalance(account);
-  dispatch(actionSetCurrentBalance(balance));
+  if (eth) {
+    const balance = await eth.eth.getBalance(account);
+    dispatch(actionSetCurrentBalance(balance));
+  }
 };
 
 export const thunkSetNewAccount = (account, eth) => async (dispatch) => {
@@ -217,11 +211,11 @@ export function userReducer(state = initialState, action) {
         ...state,
         user: action.user,
       };
-      case SET_GIF_KEYBOARD:
+    case SET_GIF_KEYBOARD:
       return {
         ...state,
         GIFStatus: action.GIFStatus,
-      }
+      };
     default:
       return state;
   }
