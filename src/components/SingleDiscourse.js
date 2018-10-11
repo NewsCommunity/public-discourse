@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ChatBucket from '../containers/ChatBucket'
+import ChatBucket from './ChatBox/ChatBucket'
 import { thunkGetSingleDiscourse } from '../state/discourse/actions'
 import { connect } from 'react-redux'
 import Loading from './Loading'
