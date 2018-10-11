@@ -102,6 +102,7 @@ class ChatBucket extends Component {
         ) : (
           <div />
         )}
+        
         {chatOpen ? (
           <React.Fragment>
             <div>
@@ -137,7 +138,8 @@ function mapState(state) {
     isLoggedIn: state.userReducer.isLoggedIn,
     tpDestination: state.userReducer.tipDestination,
     isTipActive: state.userReducer.isTipActive,
-    GIFStatus: state.userReducer.GIFStatus
+    GIFStatus: state.userReducer.GIFStatus,
+    ethProvider: state.userReducer.ethProvider,
   };
 }
 
