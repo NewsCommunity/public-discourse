@@ -1,8 +1,10 @@
+import { connect } from 'react-redux'
+import { thunkGetDiscourseList } from '../state/discourse/actions'
 import React, { Component } from 'react'
 import DiscourseCard from './DiscourseCard'
 import Loading from './Loading'
 
-export default class DiscourseList extends Component {
+class DiscourseList extends Component {
   componentDidMount = async () => {
     await this.props.getDiscourseList()
   }
@@ -40,3 +42,19 @@ export default class DiscourseList extends Component {
     )
   }
 }
+
+//CONTAINER====================================================================
+function mapState (state) {
+  return {
+    discourseList: state.discourseReducer.discourseList
+  }
+}
+function mapDispatch (dispatch) {
+  return {
+    getDiscourseList: () => {
+      dispatch(thunkGetDiscourseList())
+    }
+  }
+}
+
+export default DiscourseList = connect(mapState, mapDispatch)(DiscourseList)
