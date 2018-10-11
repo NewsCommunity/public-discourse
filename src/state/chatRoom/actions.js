@@ -28,22 +28,3 @@ export function thunkSubscribeToDatabase (discourseId, limit = 100) {
     })
   }
 }
-
-// export function thunkPostToDatabase (message, discourseId, user = 'demoUser') {
-//   return async dispatch => {
-//     firestore
-//             .collection('discourseList')
-//             .doc(discourseId)
-//             .collection('messages')
-//             .add({
-//               body: message,
-//               userName: user,
-//             })
-//             .then(function (docRef) {
-
-//             })
-//             .catch(function (error) {
-//               console.error('Error adding document: ', error)
-//             })
-//   }
-// }
