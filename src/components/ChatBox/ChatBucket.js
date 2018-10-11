@@ -52,7 +52,8 @@ class ChatBucket extends Component {
   }
 
   postMessage = (message, gif = {}) => {
-    const { user, discourseId } = this.props;
+    console.log('postMessage fired')
+    const { user, discourseId, toggleGif } = this.props;
     const { displayName, uid, photoURL } = user;
     const date = new Date();
     //message = message.replace(/\r/gm,' ');
@@ -71,7 +72,7 @@ class ChatBucket extends Component {
       .collection("messages")
       .add(messageObj);
 
-    this.props.toggleGif(false);
+    toggleGif(false);
   };
 
   render() {
