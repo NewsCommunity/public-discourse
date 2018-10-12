@@ -1,34 +1,34 @@
-import React, { Component } from 'react'
-import { Pie } from 'react-chartjs-2'
+import React from 'react';
+import { Pie } from 'react-chartjs-2';
 
-export default class PieChart extends Component {
-  constructor (props) {
-    super(props)
-  }
+const PieChart = (props) => {
+  const { sourcesData } = props;
+  const sources = Object.keys(sourcesData);
+  const values = [];
+  sources.forEach((source) => {
+    values.push(sourcesData[source]);
+  });
 
-  render () {
-    let sources = Object.keys(this.props.sourcesData)
-    let values = []
-    sources.forEach(source => {
-      values.push(this.props.sourcesData[source])
-    })
+  const data = {
+    labels: sources,
+    datasets: [
+      {
+        data: values,
+        backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
+      },
+    ],
+  };
+  const options = {
+    responsive: true,
+  };
+  return (
+    <div>
+      <Pie
+        data={data}
+        options={options}
+      />
+    </div>
+  );
+};
 
-    const data = {
-      labels: sources,
-      datasets: [
-        {
-          data: values,
-          backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']
-        }
-      ]
-    }
-    const options = {
-      responsive: true
-    }
-    return (
-      <div>
-        <Pie data={data} options={options} />
-      </div>
-    )
-  }
-}
+export default PieChart;

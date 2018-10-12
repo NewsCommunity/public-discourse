@@ -126,7 +126,6 @@ class ChatBucket extends Component {
           postMessage={this.postMessage}
           GIFStatus={GIFStatus}
           toggleGif={toggleGif}
-          GIFStatus={GIFStatus}
         />
       </div>
     );
@@ -162,7 +161,9 @@ function mapDispatch(dispatch) {
   };
 }
 
-export default (ChatBucket = connect(
+ChatBucket = connect(
   mapState,
   mapDispatch
-)(ChatBucket));
+)(ChatBucket);
+
+export default ChatBucket;

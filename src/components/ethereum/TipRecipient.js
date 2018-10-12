@@ -24,23 +24,25 @@ class TipRecipient extends Component {
             Tip:
             {displayName}
           </span>
-          <a
-            href="#"
+          <button
+            type="button"
             className="mdl-chip__action"
             alt="Button where your tip goes"
           >
             <i
               className="material-icons"
-              onClick={() => {makeTransaction(
-                '0x5bb35c9576ef6e42d4447adcb3272f0b8582e82e',
-                '0xcbdde85d7db1628d77580a58d19207c388940a37',
-                '1',
-                ethProvider,
-              )}}
+              onClick={() => {
+                makeTransaction(
+                  '0x5bb35c9576ef6e42d4447adcb3272f0b8582e82e',
+                  '0xcbdde85d7db1628d77580a58d19207c388940a37',
+                  '1',
+                  ethProvider,
+                );
+              }}
             >
               done
             </i>
-          </a>
+          </button>
         </span>
       </div>
     );

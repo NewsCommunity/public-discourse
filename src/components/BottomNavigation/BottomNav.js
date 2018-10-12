@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
+
 import Icon from '@material-ui/core/Icon';
 import ChatInput from '../ChatBox/ChatInput';
 
@@ -17,7 +17,7 @@ const styles = theme => ({
 
 function BottomNav(props) {
   const {
-    classes, onShowToggle, isOpen, isLoggedIn, logInUser, postMessage, toggleGif, GIFStatus
+    classes, onShowToggle, isOpen, isLoggedIn, postMessage, toggleGif, GIFStatus
   } = props;
 
   let multiRender = false;
