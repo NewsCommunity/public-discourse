@@ -11,7 +11,12 @@ class TipRecipient extends Component {
   // Need to implement actual sending of tip.
   render() {
     const {
-      displayName, photo, makeTransaction, ethProvider, destinationEthAddress, senderEthAddress
+      displayName,
+      photo,
+      makeTransaction,
+      ethProvider,
+      destinationEthAddress,
+      senderEthAddress,
     } = this.props;
     return (
       <div>

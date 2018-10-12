@@ -110,8 +110,7 @@ export const thunkSetEthProdiver = () => async (dispatch) => {
   if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
     // We are in the browser and metamask is running.
     const eth = new Web3(window.web3.currentProvider);
-    console.log('what is eth', eth);
-    // const accounts = await eth.accounts();
+
     const accounts = await eth.eth.getAccounts();
 
     dispatch(actionSetEthAccounts(accounts));
@@ -138,8 +137,6 @@ export const thunkGetEthBalance = (account, eth) => async (dispatch) => {
 };
 
 export const thunkMakeTransaction = (source, destination, amount, eth) => {
-
-
   eth.eth.sendTransaction(
     {
       from: source,

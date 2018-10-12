@@ -17,7 +17,6 @@ const web3 = new Web3();
 
 const demoWeb3 = new Web3(web3.currentProvider);
 
-console.log('This is the demoWeb3', demoWeb3);
 
 class BlockChainBucket extends Component {
   constructor(props) {
@@ -136,7 +135,7 @@ class BlockChainBucket extends Component {
 
   render() {
     const { tipDestination, ethProvider, makeTransaction } = this.props;
-    //console.log("demoWeb3");
+
     return (
       <div className="BlockChain-Bar">
         <div
