@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { thunkMakeTransaction } from '../../state/user/reducer';
 
 class TipRecipient extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class TipRecipient extends Component {
   // Need to implement actual sending of tip.
   render() {
     const {
-      displayName, photo, makeTransaction, ethProvider,
+      displayName, photo, makeTransaction, ethProvider, destinationEthAddress, senderEthAddress
     } = this.props;
     return (
       <div>
@@ -52,19 +53,19 @@ class TipRecipient extends Component {
 // CONTAINER====================================================================
 function mapState(state) {
   return {
-    // user: state.userReducer.user,
-    // isLoggedIn: state.userReducer.isLoggedIn,
-    // fullUserState: state.userReducer,
-    // currentBalance: state.userReducer.currentEthBalance,
-    // currentAccount: state.userReducer.currentEthAccount,
-    // availibleAccounts: state.userReducer.ethAccounts,
-    // isFetchingEth: state.userReducer.isFetchingEth,
-    // ethProvider: state.userReducer.ethProvider
+    displayName: state.userReducer.tipDestination.user,
+    photo: state.userReducer.tipDestination.photo,
+    destinationEthAddress: state.userReducer.tipDestination.uid,
+    ethProvider: state.userReducer.ethProvider,
+    senderEthAddress: state.userReducer.currentEthAccount,
   };
 }
 
 function mapDispatch(dispatch) {
   return {
+    makeTransaction: (source, destination, amount, eth_provider) => {
+      dispatch(thunkMakeTransaction(source, destination, amount, eth_provider));
+    },
     // setEthProvider: () => {
     // 	dispatch(thunkSetEthProdiver());
     // },

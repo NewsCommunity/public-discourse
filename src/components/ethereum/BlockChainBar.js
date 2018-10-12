@@ -197,13 +197,7 @@ class BlockChainBucket extends Component {
           )}
           {tipDestination.user ? (
             <div>
-              <TipRecipient
-                displayName={tipDestination.user}
-                photo={tipDestination.photo}
-                ethAddress={tipDestination.uid}
-                makeTransaction={makeTransaction}
-                ethProvider={ethProvider}
-              />
+              <TipRecipient />
             </div>
           ) : (
             <div />
