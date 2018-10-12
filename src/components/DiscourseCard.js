@@ -37,11 +37,10 @@ function ImgMediaCard(props) {
       <CardActionArea>
         <CardMedia
           component="img"
-          alt="Contemplative Reptile"
+          alt="Article Thumbnail"
           className={classes.media}
           height="100%"
           image={`${discourseImg}`}
-          title="Contemplative Reptile"
         />
         <CardContent>
           <Typography
