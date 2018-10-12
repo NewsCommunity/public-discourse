@@ -1,67 +1,60 @@
-import React, { Component } from 'react'
-import Button from '@material-ui/core/Button'
-import { withStyles } from '@material-ui/core/styles'
-import AddIcon from '@material-ui/icons/Add'
-import Icon from '@material-ui/core/Icon'
+import React, { Component } from 'react';
+
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
   },
   extendedIcon: {
-    marginRight: theme.spacing.unit
-  }
-})
+    marginRight: theme.spacing.unit,
+  },
+});
 
 class PublicKeyForm extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { publicKey: '' }
+  constructor(props) {
+    super(props);
+    this.state = { publicKey: '' };
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit (event) {
-    const { message } = this.state
-    const { postMessage } = this.props
-    event.preventDefault()
-        // postMessage(message)
-        // this.setState({ message: '' })
+  handleSubmit(event) {
+    event.preventDefault();
   }
 
-  handleChange (event) {
-    this.setState({ [event.target.name]: event.target.value })
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
-    // We should prevent users from making blank comments, and rate limit them and no duplicates.
+  // We should prevent users from making blank comments, and rate limit them and no duplicates.
 
-  render () {
-    const { publicKey } = this.state
-    const { classes } = this.props
+  render() {
+    const { publicKey } = this.state;
+
     return (
       <React.Fragment>
-        <form className='Form-Flex' onSubmit={this.handleSubmit}>
+        <form
+          className="Form-Flex"
+          onSubmit={this.handleSubmit}
+        >
           <textarea
             autoFocus
-            className='chat-box-input'
-            type='text-area'
+            className="chat-box-input"
+            type="text-area"
             value={publicKey}
-            name='publicKey'
+            name="publicKey"
             onChange={this.handleChange}
-            placeholder='Your public key'
-            onKeyPress={e => {
-              e.target.keyCode === 13 && e.preventDefault()
+            placeholder="Your public key"
+            onKeyPress={(e) => {
+              e.target.keyCode === 13 && e.preventDefault();
             }}
-                    />
+          />
         </form>
       </React.Fragment>
-    )
+    );
   }
 }
 
-// ChatInput.propTypes = {
-//   classes: PropTypes.object.isRequired
-// }
-
-export default withStyles(styles)(PublicKeyForm)
+export default withStyles(styles)(PublicKeyForm);

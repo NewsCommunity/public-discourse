@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import Eth from 'ethjs';
 import Web3 from 'web3';
 // TYPES======================================================================
 const SET_USER = 'SET_USER';
@@ -91,7 +90,7 @@ export const thunkLogInUser = (provider = googleProvider) => async (dispatch) =>
       );
     } else {
       dispatch(actionClearUser());
-      const test = firebase.auth().signInWithRedirect(provider);
+      firebase.auth().signInWithRedirect(provider);
     }
   });
 };
@@ -111,8 +110,7 @@ export const thunkSetEthProdiver = () => async (dispatch) => {
   if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
     // We are in the browser and metamask is running.
     const eth = new Web3(window.web3.currentProvider);
-    
-    //const accounts = await eth.accounts();
+
     const accounts = await eth.eth.getAccounts();
 
     dispatch(actionSetEthAccounts(accounts));
@@ -138,8 +136,24 @@ export const thunkGetEthBalance = (account, eth) => async (dispatch) => {
   }
 };
 
+export const thunkMakeTransaction = (source, destination, amount, eth) => {
+  eth.eth.sendTransaction(
+    {
+      from: source,
+      to: destination,
+      value: eth.utils.toWei(amount, 'ether'),
+    },
+    (err, transactionHash) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(transactionHash);
+      }
+    },
+  );
+};
+
 export const thunkSetNewAccount = (account, eth) => async (dispatch) => {
-  const balance = await eth.getBalance(account);
   dispatch(actionSetCurrentBalance);
   dispatch(actionSetCurrentAccount(account));
 };

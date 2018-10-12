@@ -58,6 +58,7 @@ class ChatBucket extends Component {
     const { user, discourseId, toggleGif } = this.props;
     const { displayName, uid, photoURL } = user;
     const date = new Date();
+    //message = message.replace(/\r/gm,' ');
     const messageObj = {
       body: message,
       userName: displayName,
@@ -105,7 +106,7 @@ class ChatBucket extends Component {
         ) : (
           <div />
         )}
-        
+
         {chatOpen ? (
           <React.Fragment>
             <div>
@@ -127,7 +128,6 @@ class ChatBucket extends Component {
           postMessage={this.postMessage}
           GIFStatus={GIFStatus}
           toggleGif={toggleGif}
-          GIFStatus={GIFStatus}
         />
       </div>
     );
@@ -163,7 +163,9 @@ function mapDispatch(dispatch) {
   };
 }
 
-export default (ChatBucket = connect(
+ChatBucket = connect(
   mapState,
   mapDispatch
-)(ChatBucket));
+)(ChatBucket);
+
+export default ChatBucket;

@@ -1,14 +1,10 @@
-import React, { Component } from 'react'
-import { Bar } from 'react-chartjs-2'
+import React, { Component } from 'react';
+import { Bar } from 'react-chartjs-2';
 
 export default class BarChart extends Component {
-  constructor (props) {
-    super(props)
-  }
-
-  render () {
-    let countries = Object.keys(this.props.countries)
-    let values = Object.values(this.props.countries)
+  render() {
+    const countries = Object.keys(this.props.countries);
+    const values = Object.values(this.props.countries);
     const data = {
       labels: countries,
       datasets: [
@@ -16,17 +12,20 @@ export default class BarChart extends Component {
           label: 'Story origin',
           display: 'false',
           data: values,
-          backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']
-        }
-      ]
-    }
+          backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
+        },
+      ],
+    };
     const options = {
-      responsive: false
-    }
+      responsive: false,
+    };
     return (
       <div>
-        <Bar data={data} options={options} />
+        <Bar
+          data={data}
+          options={options}
+        />
       </div>
-    )
+    );
   }
 }

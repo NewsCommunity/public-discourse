@@ -3,9 +3,9 @@ import {
   thunkSetEthProdiver,
   thunkSetNewAccount,
   actionSetTipDestination,
+  thunkMakeTransaction,
 } from '../../state/user/reducer';
 import { connect } from 'react-redux';
-import Modal from '@material-ui/core/Modal';
 import TipRecipient from '../Ethereum/TipRecipient';
 import AccountMenu from '../Ethereum/AccountMenu';
 import Web3 from 'web3';
@@ -16,7 +16,6 @@ import axios from 'axios';
 const web3 = new Web3();
 
 const demoWeb3 = new Web3(web3.currentProvider);
-
 
 
 class BlockChainBucket extends Component {
@@ -46,9 +45,7 @@ class BlockChainBucket extends Component {
     });
   };
 
-  //NEEDS TO BE DISPATCH
   clearTip = () => {
-    
     this.props.clearTipDestination();
     this.setState(() => {
       return { tipRecipient: { displayName: '', id: '', ethAddress: '' } };
@@ -62,7 +59,7 @@ class BlockChainBucket extends Component {
     let increment = new Eth.BN('10000000000000000');
     tip = tip.add(increment);
     let balance = new Eth.BN(this.props.currentBalance);
-    
+
     if (tip.gt(balance)) {
       this.setState(() => {
         return { tipOver: true };
@@ -79,7 +76,7 @@ class BlockChainBucket extends Component {
     let decrement = new Eth.BN('10000000000000000');
     tip = tip.sub(decrement);
     let balance = new Eth.BN(this.props.currentBalance);
-    
+
     const zero = new Eth.BN(0);
 
     if (tip.lt(balance)) {
@@ -125,13 +122,11 @@ class BlockChainBucket extends Component {
   async componentDidMount() {
     this.props.setEthProvider();
 
-    
-    
     axios
       .get(`https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${etherscan}`)
       .then(res => {
         const rate = res.data.result.ethusd;
-        
+
         this.setState(() => {
           return { ethPrice: rate };
         });
@@ -139,12 +134,10 @@ class BlockChainBucket extends Component {
   }
 
   render() {
-    const { tipAmount, currentAccount, currentBalance, accounts, destination } = this.state;
-    const { logOutUser, logInUser, isLoggedIn, displayName, tipDestination, ethProvider } = this.props;
-    //
+    const { tipDestination, ethProvider, makeTransaction } = this.props;
+
     return (
       <div className="BlockChain-Bar">
-      
         <div
           className={
             this.state.tipOver
@@ -156,8 +149,10 @@ class BlockChainBucket extends Component {
         </div>
 
         <div className="BlockChain-Center">
-
-          {!ethProvider ? (<div>No Web</div>):(<div className="BlockChain-Center-inner">
+          {!ethProvider ? (
+            <div>No Web</div>
+          ) : (
+            <div className="BlockChain-Center-inner">
               <div>
                 <button className="mdl-button mdl-js-button mdl-button--icon">
                   <i className="material-icons" onClick={() => this.onDecrement()}>
@@ -168,7 +163,7 @@ class BlockChainBucket extends Component {
               <span
                 className="mdl-chip mdl-chip--deletable"
                 onClick={() => {
-                  this.handleOpen;
+                  this.handleOpen();
                 }}
               >
                 <span className="mdl-chip__text chip-bar">
@@ -197,14 +192,11 @@ class BlockChainBucket extends Component {
                   </i>
                 </button>
               </div>
-          </div>)}
+            </div>
+          )}
           {tipDestination.user ? (
             <div>
-              <TipRecipient
-                displayName={tipDestination.user}
-                photo={tipDestination.photo}
-                ethAddress={tipDestination.uid}
-              />
+              <TipRecipient />
             </div>
           ) : (
             <div />
@@ -248,6 +240,9 @@ function mapDispatch(dispatch) {
     },
     setTipDestination: destination => {
       dispatch(actionSetTipDestination(destination));
+    },
+    makeTransaction: (source, destination, amount, eth_provider) => {
+      dispatch(thunkMakeTransaction(source, destination, amount, eth_provider));
     },
   };
 }

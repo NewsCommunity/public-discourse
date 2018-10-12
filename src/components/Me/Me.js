@@ -1,57 +1,56 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer'
-import PublicKeyForm from './PublicKeyForm'
+import React from 'react';
+import { connect } from 'react-redux';
+import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer';
+import PublicKeyForm from './PublicKeyForm';
 
-class Me extends Component {
-  constructor (props) {
-    super(props)
-  }
-
-  render () {
-    
-    let { displayName } = this.props.user
-    if (!this.props.isLoggedIn) {
-      return (
-        <div>
-          <p>Please log in to see your information</p>
-        </div>
-      )
-    }
+let Me = (props) => {
+  const { user, isLoggedIn } = props;
+  const { displayName } = user;
+  if (!isLoggedIn) {
     return (
       <div>
-        <p>Welcome, {displayName}</p>
-        <p>Here you can set your public address</p>
-        <p>this feature is currently a work in progress</p>
-        <PublicKeyForm />
+        <p>Please log in to see your information</p>
       </div>
-    )
+    );
   }
+  return (
+    <div>
+      <p>
+        Welcome,
+        {displayName}
+      </p>
+      <p>Here you can set your public address</p>
+      <p>this feature is currently a work in progress</p>
+      <PublicKeyForm />
+    </div>
+  );
 }
 
 // CONTAINER====================================================================
-function mapState (state) {
+function mapState(state) {
   return {
     user: state.userReducer.user,
-    isLoggedIn: state.userReducer.isLoggedIn
-  }
+    isLoggedIn: state.userReducer.isLoggedIn,
+  };
 }
 
-function mapDispatch (dispatch) {
+function mapDispatch(dispatch) {
   return {
     logOutUser: () => {
-      dispatch(thunkLogOutUser())
+      dispatch(thunkLogOutUser());
     },
     logInUser: () => {
-      dispatch(thunkLogInUser())
+      dispatch(thunkLogInUser());
     },
-    setTipDestination: destination => {
-      dispatch(actionSetTipDestination(destination))
+    setTipDestination: (destination) => {
+      dispatch(actionSetTipDestination(destination));
     },
-    postMessage: message => {
-      dispatch()
-    }
-  }
+  };
 }
 
-export default connect(mapState, mapDispatch)(Me)
+Me = connect(
+  mapState,
+  mapDispatch,
+)(Me);
+
+export default Me;

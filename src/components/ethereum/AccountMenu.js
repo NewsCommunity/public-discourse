@@ -4,18 +4,18 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-const options = ['None:99 Eth', 'Atria', 'Callisto', 'Dione', 'Ganymede', 'Hangouts Call'];
 
 const ITEM_HEIGHT = 48;
 
 class AccountMenu extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      anchorEl: null,
+      accounts: [],
+    };
   }
-  state = {
-    anchorEl: null,
-    accounts: [],
-  };
+
 
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
