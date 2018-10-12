@@ -37,6 +37,7 @@ async function getArticles() {
       read(article.url, async (err, articleSimple, meta) => {
         if (!err && articleSimple.content) {
           article.html = articleSimple.content;
+          article.html = article.html.replace(/<h2>/g, "<h6>")
           // console.log("article: ", article);
           article.retrivalDate = firebase.firestore.FieldValue.serverTimestamp();
           console.log('Timestamp: ', article.retrivalDate);
@@ -56,6 +57,7 @@ async function getArticles() {
             .doc(hash)
             .set({
               article,
+              timestamp: Math.floor(new Date())
             });
 
           // WNYCChat
@@ -69,17 +71,3 @@ async function getArticles() {
 
 getArticles();
 
-let WebHoseArticles;
-
-// async function getWebHose() {
-//   try {
-//     const res = await axios.get(webHoseRequest);
-//     const WebHoseArticles = res.data.posts;
-
-//     WebHoseArticles.forEach(async (article) => {});
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-// getWebHose();
