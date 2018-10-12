@@ -62,7 +62,7 @@ class ChatInput extends Component {
             <Icon>gif</Icon>
           </Button>
           <textarea
-            autoFocus
+            
             className="chat-box-input"
             type="text-area"
             multiline="true"
