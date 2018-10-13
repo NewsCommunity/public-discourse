@@ -4,7 +4,11 @@ import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../
 import PublicKeyForm from './PublicKeyForm';
 
 let Me = (props) => {
-  const { user, isLoggedIn } = props;
+  const {
+    user, isLoggedIn, currentEthAccount, currentEthBalance, ethProvider,
+  } = props;
+
+  console.log("Details:", currentEthAccount, currentEthBalance, ethProvider);
   const { displayName } = user;
   if (!isLoggedIn) {
     return (
@@ -19,18 +23,35 @@ let Me = (props) => {
         Welcome,
         {displayName}
       </p>
-      <p>Here you can set your public address</p>
-      <p>this feature is currently a work in progress</p>
+      {ethProvider ? (
+        <div>
+          <p>Public ETH Address: </p>
+          <p>{currentEthAccount}</p>
+          <p>
+Your Balance:
+            {ethProvider.utils.fromWei(currentEthBalance, 'ether')}
+            {' '}
+: ETH
+          </p>
+          <p>this feature is currently a work in progress</p>
+        </div>
+      ) : (
+        <div />
+      )}
+
       <PublicKeyForm />
     </div>
   );
-}
+};
 
 // CONTAINER====================================================================
 function mapState(state) {
   return {
     user: state.userReducer.user,
     isLoggedIn: state.userReducer.isLoggedIn,
+    currentEthAccount: state.userReducer.currentEthAccount,
+    currentEthBalance: state.userReducer.currentEthBalance,
+    ethProvider: state.userReducer.ethProvider,
   };
 }
 
