@@ -39,7 +39,7 @@ class TriggersTooltips extends React.Component {
                     onClick={() => {
                         this.handleTooltipOpen()
                         navigator.clipboard.writeText(
-                                                `https://collaboration-2c632.firebaseapp.com/discourse/${discourseId}`
+                                                `https://pubdiscourse.com/discourse/${discourseId}`
                                             )
                       }}
                                     >
