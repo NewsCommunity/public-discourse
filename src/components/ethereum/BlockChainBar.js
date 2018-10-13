@@ -15,7 +15,7 @@ import axios from 'axios';
 
 const web3 = new Web3();
 
-const demoWeb3 = new Web3(web3.currentProvider);
+
 
 
 class BlockChainBucket extends Component {
@@ -240,9 +240,6 @@ function mapDispatch(dispatch) {
     },
     setTipDestination: destination => {
       dispatch(actionSetTipDestination(destination));
-    },
-    makeTransaction: (source, destination, amount, ethProvider) => {
-      dispatch(thunkMakeTransaction(source, destination, amount, ethProvider));
     },
   };
 }

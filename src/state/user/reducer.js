@@ -258,3 +258,15 @@ export function userReducer(state = initialState, action) {
       return state;
   }
 }
+
+
+// encoded = contractInstance.methods.myMethod(params).encodeABI()
+
+// var tx = {
+//     to : myContractAddress,
+//     data : encoded
+// }
+
+// web3.eth.accounts.signTransaction(tx, privateKey).then(signed => {
+//     web3.eth.sendSignedTransaction(signed.rawTransaction).on('receipt', console.log)
+// });

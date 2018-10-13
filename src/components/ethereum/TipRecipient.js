@@ -40,7 +40,7 @@ class TipRecipient extends Component {
                 makeTransaction(
                   '0x5bb35c9576ef6e42d4447adcb3272f0b8582e82e',
                   '0xcbdde85d7db1628d77580a58d19207c388940a37',
-                  '1'
+                  '.01'
                 );
               }}
             >
