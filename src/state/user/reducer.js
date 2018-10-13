@@ -71,6 +71,7 @@ export const actionSetTipStatus = tipStatus => ({
 
 // THUNKS=====================================================================
 const googleProvider = new firebase.auth.GoogleAuthProvider();
+
 export const thunkLogInUser = (provider = googleProvider) => async (dispatch) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
