@@ -48,7 +48,7 @@ class SingleDiscourse extends Component {
       const { name } = discourse.article.source;
       const { isMobile } = this.state;
 
-      console.log('Name: ', name);
+ 
       return (
         <div>
           <div className="discourse-container">
