@@ -241,8 +241,8 @@ function mapDispatch(dispatch) {
     setTipDestination: destination => {
       dispatch(actionSetTipDestination(destination));
     },
-    makeTransaction: (source, destination, amount, eth_provider) => {
-      dispatch(thunkMakeTransaction(source, destination, amount, eth_provider));
+    makeTransaction: (source, destination, amount, ethProvider) => {
+      dispatch(thunkMakeTransaction(source, destination, amount, ethProvider));
     },
   };
 }

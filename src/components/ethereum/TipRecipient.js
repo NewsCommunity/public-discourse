@@ -14,7 +14,6 @@ class TipRecipient extends Component {
       displayName,
       photo,
       makeTransaction,
-      ethProvider,
       destinationEthAddress,
       senderEthAddress,
     } = this.props;
@@ -41,8 +40,7 @@ class TipRecipient extends Component {
                 makeTransaction(
                   '0x5bb35c9576ef6e42d4447adcb3272f0b8582e82e',
                   '0xcbdde85d7db1628d77580a58d19207c388940a37',
-                  '1',
-                  ethProvider,
+                  '1'
                 );
               }}
             >
@@ -68,21 +66,9 @@ function mapState(state) {
 
 function mapDispatch(dispatch) {
   return {
-    makeTransaction: (source, destination, amount, eth_provider) => {
-      dispatch(thunkMakeTransaction(source, destination, amount, eth_provider));
+    makeTransaction: (source, destination, amount) => {
+      dispatch(thunkMakeTransaction(source, destination, amount));
     },
-    // setEthProvider: () => {
-    // 	dispatch(thunkSetEthProdiver());
-    // },
-    // setNewAccount: (account) => {
-    // 	dispatch(thunkSetNewAccount(account));
-    // }
-    // logOutUser: () => {
-    // 	dispatch(thunkLogOutUser());
-    // },
-    // logInUser: () => {
-    // 	dispatch(thunkLogInUser());
-    // }
   };
 }
 

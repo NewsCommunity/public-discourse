@@ -107,26 +107,7 @@ export const thunkLogOutUser = () => async (dispatch) => {
 export const thunkSetEthProdiver = () => async (dispatch) => {
   dispatch(actionFetchEth(true));
 
-  if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
-    // We are in the browser and metamask is running.
-    const eth = new Web3(window.web3.currentProvider);
-
-    const accounts = await eth.eth.getAccounts();
-
-    dispatch(actionSetEthAccounts(accounts));
-    dispatch(actionSetCurrentAccount(accounts[0]));
-    dispatch(thunkGetEthBalance(accounts[0], eth));
-    dispatch(actionSetEthProviderOnState(eth));
-    dispatch(actionFetchEth(false));
-  } else {
-    // We are on the server *OR* the user is not running metamask
-    // In this case we aren't connecting to a remote, we need metamask. So this is disconnected and user is warned.
-    // const provider = new Web3.providers.HttpProvider('http://loalhost:7545');
-    // web3 = new Eth(provider);
-
-    const eth = {};
-    dispatch(actionSetEthProviderOnState(eth));
-  }
+  await loadWeb3(dispatch);
 };
 
 export const thunkGetEthBalance = (account, eth) => async (dispatch) => {
@@ -136,8 +117,11 @@ export const thunkGetEthBalance = (account, eth) => async (dispatch) => {
   }
 };
 
-export const thunkMakeTransaction = (source, destination, amount, eth) => {
-  eth.eth.sendTransaction(
+export const thunkMakeTransaction2 = async (source, destination, amount) => {
+
+  let eth = new Web3(window.web3.currentProvider);
+console.log("The transaction values: ", source, destination, amount )
+  const transactionHash = await eth.eth.sendTransaction(
     {
       from: source,
       to: destination,
@@ -152,6 +136,25 @@ export const thunkMakeTransaction = (source, destination, amount, eth) => {
     },
   );
 };
+
+export const thunkMakeTransaction = (source, destination, amount) => async (dispatch) => {
+
+  let eth = new Web3(window.web3.currentProvider);
+
+  try {
+    const transactionHash = await eth.eth.sendTransaction(
+      {
+        from: source,
+        to: destination,
+        value: eth.utils.toWei(amount, 'ether'),
+      })
+      console.log("The transaction hash: ", transactionHash)
+  } catch (error) {
+    console.log(error)
+  }
+
+  
+}
 
 export const thunkSetNewAccount = (account, eth) => async (dispatch) => {
   dispatch(actionSetCurrentBalance);
@@ -171,6 +174,27 @@ const initialState = {
   tipDestination: {},
   GIFStatus: false,
 };
+
+async function loadWeb3(dispatch) {
+  if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
+    // We are in the browser and metamask is running.
+    let eth = new Web3(window.web3.currentProvider);
+    const accounts = await eth.eth.getAccounts();
+    dispatch(actionSetEthAccounts(accounts));
+    dispatch(actionSetCurrentAccount(accounts[0]));
+    dispatch(thunkGetEthBalance(accounts[0], eth));
+    dispatch(actionSetEthProviderOnState(eth));
+    dispatch(actionFetchEth(false));
+  }
+  else {
+    // We are on the server *OR* the user is not running metamask
+    // In this case we aren't connecting to a remote, we need metamask. So this is disconnected and user is warned.
+    // const provider = new Web3.providers.HttpProvider('http://loalhost:7545');
+    // web3 = new Eth(provider);
+    const eth = {};
+    dispatch(actionSetEthProviderOnState(eth));
+  }
+}
 
 export function userReducer(state = initialState, action) {
   switch (action.type) {

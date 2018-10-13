@@ -58,7 +58,7 @@ class SingleDiscourse extends Component {
                   <div className="source-name-name">{name.toUpperCase()}</div>
                   <div className="source-name-published">Published at: {publishedAt}</div>
                 </div>
-                <div ClassName="source-tip">
+                <div className="source-tip">
                   <Button variant="outlined" color="primary" className={classes.button}>
                     Tip
                   </Button>
