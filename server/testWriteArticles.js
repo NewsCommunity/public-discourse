@@ -29,7 +29,7 @@ let Articles;
 async function getArticles() {
   try {
     const res = await newsapi.v2.topHeadlines({
-      sources: 'bbc-news,the-new-york-times,the-washington-post',
+      sources: 'bbc-news,the-new-york-times,the-washington-post,associated-press,cnn, new-york-magazine, national-geographic, time',
     });
     const articles = res.articles;
 
