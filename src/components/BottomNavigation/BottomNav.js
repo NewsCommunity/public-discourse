@@ -9,6 +9,8 @@ import ChatInput from '../ChatBox/ChatInput';
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
+    height: 40,
+    width: 40,
   },
   extendedIcon: {
     marginRight: theme.spacing.unit,

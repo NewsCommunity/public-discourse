@@ -172,7 +172,7 @@ body {
   padding-top: 4px;
   background-color: #f1f1f1;
   border: none;
-  width: 19em;
+  width: 17.7em;
     height: 3em;
 }
 
@@ -363,3 +363,9 @@ font-size: 1.5em;
 font-size: .6em;
 margin-left: 3px;
 }
+
+jss63 {
+  width: 40px;
+  height: 40px;
+}
+
