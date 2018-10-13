@@ -2,7 +2,8 @@ import types from './types'
 
 const initialState = {
   discourse: {},
-  discourseList: []
+  discourseList: [],
+  discourseIds: {},
 }
 
 export function discourseReducer (state = initialState, action) {
@@ -15,7 +16,7 @@ export function discourseReducer (state = initialState, action) {
     case types.SET_DISCOURSE_LIST:
       return {
         ...state,
-        discourseList: action.discourseList
+        discourseList: action.discourseList, discourseIds: action.discourseIds
       }
     default:
       return state
