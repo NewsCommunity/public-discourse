@@ -22,9 +22,9 @@ class NavMenu extends React.Component {
 
     return (
       <div>
-        <Button aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup='true' onClick={this.handleClick}>
+        {/* <Button aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup='true' onClick={this.handleClick}>
                     More!
-                </Button>
+                </Button> */}
 
         <Menu id='simple-menu' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
           <MenuItem onClick={this.handleClose}>

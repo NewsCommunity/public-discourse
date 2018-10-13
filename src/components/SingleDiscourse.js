@@ -1,22 +1,34 @@
-import React, { Component } from "react";
-import ChatBucket from "./ChatBox/ChatBucket";
-import { thunkGetSingleDiscourse } from "../state/discourse/actions";
-import { connect } from "react-redux";
-import Loading from "./Loading";
-import Parser from "html-react-parser";
-import { actionSetUser } from "../state/user/reducer";
+import React, { Component } from 'react';
+import ChatBucket from './ChatBox/ChatBucket';
+import { thunkGetSingleDiscourse } from '../state/discourse/actions';
+import { connect } from 'react-redux';
+import Loading from './Loading';
+import Parser from 'html-react-parser';
+import { actionSetUser } from '../state/user/reducer';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
+  },
+});
+
 class SingleDiscourse extends Component {
   constructor(props) {
     super(props);
     this.articleContainer = React.createRef();
     this.state = {
-      isMobile: window.innerWidth < 480
+      isMobile: window.innerWidth < 480,
     };
   }
 
   componentDidMount = async () => {
     await this.props.getSingleDiscourse(this.props.match.params.docId);
-    window.addEventListener("resize", this.handleWindowResize);
+    window.addEventListener('resize', this.handleWindowResize);
   };
 
   componentDidUpdate = () => {
@@ -28,23 +40,32 @@ class SingleDiscourse extends Component {
   };
 
   render() {
-    const { discourse, match } = this.props;
+    const { discourse, match, classes } = this.props;
     const discourseId = match.params.docId;
 
     if (discourse.article) {
-      const { html, title } = discourse.article;
-      const { isMobile } = this.state
+      const { html, title, publishedAt } = discourse.article;
+      const { name } = discourse.article.source;
+      const { isMobile } = this.state;
 
+      console.log('Name: ', name);
       return (
         <div>
           <div className="discourse-container">
             <div className="single-room">
+              <div className="source-info">
+                <div className="source-Name">
+                  <div className="source-name-name">{name.toUpperCase()}</div>
+                  <div className="source-name-published">Published at: {publishedAt}</div>
+                </div>
+                <div ClassName="source-tip">
+                  <Button variant="outlined" color="primary" className={classes.button}>
+                    Tip
+                  </Button>
+                </div>
+              </div>
               <div className="iframe-container" ref={this.articleContainer}>
-                {isMobile ? (
-                  <h6>{Parser(title)}</h6>
-                ) : (
-                  <h2>{Parser(title)}</h2>
-                )}
+                {isMobile ? <h6>{Parser(title)}</h6> : <h2>{Parser(title)}</h2>}
                 {Parser(html)}
               </div>
               <ChatBucket discourseId={discourseId} />
@@ -62,22 +83,21 @@ class SingleDiscourse extends Component {
 
 function mapState(state) {
   return {
-    discourse: state.discourseReducer.discourse
+    discourse: state.discourseReducer.discourse,
   };
 }
 
 function mapDispatch(dispatch) {
   return {
-    getSingleDiscourse: (discourseId) => {
+    getSingleDiscourse: discourseId => {
       dispatch(thunkGetSingleDiscourse(discourseId));
     },
     logInUser: (user, bool) => {
       dispatch(actionSetUser(user, bool));
-    }
+    },
   };
 }
 
-export default (SingleDiscourse = connect(
-  mapState,
-  mapDispatch
-)(SingleDiscourse));
+
+
+export default connect(mapState, mapDispatch)(withStyles(styles)(SingleDiscourse));
