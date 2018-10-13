@@ -48,6 +48,14 @@ export function thunkGetSingleDiscourse(discourseId) {
   return async (dispatch) => {
     const {discourseList, discourseIds} = store.getState().discourseReducer
     const discourse = discourseList[discourseIds[discourseId]]
-    dispatch(setSingleDiscourse(discourse));
+    if (!discourse){
+      let doc = await firestore.collection('discourseList').doc(discourseId).get()
+      const id = doc._key.path.segments[doc._key.path.segments.length - 1]
+      let docData = doc.data()
+      docData = { ...docData, docId: id }
+      dispatch(setSingleDiscourse(docData))
+    } else {
+      dispatch(setSingleDiscourse(discourse));
+    }
   };
 }
