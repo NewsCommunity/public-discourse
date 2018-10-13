@@ -16,7 +16,7 @@ export function setDiscourseList(discourseList, discourseIds) {
     discourseIds,
   };
 }
-
+//.
 // I assume later users will be able to query by discourseList. Here I am
 // just leaving query as a possible value to pass for a query. We will
 // need to define how we query later. For now it's unused.
@@ -25,7 +25,7 @@ export function thunkGetDiscourseList() {
     let discourseList = [];
     let discourseIds = {};
     let discourseListRef = firestore.collection("discourseList");
-    let query = discourseListRef.limit(100);
+    let query = discourseListRef.orderBy("timestamp", "desc").limit(100);
     await query
       .get()
       .then((snapshot) => {

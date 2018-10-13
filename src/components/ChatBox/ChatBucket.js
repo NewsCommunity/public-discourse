@@ -1,155 +1,171 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { ChatBox, ChatInput } from './index'
-import { firestore } from '../../fire'
-import Login from '../authentication/login'
-import BottomNav from '../BottomNavigation/BottomNav'
-import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer'
-import BlockChainBar from '../Ethereum/BlockChainBar'
-import ChatTrigger from './ChatTrigger'
-
-const firebase = require('firebase')
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Selector } from "react-giphy-selector";
+import { ChatBox } from "./index";
+import { firestore } from "../../fire";
+import BottomNav from "../BottomNavigation/BottomNav";
+import {
+  thunkLogInUser,
+  thunkLogOutUser,
+  actionSetTipDestination,
+  actionSetGif
+} from "../../state/user/reducer";
+import BlockChainBar from "../Ethereum/BlockChainBar";
 
 class ChatBucket extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       messages: [],
       chatOpen: false
-    }
-
-    this.getInitialMessages = this.getInitialMessages.bind(this)
-    this.addSingleMessageToState = this.addSingleMessageToState.bind(this)
-    this.postMessage = this.postMessage.bind(this)
-    this.onShowToggle = this.onShowToggle.bind(this)
+    };
   }
 
-  async componentDidMount () {
-    const { discourseId } = this.props
-
-    this.subscribeToMessageUpdates(discourseId)
+  async componentDidMount() {
+    const { discourseId } = this.props;
+    this.subscribeToMessageUpdates(discourseId);
   }
 
-  onShowToggle () {
-    const { chatOpen } = this.state
-    const toggleState = !chatOpen
-    this.setState(() => ({ chatOpen: toggleState }))
-  }
+  onShowToggle = () => {
+    const { chatOpen } = this.state;
+    const toggleState = !chatOpen;
+    this.setState(() => ({ chatOpen: toggleState }));
+  };
 
-  async getInitialMessages (discourseId, limit = 50) {
-    const messages = await firestore
-            .collection('discourseList')
-            .doc(discourseId)
-            .collection('messages')
-            .limit(limit)
-            .orderBy('timestamp')
-            .get()
-
-    messages.forEach(message => {
-      this.addSingleMessageToState(message.data())
-    })
-  }
-
-  addSingleMessageToState (message) {
-    const { messages } = this.state
-    const newMessages = [...messages, message]
-    this.setState({ messages: newMessages })
-  }
-
-  async subscribeToMessageUpdates (discourseId) {
-    const { messages } = this.state
+  async subscribeToMessageUpdates(discourseId) {
     await firestore
-            .collection('discourseList')
-            .doc(discourseId)
-            .collection('messages')
-            .orderBy('timestamp', 'desc')
-            .limit(100)
-            .onSnapshot(snapshot => {
-              snapshot.docChanges().forEach(change => {
-                const messageArray = messages
-                messageArray.push(change.doc.data())
-                this.setState({ messages: messageArray })
-              })
-            })
+      .collection("discourseList")
+      .doc(discourseId)
+      .collection("messages")
+      .orderBy("timestamp", "desc")
+      .limit(100)
+      .onSnapshot((snapshot) => {
+        const { messages } = this.state;
+        let messagesFromFirebase = [];
+        
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === 'added'){
+            messagesFromFirebase.push(change.doc.data());
+          }
+        });
+        const newMessages = [...messagesFromFirebase, ...messages];
+        this.setState({ messages: newMessages });
+      });
   }
 
-  postMessage (message) {
-    const { user, discourseId } = this.props
-    const { displayName, uid, photoURL } = user
-    const date = new Date()
+  postMessage = (message, gif = {}) => {
+    
+    const { user, discourseId, toggleGif } = this.props;
+    const { displayName, uid, photoURL } = user;
+    const date = new Date();
+    //message = message.replace(/\r/gm,' ');
     const messageObj = {
       body: message,
       userName: displayName,
       timestamp: date,
       uid,
-      photoURL
-    }
+      photoURL,
+      gif
+    };
 
-    this.addSingleMessageToState(messageObj)
     firestore
-            .collection('discourseList')
-            .doc(discourseId)
-            .collection('messages')
-            .add(messageObj)
-            .then(() => {})
-            .catch(error => {
-              console.log('Error adding document: ', error)
-            })
-  }
+      .collection("discourseList")
+      .doc(discourseId)
+      .collection("messages")
+      .add(messageObj);
 
-  render () {
-    const { messages, chatOpen } = this.state
-    const { logInUser, isLoggedIn, user, setTipDestination, tipDestination, isTipActive } = this.props
+    toggleGif(false);
+  };
 
-    console.log('The props of chatBucket are:', this.props)
+  render() {
+    const { messages, chatOpen } = this.state;
+    const {
+      logInUser,
+      isLoggedIn,
+      setTipDestination,
+      tipDestination,
+      GIFStatus,
+      toggleGif
+    } = this.props;
 
     return (
-      <div className={chatOpen ? 'Chatbucket-Container White-Background' : 'Chatbucket-Container'}>
-        {chatOpen
-                    ? <React.Fragment>
-                      <div>
-                        <BlockChainBar tipDestination={tipDestination} />
-                        <ChatBox msgArray={messages} setTipDestination={setTipDestination} />
-                      </div>
-                    </React.Fragment>
-                    : <div />}
+      <div
+        className={
+          chatOpen
+            ? "Chatbucket-Container White-Background"
+            : "Chatbucket-Container"
+        }
+      >
+        {GIFStatus ? (
+          <div className="gifBar">
+            <Selector
+              apiKey="KP3uURmACOmXvXYKnYDjglkk5LAOu9DQ"
+              onGifSelected={(gif) => this.postMessage("GIFGIF8x8", gif)}
+            />
+          </div>
+        ) : (
+          <div />
+        )}
+
+        {chatOpen ? (
+          <React.Fragment>
+            <div>
+              <BlockChainBar tipDestination={tipDestination} />
+              <ChatBox
+                msgArray={messages}
+                setTipDestination={setTipDestination}
+              />
+            </div>
+          </React.Fragment>
+        ) : (
+          <div />
+        )}
         <BottomNav
           onShowToggle={this.onShowToggle}
           isOpen={chatOpen}
           isLoggedIn={isLoggedIn}
           logInUser={logInUser}
           postMessage={this.postMessage}
-                />
+          GIFStatus={GIFStatus}
+          toggleGif={toggleGif}
+        />
       </div>
-    )
+    );
   }
 }
 
 // CONTAINER====================================================================
-function mapState (state) {
+function mapState(state) {
   return {
     user: state.userReducer.user,
     isLoggedIn: state.userReducer.isLoggedIn,
     tpDestination: state.userReducer.tipDestination,
-    isTipActive: state.userReducer.isTipActive
-  }
+    isTipActive: state.userReducer.isTipActive,
+    GIFStatus: state.userReducer.GIFStatus,
+    ethProvider: state.userReducer.ethProvider,
+  };
 }
 
-function mapDispatch (dispatch) {
+function mapDispatch(dispatch) {
   return {
     logOutUser: () => {
-      dispatch(thunkLogOutUser())
+      dispatch(thunkLogOutUser());
     },
     logInUser: () => {
-      dispatch(thunkLogInUser())
+      dispatch(thunkLogInUser());
     },
-    setTipDestination: destination => {
-      dispatch(actionSetTipDestination(destination))
+    setTipDestination: (destination) => {
+      dispatch(actionSetTipDestination(destination));
     },
-    postMessage: message => {
-      dispatch()
+    toggleGif: (bool) => {
+      dispatch(actionSetGif(bool));
     }
-  }
+  };
 }
 
-export default (ChatBucket = connect(mapState, mapDispatch)(ChatBucket))
+ChatBucket = connect(
+  mapState,
+  mapDispatch
+)(ChatBucket);
+
+export default ChatBucket;

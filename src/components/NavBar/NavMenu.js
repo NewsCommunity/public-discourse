@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import { Link } from 'react-router-dom'
@@ -22,9 +21,9 @@ class NavMenu extends React.Component {
 
     return (
       <div>
-        <Button aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup='true' onClick={this.handleClick}>
+        {/* <Button aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup='true' onClick={this.handleClick}>
                     More!
-                </Button>
+                </Button> */}
 
         <Menu id='simple-menu' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
           <MenuItem onClick={this.handleClose}>

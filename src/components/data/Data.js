@@ -1,54 +1,55 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { thunkGetDiscourseList } from '../../state/discourse/actions'
-import PieChart from './PieChart'
-import BarChart from './BarChart'
-import ChatBucket from '../ChatBox/ChatBucket'
-import Loading from '../Loading'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { thunkGetDiscourseList } from '../../state/discourse/actions';
+import PieChart from './PieChart';
+import ChatBucket from '../ChatBox/ChatBucket';
+import Loading from '../Loading';
+
 class Data extends Component {
-  constructor (props) {
-    super(props)
+  async componentDidMount() {
+    await this.props.getDiscourseList();
   }
 
-  async componentDidMount () {
-    await this.props.getDiscourseList()
-  }
-
-  render () {
-    let discourseList = this.props.discourseList
-    let sources = {}
-    discourseList.forEach(discourse => {
-      sources[discourse.article.source.name] = sources[discourse.article.source.name] + 1 || 1
-    })
+  render() {
+    const discourseList = this.props.discourseList;
+    const sources = {};
+    discourseList.forEach((discourse) => {
+      sources[discourse.article.source.name] = sources[discourse.article.source.name] + 1 || 1;
+    });
 
     if (this.props.discourseList) {
       return (
-        <div className='data-container' style={{ overflowX: 'auto', fontSize: '14px' }}>
-          <h1>Our Sources</h1>
+        <div
+          className="data-container"
+          style={{ overflowX: 'auto', fontSize: '14px' }}
+        >
+          <h3>Our Sources:</h3>
           <PieChart sourcesData={sources} />
-          <ChatBucket discourseId={'dataChat'} />
+          <ChatBucket discourseId="dataChat" />
         </div>
-      )
-    } else {
-      return <Loading />
+      );
     }
+    return <Loading />;
   }
 }
 
 // ====== CONTAINER ======
 
-function mapState (state) {
+function mapState(state) {
   return {
-    discourseList: state.discourseReducer.discourseList
-  }
+    discourseList: state.discourseReducer.discourseList,
+  };
 }
 
-function mapDispatch (dispatch) {
+function mapDispatch(dispatch) {
   return {
     getDiscourseList: () => {
-      dispatch(thunkGetDiscourseList())
-    }
-  }
+      dispatch(thunkGetDiscourseList());
+    },
+  };
 }
 
-export default connect(mapState, mapDispatch)(Data)
+export default connect(
+  mapState,
+  mapDispatch,
+)(Data);

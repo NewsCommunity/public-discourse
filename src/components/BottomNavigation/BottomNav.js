@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
+
 import Icon from '@material-ui/core/Icon';
 import ChatInput from '../ChatBox/ChatInput';
 
@@ -17,7 +17,7 @@ const styles = theme => ({
 
 function BottomNav(props) {
   const {
-    classes, onShowToggle, isOpen, isLoggedIn, logInUser, postMessage,
+    classes, onShowToggle, isOpen, isLoggedIn, postMessage, toggleGif, GIFStatus
   } = props;
 
   let multiRender = false;
@@ -29,7 +29,7 @@ function BottomNav(props) {
     <div className="Bottom-Nav">
     
       <div className="chat-input-left">
-        {multiRender ? <ChatInput postMessage={postMessage} /> : <div/>}
+        {multiRender ? <ChatInput postMessage={postMessage} toggleGif={toggleGif} GIFStatus={GIFStatus}/> : <div/>}
       </div>
       <div className="chat-input-right">
         <Button
@@ -39,7 +39,8 @@ function BottomNav(props) {
           className={classes.button}
           onClick={onShowToggle}
         >
-          <AddIcon />
+          {/* <AddIcon /> */}
+          <Icon>chat</Icon>
         </Button>
       </div>
     </div>

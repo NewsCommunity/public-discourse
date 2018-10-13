@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import Eth from 'ethjs';
+import Web3 from 'web3';
 // TYPES======================================================================
 const SET_USER = 'SET_USER';
 const CLEAR_USER = 'CLEAR_USER';
@@ -11,7 +11,13 @@ const FETCH_ETH_CONNECTION = 'FETCH_ETH_CONNECTION';
 const SET_TIP_DESTINATION = 'SET_TIP_DESTINATION';
 const SET_CHAT_STATUS = 'SET_CHAT_STATUS';
 const SET_TIP_STATUS = 'SET_TIP_STATUS';
+const SET_GIF_KEYBOARD = 'SET_GIF_KEYBOARD';
 // ACTIONS====================================================================
+export const actionSetGif = bool => ({
+  type: SET_GIF_KEYBOARD,
+  GIFStatus: bool,
+});
+
 export const actionSetUser = (userObj, isLoggedIn) => ({
   type: SET_USER,
   user: userObj,
@@ -48,13 +54,10 @@ export const actionSetEthProviderOnState = ethProvider => ({
   ethProvider,
 });
 
-export const actionSetTipDestination = (tipDestination) => {
-  console.log('Set Tip Destination in the User Reducer is fired!');
-  return {
-    type: SET_TIP_DESTINATION,
-    tipDestination,
-  };
-};
+export const actionSetTipDestination = tipDestination => ({
+  type: SET_TIP_DESTINATION,
+  tipDestination,
+});
 
 export const actionSetChatStatus = chatStatus => ({
   type: SET_CHAT_STATUS,
@@ -71,7 +74,6 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const thunkLogInUser = (provider = googleProvider) => async (dispatch) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      console.log('MY USER IS: ', user);
       const {
         displayName, email, photoURL, uid,
       } = user;
@@ -87,15 +89,10 @@ export const thunkLogInUser = (provider = googleProvider) => async (dispatch) =>
         ),
       );
     } else {
-      console.log('No user logged in');
       dispatch(actionClearUser());
-      const test = firebase.auth().signInWithRedirect(provider);
-      console.log("Test of loging:", test)
-
+      firebase.auth().signInWithRedirect(provider);
     }
   });
-
-  
 };
 
 export const thunkLogOutUser = () => async (dispatch) => {
@@ -109,37 +106,57 @@ export const thunkLogOutUser = () => async (dispatch) => {
 
 export const thunkSetEthProdiver = () => async (dispatch) => {
   dispatch(actionFetchEth(true));
-  console.log('Window welement', window);
-  if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
-    // We are in the browser and metamask is running.
-    const eth = new Eth(window.web3.currentProvider);
-    console.log('THE ETH IS:', eth);
-    const accounts = await eth.accounts();
-    console.log('The accounts:', accounts);
 
-    dispatch(actionSetEthAccounts(accounts));
-    dispatch(actionSetCurrentAccount(accounts[0]));
-    dispatch(thunkGetEthBalance(accounts[0], eth));
-    dispatch(actionSetEthProviderOnState(eth));
-    dispatch(actionFetchEth(false));
-  } else {
-    // We are on the server *OR* the user is not running metamask
-    // In this case we aren't connecting to a remote, we need metamask. So this is disconnected and user is warned.
-    // const provider = new Web3.providers.HttpProvider('http://loalhost:7545');
-    // web3 = new Eth(provider);
-
-    const eth = {};
-    dispatch(actionSetEthProviderOnState(eth));
-  }
+  await loadWeb3(dispatch);
 };
 
 export const thunkGetEthBalance = (account, eth) => async (dispatch) => {
-  const balance = await eth.getBalance(account);
-  dispatch(actionSetCurrentBalance(balance));
+  if (eth) {
+    const balance = await eth.eth.getBalance(account);
+    dispatch(actionSetCurrentBalance(balance));
+  }
 };
 
+export const thunkMakeTransaction2 = async (source, destination, amount) => {
+
+  let eth = new Web3(window.web3.currentProvider);
+console.log("The transaction values: ", source, destination, amount )
+  const transactionHash = await eth.eth.sendTransaction(
+    {
+      from: source,
+      to: destination,
+      value: eth.utils.toWei(amount, 'ether'),
+    },
+    (err, transactionHash) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(transactionHash);
+      }
+    },
+  );
+};
+
+export const thunkMakeTransaction = (source, destination, amount) => async (dispatch) => {
+
+  let eth = new Web3(window.web3.currentProvider);
+
+  try {
+    const transactionHash = await eth.eth.sendTransaction(
+      {
+        from: source,
+        to: destination,
+        value: eth.utils.toWei(amount, 'ether'),
+      })
+      console.log("The transaction hash: ", transactionHash)
+  } catch (error) {
+    console.log(error)
+  }
+
+  
+}
+
 export const thunkSetNewAccount = (account, eth) => async (dispatch) => {
-  const balance = await eth.getBalance(account);
   dispatch(actionSetCurrentBalance);
   dispatch(actionSetCurrentAccount(account));
 };
@@ -155,7 +172,29 @@ const initialState = {
   currentEthBalance: '',
   ethProvider: undefined,
   tipDestination: {},
+  GIFStatus: false,
 };
+
+async function loadWeb3(dispatch) {
+  if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
+    // We are in the browser and metamask is running.
+    let eth = new Web3(window.web3.currentProvider);
+    const accounts = await eth.eth.getAccounts();
+    dispatch(actionSetEthAccounts(accounts));
+    dispatch(actionSetCurrentAccount(accounts[0]));
+    dispatch(thunkGetEthBalance(accounts[0], eth));
+    dispatch(actionSetEthProviderOnState(eth));
+    dispatch(actionFetchEth(false));
+  }
+  else {
+    // We are on the server *OR* the user is not running metamask
+    // In this case we aren't connecting to a remote, we need metamask. So this is disconnected and user is warned.
+    // const provider = new Web3.providers.HttpProvider('http://loalhost:7545');
+    // web3 = new Eth(provider);
+    const eth = {};
+    dispatch(actionSetEthProviderOnState(eth));
+  }
+}
 
 export function userReducer(state = initialState, action) {
   switch (action.type) {
@@ -210,7 +249,24 @@ export function userReducer(state = initialState, action) {
         ...state,
         user: action.user,
       };
+    case SET_GIF_KEYBOARD:
+      return {
+        ...state,
+        GIFStatus: action.GIFStatus,
+      };
     default:
       return state;
   }
 }
+
+
+// encoded = contractInstance.methods.myMethod(params).encodeABI()
+
+// var tx = {
+//     to : myContractAddress,
+//     data : encoded
+// }
+
+// web3.eth.accounts.signTransaction(tx, privateKey).then(signed => {
+//     web3.eth.sendSignedTransaction(signed.rawTransaction).on('receipt', console.log)
+// });

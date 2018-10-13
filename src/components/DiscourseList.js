@@ -1,22 +1,24 @@
-import React, { Component } from 'react'
-import DiscourseCard from './DiscourseCard'
-import Loading from './Loading'
+import { connect } from "react-redux";
+import { thunkGetDiscourseList } from "../state/discourse/actions";
+import React, { Component } from "react";
+import DiscourseCard from "./DiscourseCard";
+import Loading from "./Loading";
 
-
-export default class DiscourseList extends Component {
+class DiscourseList extends Component {
   componentDidMount = async () => {
-    await this.props.getDiscourseList()
-  }
+    await this.props.getDiscourseList();
+  };
 
-  render () {
-    const { discourseList } = this.props
+  render() {
+    const { discourseList } = this.props;
     let styles = {
-      display: 'flex',
-      flexDirection: 'column'
-    }
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    };
     return (
-      <div className='discourse-list' style={styles}>
-        {discourseList.map(elem => {
+      <div className="discourse-list" style={styles}>
+        {discourseList.map((elem) => {
           if (elem.article) {
             return (
               <DiscourseCard
@@ -26,17 +28,36 @@ export default class DiscourseList extends Component {
                 discourseImg={elem.article.urlToImage}
                 discoursePublishedAt={elem.article.publishedAt}
                 key={elem.docId}
-                            />
-            )
+              />
+            );
           } else {
             return (
               <div>
                 <Loading />
               </div>
-            )
+            );
           }
         })}
       </div>
-    )
+    );
   }
 }
+
+//CONTAINER====================================================================
+function mapState(state) {
+  return {
+    discourseList: state.discourseReducer.discourseList
+  };
+}
+function mapDispatch(dispatch) {
+  return {
+    getDiscourseList: () => {
+      dispatch(thunkGetDiscourseList());
+    }
+  };
+}
+
+export default (DiscourseList = connect(
+  mapState,
+  mapDispatch
+)(DiscourseList));

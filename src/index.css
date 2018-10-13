@@ -172,7 +172,8 @@ body {
   padding-top: 4px;
   background-color: #f1f1f1;
   border: none;
-  margin-top: 8px;
+  width: 19em;
+    height: 3em;
 }
 
 .bottom-nav {
@@ -287,4 +288,78 @@ padding-bottom: 4px;
 
 .story-body__inner {
   z-index: -1;
+}
+
+.gifBar {
+  background: rgb(255, 255, 255);
+  border-radius: 18px;
+  padding: 10px;
+  border-style: solid;
+}
+
+.chatGif {
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 18px;
+}
+._1KkHIRuOEYyPrmBuaClRnV{
+  border-radius: 18px;
+  padding: 5px;
+}
+.zYqoW58qDQxXpBtmFR_r1{
+  color:rgb(39, 39, 39);
+}
+
+.TitleFont {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.6em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.705);
+}
+
+.MuiTypography-root-112 {
+  margin: 0;
+  display: block;
+  font-family: 'Roboto Slab', serif;
+}
+
+.MuiTypography-body1-121 {
+  color: rgba(0, 0, 0, 0.56);
+  font-size: 0.875rem;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.2em;
+}
+
+a{
+  text-decoration: none;
+}
+
+.MuiButton-containedPrimary-54 {
+  color: #fff;
+  background-color: #3f51b59c;
+}
+
+.source-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 4px;
+  margin-right: 4px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  margin-top: 12px;
+  padding-left: 4px;
+  align-items: baseline;
+  border-left: 6px solid red;
+  background-color: rgba(211, 211, 211, 0.142);
+  margin-bottom: 15px;
+}
+
+.source-name-name{
+font-size: 1.5em;
+}
+
+.source-name-published{
+font-size: .6em;
+margin-left: 3px;
 }
