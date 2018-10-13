@@ -5,15 +5,15 @@ import PublicKeyForm from './PublicKeyForm';
 
 let Me = (props) => {
   const {
-    user, isLoggedIn, currentEthAccount, currentEthBalance, ethProvider,
+    user, isLoggedIn, currentEthAccount, currentEthBalance, ethProvider, logInUser
   } = props;
 
-  console.log("Details:", currentEthAccount, currentEthBalance, ethProvider);
+  console.log("Details:", currentEthAccount, currentEthBalance, ethProvider, logInUser);
   const { displayName } = user;
   if (!isLoggedIn) {
     return (
       <div>
-        <p>Please log in to see your information</p>
+        <p onClick={()=> logInUser()}>Please log in to see your information.</p>
       </div>
     );
   }
