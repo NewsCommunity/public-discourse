@@ -24,7 +24,7 @@ class UserMenu extends React.Component {
     const { user, isLoggedIn, logOutUser, logInUser } = this.props
     if (!isLoggedIn) {
       return (
-        <Button size='small' onClick={logInUser}>
+        <Button size='small' onClick={() => logInUser()}>
                     Login
                 </Button>
       )
