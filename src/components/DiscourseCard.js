@@ -30,7 +30,9 @@ function ImgMediaCard(props) {
     discourseTitle,
     discourseDescription,
     discourseImg,
-    classes
+    classes,
+    sourceName,
+    publishedAt,
   } = props;
   if (discourseImg === "") {
     return null;
@@ -49,6 +51,12 @@ function ImgMediaCard(props) {
             <Typography gutterBottom variant="h8" component="h6">
               {discourseTitle}
             </Typography>
+            <div className=".source-info-discourse-card">
+                <div className="source-Name">
+                  <div className="source-name-name text-size2">{sourceName.toUpperCase()}</div>
+                  <div className="source-name-published">Published at: {publishedAt}</div>
+                </div>
+              </div>
             <Typography component="p">{discourseDescription}</Typography>
           </CardContent>
         </CardActionArea>

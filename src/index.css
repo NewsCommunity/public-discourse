@@ -8,6 +8,7 @@ body {
   
   margin: 0;
   font-family: sans-serif;
+  background-color: rgba(243, 242, 245, 1);
 }
 @media screen and (max-width: 768px) {
 }
@@ -355,8 +356,22 @@ a{
   margin-bottom: 15px;
 }
 
-.source-name-name{
-font-size: 1.5em;
+.source-info-discourse-card{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 4px;
+  margin-right: 4px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  margin-top: 12px;
+  padding-left: 4px;
+  align-items: baseline;
+  border-left: 6px solid red;
+  background-color: rgba(211, 211, 211, 0.142);
+  margin-bottom: 15px;
+}
+.text-size2{
+font-size: 1em;
 }
 
 .source-name-published{
@@ -369,3 +384,7 @@ jss63 {
   height: 40px;
 }
 
+h6, p {
+  font-weight: 400;
+  line-height: 24px;
+}

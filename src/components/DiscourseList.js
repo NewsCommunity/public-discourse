@@ -28,6 +28,8 @@ class DiscourseList extends Component {
                 discourseImg={elem.article.urlToImage}
                 discoursePublishedAt={elem.article.publishedAt}
                 key={elem.docId}
+                sourceName={elem.article.source.name}
+                publishedAt={elem.article.publishedAt}
               />
             );
           } else {
