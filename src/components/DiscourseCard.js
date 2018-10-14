@@ -54,7 +54,7 @@ function ImgMediaCard(props) {
             <div className=".source-info-discourse-card">
                 <div className="source-Name">
                   <div className="source-name-name text-size2">{sourceName.toUpperCase()}</div>
-                  <div className="source-name-published">Published at: {publishedAt}</div>
+                  <div className="source-name-published no-margin">Published at: {publishedAt}</div>
                 </div>
               </div>
             <Typography component="p">{discourseDescription}</Typography>
