@@ -1,14 +1,6 @@
 const firebase = require('firebase');
+const {config} = require(../src/secrets)
 
-const config = {
-  /* COPY THE ACTUAL CONFIG FROM FIREBASE CONSOLE */
-  apiKey: 'AIzaSyDdi-knbC_esYy0s3iKhQFOT-5DI8rA1Xg',
-  authDomain: 'collaboration-2c632.firebaseapp.com',
-  databaseURL: 'https://collaboration-2c632.firebaseio.com',
-  projectId: 'collaboration-2c632',
-  storageBucket: 'collaboration-2c632.appspot.com',
-  messagingSenderId: '521492989557',
-};
 const axios = require('axios');
 
 const fire = firebase.initializeApp(config);
