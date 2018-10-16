@@ -52,6 +52,12 @@ class SingleDiscourse extends Component {
       return (
         <div>
           <div className="discourse-container">
+
+          <span className="mdl-chip mdl-chip--contact">
+                <span className="mdl-chip__contact mdl-color--blue mdl-color-text--white">pd</span>
+                <span className="mdl-chip__text"> We are under development.</span>
+              </span>
+
             <div className="single-room">
               <div className="source-info">
                 <div className="source-Name">

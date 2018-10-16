@@ -43,6 +43,7 @@ function NavBar(props) {
               </Link>
               {' '}
               <NavMenu />
+
             </div>
 
             <div style={stuffOnTheRight}>
