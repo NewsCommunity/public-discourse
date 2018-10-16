@@ -11,6 +11,7 @@ import {
   actionSetGif
 } from "../../state/user/reducer";
 import BlockChainBar from "../Ethereum/BlockChainBar";
+import {GIFYapi} from "../../secrets"
 
 class ChatBucket extends Component {
   constructor(props) {
@@ -99,7 +100,7 @@ class ChatBucket extends Component {
         {GIFStatus ? (
           <div className="gifBar">
             <Selector
-              apiKey="KP3uURmACOmXvXYKnYDjglkk5LAOu9DQ"
+              apiKey={GIFYapi.apiKey}
               onGifSelected={(gif) => this.postMessage("GIFGIF8x8", gif)}
             />
           </div>

@@ -30,9 +30,9 @@ function BottomNav(props) {
   return (
     <div className="Bottom-Nav">
     
-      <div className="chat-input-left">
+      
         {multiRender ? <ChatInput postMessage={postMessage} toggleGif={toggleGif} GIFStatus={GIFStatus}/> : <div/>}
-      </div>
+     
       <div className="chat-input-right">
         <Button
           variant="fab"

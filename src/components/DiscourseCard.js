@@ -10,6 +10,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import DelayToolTips from "./DelayToolTips";
+import ChatBucket from "./ChatBox/ChatBucket"
 
 const styles = {
   card: {
@@ -79,6 +80,7 @@ function ImgMediaCard(props) {
             {"  "}
             Chat about this
           </Button>
+        
         </CardActions>
       </Card>
     );
