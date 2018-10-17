@@ -1,3 +1,6 @@
+Demo: 
+pubdiscourse.com
+
 Goals: 
 Create a better mobile-first news aggregation service that makes the experience of consuming journalism on a mobile device more pleasurable across various publications/publishers and creates a sustainable economic model for publishers. 
 
