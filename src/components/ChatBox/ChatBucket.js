@@ -24,7 +24,7 @@ class ChatBucket extends Component {
 
   async componentDidMount() {
     const { discourseId } = this.props;
-    toggleGif(false);
+    this.props.toggleGif(false);
     this.subscribeToMessageUpdates(discourseId);
   }
 

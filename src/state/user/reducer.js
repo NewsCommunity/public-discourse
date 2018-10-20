@@ -85,14 +85,14 @@ export const actionSetTipStatus = tipStatus => ({
 // THUNKS=====================================================================
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-export const addDiscourseToUserHistory = (discourseID, user) => {
+export const addDiscourseToUserHistory = (discourseID, user, discourse) => {
   const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
   const { uid } = user;
   firestore
     .collection('users')
     .doc(uid)
     .collection('discourseHistory')
-    .add({ discourseID, timeStamp })
+    .add({ discourseID, timeStamp, discourse })
     .then(() => {
       console.log('Document successfully written!', discourseID, timeStamp);
     })

@@ -27,10 +27,13 @@ class SingleDiscourse extends Component {
   }
 
   componentDidMount = async () => {
-    await this.props.getSingleDiscourse(this.props.match.params.docId);
+    const { discourse, match, actionSetUser, user, getSingleDiscourse} = this.props;
+    const discourseId = match.params.docId;
+
+    await getSingleDiscourse(discourseId);
     window.addEventListener('resize', this.handleWindowResize);
-    if(this.props.user){
-      addDiscourseToUserHistory(this.props.match.params.docId, this.props.user)
+    if(user){
+      addDiscourseToUserHistory(discourseId, user, discourse)
     }
   };
 

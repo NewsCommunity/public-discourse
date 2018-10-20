@@ -17,6 +17,11 @@ class UserPage extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const {loadHistory, user} = this.props;
+    loadHistory(user);
+  }
+
   render() {
     const {
       user,
@@ -43,9 +48,11 @@ class UserPage extends React.Component {
       loadWeb3();
     }
 
-    if (user && userHistory.length < 1) {
-      loadHistory(user);
-    }
+    // if (user && userHistory.length < 1) {
+    //   loadHistory(user);
+    // }
+
+   
 
     const historyItems = userHistory.map(discourse => <li key={discourse} >{discourse}</li>);
 
