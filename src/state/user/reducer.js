@@ -13,7 +13,19 @@ const SET_TIP_DESTINATION = 'SET_TIP_DESTINATION';
 const SET_CHAT_STATUS = 'SET_CHAT_STATUS';
 const SET_TIP_STATUS = 'SET_TIP_STATUS';
 const SET_GIF_KEYBOARD = 'SET_GIF_KEYBOARD';
+const FETCH_USER_HISTORY = 'FETCH_USER_HISTORY';
+const SET_USER_HISTORY = 'SET_USER_HISTORY';
 // ACTIONS====================================================================
+
+export const fetchUserHistory = bool => ({
+  type: FETCH_USER_HISTORY,
+  bool,
+});
+
+export const setUserHistory = history => ({
+  type: SET_USER_HISTORY,
+  history,
+});
 export const actionSetGif = bool => ({
   type: SET_GIF_KEYBOARD,
   GIFStatus: bool,
@@ -202,6 +214,29 @@ export const thunkSetNewAccount = (account, eth) => async (dispatch) => {
   dispatch(actionSetCurrentBalance);
   dispatch(actionSetCurrentAccount(account));
 };
+
+export const thunkGetUserHistory = user => async (dispatch) => {
+  const { uid } = user;
+  const historyItems = new Set();
+  dispatch(fetchUserHistory(true));
+  try {
+    const historyRef = await firestore
+      .collection('users')
+      .doc(uid)
+      .collection('discourseHistory')
+      .orderBy('timeStamp', 'desc')
+      .limit(50)
+      .get();
+
+    historyRef.forEach((doc) => {
+      console.log('This is the document:', doc);
+      historyItems.add(doc.discourseID);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  dispatch(fetchUserHistory(false));
+};
 // REDUCER=====================================================================
 const initialState = {
   user: {},
@@ -215,6 +250,8 @@ const initialState = {
   ethProvider: undefined,
   tipDestination: {},
   GIFStatus: false,
+  isFetchingHistory: false,
+  userHistory: [],
 };
 
 export async function loadWeb3(dispatch) {
@@ -294,6 +331,16 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
         GIFStatus: action.GIFStatus,
+      };
+    case FETCH_USER_HISTORY:
+      return {
+        ...state,
+        isFetchingHistory: action.bool,
+      };
+    case SET_USER_HISTORY:
+      return {
+        ...state,
+        userHistory: action.history,
       };
     default:
       return state;
