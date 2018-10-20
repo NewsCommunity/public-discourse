@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import QRCode from 'qrcode.react';
 import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer';
 import PublicKeyForm from './PublicKeyForm';
 
@@ -8,8 +9,9 @@ const UserPage = (props) => {
     user, isLoggedIn, currentEthAccount, currentEthBalance, ethProvider, logInUser,
   } = props;
 
-  console.log('Details:', currentEthAccount, currentEthBalance, ethProvider, logInUser);
-  const { displayName } = user;
+  console.log('This is user:', user);
+
+  const { displayName, photoURL } = user;
   if (!isLoggedIn) {
     return (
       <div>
@@ -19,10 +21,15 @@ const UserPage = (props) => {
   }
   return (
     <div className="user-details-page">
-      <p>
-        Welcome,
-        {displayName}
-      </p>
+      <div className="user-photo-name">
+        <img
+          className="user-photo"
+          src={photoURL} alt="user profile photo"
+        />
+        <QRCode value={currentEthAccount} />
+        
+      </div>
+      <span className="display-name">{displayName}</span>
       {ethProvider ? (
         <div>
           <p>Public ETH Address: </p>
@@ -36,7 +43,7 @@ const UserPage = (props) => {
           <p>this feature is currently a work in progress</p>
         </div>
       ) : (
-        <div />
+        <div>No web3 Ethereum Provider Found.</div>
       )}
 
       <PublicKeyForm />

@@ -391,5 +391,23 @@ p {
   display: flex;
   flex-direction: column;
   margin: 20px;
-  padding: 10px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 15px;
+}
+
+.user-photo-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.user-photo {
+  border-radius: 100px;
+}
+
+.display-name {
+  font-size: 1.3em;
+  border-bottom: 1px solid black;
+  padding-bottom: 5px;
 }
