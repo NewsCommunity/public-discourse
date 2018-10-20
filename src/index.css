@@ -401,6 +401,8 @@ p {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
+  padding-right: 10px;
 }
 .user-photo {
   border-radius: 100px;
@@ -408,6 +410,14 @@ p {
 
 .display-name {
   font-size: 1.3em;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(0, 0, 0);
   padding-bottom: 5px;
+}
+
+.user-QR-code-blur {
+  filter: blur(10px);
+}
+
+.user-QR-code {
+ margin-right: 5px;
 }
