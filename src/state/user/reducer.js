@@ -229,9 +229,10 @@ export const thunkGetUserHistory = user => async (dispatch) => {
       .get();
 
     historyRef.forEach((doc) => {
-      console.log('This is the document:', doc);
-      historyItems.add(doc.discourseID);
+      console.log(doc.id, " => ", doc.data());
+      historyItems.add(doc.data().discourseID);
     });
+    dispatch(setUserHistory(Array.from(historyItems)));
   } catch (error) {
     console.log(error);
   }
