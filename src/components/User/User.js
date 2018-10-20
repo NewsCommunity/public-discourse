@@ -14,7 +14,7 @@ class UserPage extends React.Component {
     super(props);
     this.state = {
       checked: false,
-    }
+    };
   }
 
   render() {
@@ -46,6 +46,8 @@ class UserPage extends React.Component {
     if (user && userHistory.length < 1) {
       loadHistory(user);
     }
+
+    const historyItems = userHistory.map(discourse => <li key={discourse} >{discourse}</li>);
 
     return (
       <div className="user-details-page">
@@ -82,14 +84,14 @@ class UserPage extends React.Component {
             </p>
 
             <p>
-              Your Balance:
+              Balance:
               {ethProvider.utils.fromWei(currentEthBalance, 'ether')}
-              {' '}: ETH
+              {' '}
+: ETH
             </p>
             <div className="user-discourse-history">
-            <div className="user-discourse-history-table">
-            {}
-            </div>
+            Discourse History:
+              <div className="user-discourse-history-table"><ul>{historyItems}</ul></div>
             </div>
             <p>this feature is currently a work in progress</p>
           </div>
