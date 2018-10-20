@@ -24,21 +24,34 @@ const UserPage = (props) => {
       <div className="user-photo-name">
         <img
           className="user-photo"
-          src={photoURL} alt="user profile"
+          src={photoURL}
+          alt="user profile"
         />
         {ethProvider ? (
-          <QRCode renderAs="svg" fgColor="#000000" className="user-QR-code" value={currentEthAccount} />
+          <QRCode
+            renderAs="svg"
+            fgColor="#000000"
+            className="user-QR-code"
+            value={currentEthAccount}
+          />
         ) : (
-          <QRCode renderAs="svg" fgColor="#c6c6c6" className="user-QR-code-blur" value="No Eth Provider" />
+          <QRCode
+            renderAs="svg"
+            fgColor="#c6c6c6"
+            className="user-QR-code-blur"
+            value="No Eth Provider"
+          />
         )}
       </div>
       <span className="display-name">{displayName}</span>
       {ethProvider ? (
         <div>
           <p>Public ETH Address: </p>
-          <p>{currentEthAccount}</p>
           <p>
-            Your Balance: 
+            <a href={`https://etherscan.io/address/${currentEthAccount}`}>{currentEthAccount}</a>
+          </p>
+          <p>
+            Your Balance:
             {ethProvider.utils.fromWei(currentEthBalance, 'ether')}
             {' '}
 : ETH
