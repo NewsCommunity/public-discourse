@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer';
 import PublicKeyForm from './PublicKeyForm';
 
-const User = (props) => {
+const UserPage = (props) => {
   const {
     user, isLoggedIn, currentEthAccount, currentEthBalance, ethProvider, logInUser,
   } = props;
@@ -69,9 +69,9 @@ function mapDispatch(dispatch) {
   };
 }
 
-User = connect(
+const User = connect(
   mapState,
   mapDispatch,
-)(User);
+)(UserPage);
 
 export default User;

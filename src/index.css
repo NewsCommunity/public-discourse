@@ -388,5 +388,8 @@ p {
 }
 
 .user-details-page {
-  
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  padding: 10px;
 }
