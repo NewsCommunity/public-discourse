@@ -74,7 +74,7 @@ export const actionSetTipStatus = tipStatus => ({
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 export const addDiscourseToUserHistory = (discourseID, user) => {
-  const timeStamp = new Date();
+  const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
   const { uid } = user;
   firestore
     .collection('users')
