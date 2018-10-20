@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import localStorage from 'redux-persist/lib/storage'
 import reducer from './reducers'
 import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: localStorage,
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer)

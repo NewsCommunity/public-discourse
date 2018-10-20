@@ -6,7 +6,7 @@ import Data from "./components/Data/Data";
 import Player from "./components/AudioStream/Player";
 import { About } from "./components/About";
 import DiscourseList from "./components/DiscourseList";
-import Me from "./components/Me/Me";
+import User from "./components/User/User";
 import { actionSetUser } from "./state/user/reducer";
 import { store } from "./state/store";
 import firebase from "firebase";
@@ -26,7 +26,7 @@ class App extends Component {
         <NavBar />
         <Switch>
           {/* Routes placed here are available to all visitors */}
-          <Route path="/me" component={Me} />
+          <Route path="/User" component={User} />
           <Route path="/about" component={About} />
           <Route path="/audio" component={Player} />
           <Route path="/data" component={Data} />

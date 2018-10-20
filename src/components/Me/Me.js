@@ -3,22 +3,22 @@ import { connect } from 'react-redux';
 import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer';
 import PublicKeyForm from './PublicKeyForm';
 
-let Me = (props) => {
+const User = (props) => {
   const {
-    user, isLoggedIn, currentEthAccount, currentEthBalance, ethProvider, logInUser
+    user, isLoggedIn, currentEthAccount, currentEthBalance, ethProvider, logInUser,
   } = props;
 
-  console.log("Details:", currentEthAccount, currentEthBalance, ethProvider, logInUser);
+  console.log('Details:', currentEthAccount, currentEthBalance, ethProvider, logInUser);
   const { displayName } = user;
   if (!isLoggedIn) {
     return (
       <div>
-        <p onClick={()=> logInUser()}>Please log in to see your information.</p>
+        <p onClick={() => logInUser()}>Please log in to see your information.</p>
       </div>
     );
   }
   return (
-    <div>
+    <div className="user-details-page">
       <p>
         Welcome,
         {displayName}
@@ -28,7 +28,7 @@ let Me = (props) => {
           <p>Public ETH Address: </p>
           <p>{currentEthAccount}</p>
           <p>
-Your Balance:
+            Your Balance:
             {ethProvider.utils.fromWei(currentEthBalance, 'ether')}
             {' '}
 : ETH
@@ -69,9 +69,9 @@ function mapDispatch(dispatch) {
   };
 }
 
-Me = connect(
+User = connect(
   mapState,
   mapDispatch,
-)(Me);
+)(User);
 
-export default Me;
+export default User;
