@@ -1,15 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import QRCode from 'qrcode.react';
-import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination } from '../../state/user/reducer';
+import { thunkLogInUser, thunkLogOutUser, actionSetTipDestination, loadWeb3 } from '../../state/user/reducer';
 import PublicKeyForm from './PublicKeyForm';
+//import loadWeb3 from '../../state/user/reducer';
 
 const UserPage = (props) => {
   const {
-    user, isLoggedIn, currentEthAccount, currentEthBalance, ethProvider, logInUser,
+    user,
+    isLoggedIn,
+    currentEthAccount,
+    currentEthBalance,
+    ethProvider,
+    logInUser,
+    loadWeb3,
   } = props;
-
-  console.log('This is user:', user);
 
   const { displayName, photoURL } = user;
   if (!isLoggedIn) {
@@ -19,6 +24,7 @@ const UserPage = (props) => {
       </div>
     );
   }
+  loadWeb3();
   return (
     <div className="user-details-page">
       <div className="user-photo-name">
@@ -46,10 +52,8 @@ const UserPage = (props) => {
       <span className="display-name">{displayName}</span>
       {ethProvider ? (
         <div>
-          <p>Public ETH Address: </p>
-          <p>
-            <a href={`https://etherscan.io/address/${currentEthAccount}`}>{currentEthAccount}</a>
-          </p>
+          <p>Public ETH Address: <a href={`https://etherscan.io/address/${currentEthAccount}`}>{currentEthAccount}</a> </p>
+          
           <p>
             Your Balance:
             {ethProvider.utils.fromWei(currentEthBalance, 'ether')}
@@ -62,7 +66,7 @@ const UserPage = (props) => {
         <div>No web3 Ethereum Provider Found.</div>
       )}
 
-      <PublicKeyForm />
+     
     </div>
   );
 };
@@ -88,6 +92,9 @@ function mapDispatch(dispatch) {
     },
     setTipDestination: (destination) => {
       dispatch(actionSetTipDestination(destination));
+    },
+    loadWeb3: () => {
+      loadWeb3(dispatch);
     },
   };
 }

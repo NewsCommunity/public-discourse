@@ -176,7 +176,7 @@ const initialState = {
   GIFStatus: false,
 };
 
-async function loadWeb3(dispatch) {
+export async function loadWeb3(dispatch) {
   if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
     // We are in the browser and metamask is running.
     let eth = new Web3(window.web3.currentProvider);
