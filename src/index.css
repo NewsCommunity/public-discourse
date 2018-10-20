@@ -406,6 +406,7 @@ p {
 }
 .user-photo {
   border-radius: 100px;
+  max-width: 150px;
 }
 
 .display-name {
