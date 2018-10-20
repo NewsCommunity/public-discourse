@@ -74,19 +74,37 @@ export const actionSetTipStatus = tipStatus => ({
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 export const UpdateUserRecord = (user) => {
-  const { uid } = user;
+  const {
+    displayName, email, photoURL, uid,
+  } = user;
 
-  console.log("We sent something to firestore: ", uid);
-  
+  console.log('We sent something to firestore: ', uid);
+
   firestore
     .collection('users')
     .doc(uid)
-    .add(user);
+    .set(
+      {
+        displayName,
+        email,
+        photoURL,
+        uid,
+      },
+      { merge: true },
+    )
+    .then(() => {
+      console.log('Document successfully written!');
+    })
+    .catch((error) => {
+      console.error('Error writing document: ', error);
+    });
 };
 
 export const thunkLogInUser = (provider = googleProvider) => async (dispatch) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+      console.log('Here we are about to update user record', user);
+      UpdateUserRecord(user);
       const {
         displayName, email, photoURL, uid,
       } = user;
@@ -101,15 +119,12 @@ export const thunkLogInUser = (provider = googleProvider) => async (dispatch) =>
           true,
         ),
       );
-      UpdateUserRecord(user);
     } else {
       dispatch(actionClearUser());
       firebase.auth().signInWithRedirect(provider);
     }
   });
 };
-
-
 
 export const thunkLogOutUser = () => async (dispatch) => {
   firebase

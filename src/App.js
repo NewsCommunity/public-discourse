@@ -7,7 +7,7 @@ import Player from "./components/AudioStream/Player";
 import { About } from "./components/About";
 import DiscourseList from "./components/DiscourseList";
 import User from "./components/User/User";
-import { actionSetUser } from "./state/user/reducer";
+import { actionSetUser, UpdateUserRecord } from "./state/user/reducer";
 import { store } from "./state/store";
 import firebase from "firebase";
 
@@ -16,6 +16,7 @@ class App extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         store.dispatch(actionSetUser(user, true));
+        UpdateUserRecord(user);
       } else {
       }
     });

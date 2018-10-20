@@ -7,8 +7,7 @@ import {
   actionSetTipDestination,
   loadWeb3,
 } from '../../state/user/reducer';
-import PublicKeyForm from './PublicKeyForm';
-// import loadWeb3 from '../../state/user/reducer';
+
 
 const UserPage = (props) => {
   const {
