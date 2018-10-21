@@ -88,11 +88,18 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const addDiscourseToUserHistory = (discourseID, user, discourse) => {
   const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
   const { uid } = user;
+  const { title, source, url } = discourse.article;
+  const { name } = source;
+  const article = {
+    title,
+    source: name,
+    url,
+  };
   firestore
     .collection('users')
     .doc(uid)
     .collection('discourseHistory')
-    .add({ discourseID, timeStamp, discourse })
+    .add({ discourseID, timeStamp, article })
     .then(() => {
       console.log('Document successfully written!', discourseID, timeStamp);
     })
@@ -229,7 +236,7 @@ export const thunkGetUserHistory = user => async (dispatch) => {
       .get();
 
     historyRef.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
+      console.log(doc.id, ' => ', doc.data());
       historyItems.add(doc.data().discourseID);
     });
     dispatch(setUserHistory(Array.from(historyItems)));
