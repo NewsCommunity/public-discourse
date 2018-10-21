@@ -18,7 +18,7 @@ class UserPage extends React.Component {
   }
 
   componentDidMount() {
-    const {loadHistory, user} = this.props;
+    const { loadHistory, user } = this.props;
     loadHistory(user);
   }
 
@@ -48,13 +48,16 @@ class UserPage extends React.Component {
       loadWeb3();
     }
 
-    // if (user && userHistory.length < 1) {
-    //   loadHistory(user);
-    // }
-
-   
-
-    const historyItems = userHistory.map(discourse => <li key={discourse} >{discourse}</li>);
+    const historyItems = userHistory.map(discourse => (
+      <li key={discourse.discourseID}>
+        {discourse.article.title}
+        {' '}
+Source:
+        {' '}
+        {discourse.article.source}
+        {' '}
+      </li>
+    ));
 
     return (
       <div className="user-details-page">
@@ -97,8 +100,10 @@ class UserPage extends React.Component {
 : ETH
             </p>
             <div className="user-discourse-history">
-            Discourse History:
-              <div className="user-discourse-history-table"><ul>{historyItems}</ul></div>
+              Discourse History:
+              <div className="user-discourse-history-table">
+                <ul>{historyItems}</ul>
+              </div>
             </div>
             <p>this feature is currently a work in progress</p>
           </div>
