@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import Web3 from 'web3';
+import { firestore } from '../../fire';
 // TYPES======================================================================
 const SET_USER = 'SET_USER';
 const CLEAR_USER = 'CLEAR_USER';
@@ -12,7 +13,19 @@ const SET_TIP_DESTINATION = 'SET_TIP_DESTINATION';
 const SET_CHAT_STATUS = 'SET_CHAT_STATUS';
 const SET_TIP_STATUS = 'SET_TIP_STATUS';
 const SET_GIF_KEYBOARD = 'SET_GIF_KEYBOARD';
+const FETCH_USER_HISTORY = 'FETCH_USER_HISTORY';
+const SET_USER_HISTORY = 'SET_USER_HISTORY';
 // ACTIONS====================================================================
+
+export const fetchUserHistory = bool => ({
+  type: FETCH_USER_HISTORY,
+  bool,
+});
+
+export const setUserHistory = history => ({
+  type: SET_USER_HISTORY,
+  history,
+});
 export const actionSetGif = bool => ({
   type: SET_GIF_KEYBOARD,
   GIFStatus: bool,
@@ -72,9 +85,66 @@ export const actionSetTipStatus = tipStatus => ({
 // THUNKS=====================================================================
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
+export const addDiscourseToUserHistory = async (discourseID, user) => {
+  const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
+  const { uid } = user;
+  const document = await firestore
+    .collection('discourseList')
+    .doc(discourseID)
+    .get();
+  const { title, source, url } = document.data().article;
+  const { name } = source;
+  const article = {
+    title,
+    source: name,
+    url,
+  };
+
+  firestore
+    .collection('users')
+    .doc(uid)
+    .collection('discourseHistory')
+    .add({ discourseID, timeStamp, article })
+    .then(() => {
+      console.log('Document successfully written!', discourseID, timeStamp);
+    })
+    .catch((error) => {
+      console.error('Error writing document: ', error);
+    });
+};
+
+export const UpdateUserRecord = (user) => {
+  const {
+    displayName, email, photoURL, uid,
+  } = user;
+
+  console.log('We sent something to firestore: ', uid);
+
+  firestore
+    .collection('users')
+    .doc(uid)
+    .set(
+      {
+        displayName,
+        email,
+        photoURL,
+        uid,
+      },
+      { merge: true },
+    )
+    .then(() => {
+      console.log('Document successfully written!');
+    })
+    .catch((error) => {
+      console.error('Error writing document: ', error);
+    });
+};
+
 export const thunkLogInUser = (provider = googleProvider) => async (dispatch) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+      console.log('Here we are about to update user record', user);
+      UpdateUserRecord(user);
       const {
         displayName, email, photoURL, uid,
       } = user;
@@ -119,9 +189,8 @@ export const thunkGetEthBalance = (account, eth) => async (dispatch) => {
 };
 
 export const thunkMakeTransaction2 = async (source, destination, amount) => {
-
-  let eth = new Web3(window.web3.currentProvider);
-console.log("The transaction values: ", source, destination, amount )
+  const eth = new Web3(window.web3.currentProvider);
+  console.log('The transaction values: ', source, destination, amount);
   const transactionHash = await eth.eth.sendTransaction(
     {
       from: source,
@@ -139,27 +208,53 @@ console.log("The transaction values: ", source, destination, amount )
 };
 
 export const thunkMakeTransaction = (source, destination, amount) => async (dispatch) => {
-
-  let eth = new Web3(window.web3.currentProvider);
+  const eth = new Web3(window.web3.currentProvider);
 
   try {
-    const transactionHash = await eth.eth.sendTransaction(
-      {
-        from: source,
-        to: destination,
-        value: eth.utils.toWei(amount, 'ether'),
-      })
-      console.log("The transaction hash: ", transactionHash)
+    const transactionHash = await eth.eth.sendTransaction({
+      from: source,
+      to: destination,
+      value: eth.utils.toWei(amount, 'ether'),
+    });
+    console.log('The transaction hash: ', transactionHash);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
-  
-}
+};
 
 export const thunkSetNewAccount = (account, eth) => async (dispatch) => {
   dispatch(actionSetCurrentBalance);
   dispatch(actionSetCurrentAccount(account));
+};
+
+export const thunkGetUserHistory = user => async (dispatch) => {
+  const { uid } = user;
+  const historyItems = new Map();
+  dispatch(fetchUserHistory(true));
+  try {
+    const historyRef = await firestore
+      .collection('users')
+      .doc(uid)
+      .collection('discourseHistory')
+      .orderBy('timeStamp', 'desc')
+      .limit(50)
+      .get();
+
+    historyRef.forEach((doc) => {
+      console.log(doc.id, ' => ', doc.data());
+      const item = {
+        title: doc.data().article.title,
+        source: doc.data().article.source,
+        discourseID: doc.data().discourseID,
+      }
+      historyItems.set(item.discourseID, item);
+    });
+
+    dispatch(setUserHistory(Array.from(historyItems)));
+  } catch (error) {
+    console.log(error);
+  }
+  dispatch(fetchUserHistory(false));
 };
 // REDUCER=====================================================================
 const initialState = {
@@ -174,20 +269,21 @@ const initialState = {
   ethProvider: undefined,
   tipDestination: {},
   GIFStatus: false,
+  isFetchingHistory: false,
+  userHistory: [],
 };
 
-async function loadWeb3(dispatch) {
+export async function loadWeb3(dispatch) {
   if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
     // We are in the browser and metamask is running.
-    let eth = new Web3(window.web3.currentProvider);
+    const eth = new Web3(window.web3.currentProvider);
     const accounts = await eth.eth.getAccounts();
     dispatch(actionSetEthAccounts(accounts));
     dispatch(actionSetCurrentAccount(accounts[0]));
     dispatch(thunkGetEthBalance(accounts[0], eth));
     dispatch(actionSetEthProviderOnState(eth));
     dispatch(actionFetchEth(false));
-  }
-  else {
+  } else {
     // We are on the server *OR* the user is not running metamask
     // In this case we aren't connecting to a remote, we need metamask. So this is disconnected and user is warned.
     // const provider = new Web3.providers.HttpProvider('http://loalhost:7545');
@@ -255,11 +351,20 @@ export function userReducer(state = initialState, action) {
         ...state,
         GIFStatus: action.GIFStatus,
       };
+    case FETCH_USER_HISTORY:
+      return {
+        ...state,
+        isFetchingHistory: action.bool,
+      };
+    case SET_USER_HISTORY:
+      return {
+        ...state,
+        userHistory: action.history,
+      };
     default:
       return state;
   }
 }
-
 
 // encoded = contractInstance.methods.myMethod(params).encodeABI()
 

@@ -4,7 +4,7 @@ import { thunkGetSingleDiscourse } from '../state/discourse/actions';
 import { connect } from 'react-redux';
 import Loading from './Loading';
 import Parser from 'html-react-parser';
-import { actionSetUser } from '../state/user/reducer';
+import { actionSetUser, addDiscourseToUserHistory } from '../state/user/reducer';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
@@ -27,8 +27,14 @@ class SingleDiscourse extends Component {
   }
 
   componentDidMount = async () => {
-    await this.props.getSingleDiscourse(this.props.match.params.docId);
+    const { discourse, match, actionSetUser, user, getSingleDiscourse} = this.props;
+    const discourseId = match.params.docId;
+
+    await getSingleDiscourse(discourseId);
     window.addEventListener('resize', this.handleWindowResize);
+    if(user){
+      addDiscourseToUserHistory(discourseId, user)
+    }
   };
 
   componentDidUpdate = () => {
@@ -90,6 +96,7 @@ class SingleDiscourse extends Component {
 function mapState(state) {
   return {
     discourse: state.discourseReducer.discourse,
+    user: state.userReducer.user,
   };
 }
 

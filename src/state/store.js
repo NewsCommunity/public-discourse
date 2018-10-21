@@ -1,7 +1,16 @@
 import { createStore, applyMiddleware, compose } from 'redux'
+import { persistStore, persistReducer } from 'redux-persist'
+import localStorage from 'redux-persist/lib/storage'
 import reducer from './reducers'
 import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
+
+const persistConfig = {
+  key: 'root',
+  storage: localStorage,
+}
+
+const persistedReducer = persistReducer(persistConfig, reducer)
 
 function configureStore (/* deps = {} */) {
     /* eslint-disable-next-line no-underscore-dangle */
@@ -16,9 +25,9 @@ function configureStore (/* deps = {} */) {
     middleware.push(logger)
   }
 
-  return createStore(reducer, composeEnhancers(applyMiddleware(...middleware)))
+  return createStore(persistedReducer, composeEnhancers(applyMiddleware(...middleware)))
 }
 
 const store = configureStore()
-
-export { configureStore, store }
+const persistor = persistStore(store)
+export { configureStore, store, persistor }

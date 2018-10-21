@@ -6,5 +6,5 @@ import { discourseReducer } from './discourse/reducers'
 export default combineReducers({
   discourseReducer,
   ChatReducer,
-  userReducer
+  userReducer,
 })
