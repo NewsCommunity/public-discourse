@@ -48,13 +48,13 @@ class UserPage extends React.Component {
       loadWeb3();
     }
 
-    const historyItems = userHistory.map(discourse => (
+    const historyItems = [...userHistory].map(discourse => (
       <li key={discourse.discourseID}>
-        {discourse.article.title}
+        {discourse[1].title}
         {' '}
 Source:
         {' '}
-        {discourse.article.source}
+        {discourse[1].source}
         {' '}
       </li>
     ));

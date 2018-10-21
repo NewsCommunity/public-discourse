@@ -33,7 +33,7 @@ class SingleDiscourse extends Component {
     await getSingleDiscourse(discourseId);
     window.addEventListener('resize', this.handleWindowResize);
     if(user){
-      addDiscourseToUserHistory(discourseId, user, discourse)
+      addDiscourseToUserHistory(discourseId, user)
     }
   };
 

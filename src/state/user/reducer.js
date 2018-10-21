@@ -85,16 +85,21 @@ export const actionSetTipStatus = tipStatus => ({
 // THUNKS=====================================================================
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-export const addDiscourseToUserHistory = (discourseID, user, discourse) => {
+export const addDiscourseToUserHistory = async (discourseID, user) => {
   const timeStamp = firebase.firestore.FieldValue.serverTimestamp();
   const { uid } = user;
-  const { title, source, url } = discourse.article;
+  const document = await firestore
+    .collection('discourseList')
+    .doc(discourseID)
+    .get();
+  const { title, source, url } = document.data().article;
   const { name } = source;
   const article = {
     title,
     source: name,
     url,
   };
+
   firestore
     .collection('users')
     .doc(uid)
@@ -224,7 +229,7 @@ export const thunkSetNewAccount = (account, eth) => async (dispatch) => {
 
 export const thunkGetUserHistory = user => async (dispatch) => {
   const { uid } = user;
-  const historyItems = new Set();
+  const historyItems = new Map();
   dispatch(fetchUserHistory(true));
   try {
     const historyRef = await firestore
@@ -237,8 +242,14 @@ export const thunkGetUserHistory = user => async (dispatch) => {
 
     historyRef.forEach((doc) => {
       console.log(doc.id, ' => ', doc.data());
-      historyItems.add(doc.data());
+      const item = {
+        title: doc.data().article.title,
+        source: doc.data().article.source,
+        discourseID: doc.data().discourseID,
+      }
+      historyItems.set(item.discourseID, item);
     });
+
     dispatch(setUserHistory(Array.from(historyItems)));
   } catch (error) {
     console.log(error);
