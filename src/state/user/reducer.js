@@ -183,10 +183,15 @@ export const thunkSetEthProdiver = () => async (dispatch) => {
 
 export const thunkGetEthBalance = (account, eth) => async (dispatch) => {
   if (eth) {
-    const balance = await eth.eth.getBalance(account);
-    dispatch(actionSetCurrentBalance(balance));
+    try {
+      const balance = await eth.eth.getBalance(account);
+      dispatch(actionSetCurrentBalance(balance));
+    } catch (err) {
+      dispatch(actionSetCurrentBalance('0'));
+    }
   }
 };
+
 
 export const thunkMakeTransaction2 = async (source, destination, amount) => {
   const eth = new Web3(window.web3.currentProvider);
@@ -246,7 +251,7 @@ export const thunkGetUserHistory = user => async (dispatch) => {
         title: doc.data().article.title,
         source: doc.data().article.source,
         discourseID: doc.data().discourseID,
-      }
+      };
       historyItems.set(item.discourseID, item);
     });
 

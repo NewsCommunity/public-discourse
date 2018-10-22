@@ -35,6 +35,7 @@ class UserPage extends React.Component {
       userHistory,
     } = this.props;
 
+    let localEthAccount = currentEthAccount || "0x0";
     const { displayName, photoURL } = user;
     if (!isLoggedIn) {
       return (
@@ -67,7 +68,7 @@ Source:
             src={photoURL}
             alt="user profile"
           />
-          {ethProvider ? (
+          {currentEthAccount ? (
             <QRCode
               renderAs="svg"
               fgColor="#000000"
@@ -89,7 +90,7 @@ Source:
             <p>
               Public ETH Address:
               {' '}
-              <a href={`https://etherscan.io/address/${currentEthAccount}`}>{currentEthAccount}</a>
+              <a href={`https://etherscan.io/address/${localEthAccount}`}>{localEthAccount}</a>
               {' '}
             </p>
 
