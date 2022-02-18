@@ -10,7 +10,7 @@
     "ethjs": "^0.4.0",
     "firebase": "^5.5.1",
     "firebaseui": "^3.4.1",
-    "ganache-cli": "^6.1.8",
+    "ganache-cli": "^6.12.2",
     "html-react-parser": "^0.4.7",
     "newsapi": "^2.4.0",
     "node-readability": "^3.0.0",
